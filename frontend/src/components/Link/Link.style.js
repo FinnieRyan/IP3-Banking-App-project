@@ -12,5 +12,10 @@ export const LinkContainer = styled(Link)`
 
 export const LinkText = styled.span`
   font-size: 16px;
-  font-weight: ${({ theme }) => theme.fonts.weights.medium};
+  font-weight: ${({ theme }) => theme.fonts.weights.bold};
+`;
+export const LinkTextIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;
