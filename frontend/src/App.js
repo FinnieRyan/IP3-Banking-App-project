@@ -5,21 +5,23 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { theme } from './styles/Theme';
 
-import { Link } from './components/Link/Link';
+// COMPONENTS
 import { PageLayout } from './components/PageLayout/PageLayout';
+import { Heading } from './components/Heading/Heading';
+import { Link } from './components/Link/Link';
 
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
-        {/* <Routes> */}
         <PageLayout>
-          <h1>Hello world!</h1>
+          <Heading size={1} displayAs={3}>
+            Hello world!
+          </Heading>
           <p>FinWise App</p>
           <Link>Test link</Link>
         </PageLayout>
-        {/* </Routes> */}
       </Router>
     </ThemeProvider>
   );
