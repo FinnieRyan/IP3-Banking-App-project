@@ -25,7 +25,7 @@ export const theme = {
     },
     weights: {
       light: '200',
-      normal: '300',
+      normal: '400',
       medium: '500',
       bold: '600',
     },
