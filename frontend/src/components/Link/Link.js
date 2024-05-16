@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 // ICONS
 import { FiExternalLink } from 'react-icons/fi';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
@@ -5,7 +7,7 @@ import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 // STYLES
 import { LinkContainer, LinkText } from './Link.style';
 
-export const Link = ({ children, location, backLink, isExternal, inline }) => {
+export const Link = ({ children, location, backLink = false, isExternal = false, inline = false }) => {
   return (
     <>
       {isExternal ? (
@@ -30,4 +32,12 @@ export const Link = ({ children, location, backLink, isExternal, inline }) => {
       )}
     </>
   );
+};
+
+Link.propTypes = {
+  children: PropTypes.node.isRequired,
+  location: PropTypes.string.isRequired,
+  backLink: PropTypes.bool,
+  isExternal: PropTypes.bool,
+  inline: PropTypes.bool,
 };
