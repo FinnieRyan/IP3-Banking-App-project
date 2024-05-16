@@ -28,6 +28,7 @@ export const theme = {
       normal: '400',
       medium: '500',
       bold: '600',
+      black: '700',
     },
   },
   shadows: {
