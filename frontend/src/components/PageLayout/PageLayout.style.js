@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin: auto;
+  margin: 20px auto;
   max-width: ${({ theme }) => theme.sizes.tablet};
   min-width: ${({ theme }) => theme.sizes.sm};
   display: flex;
