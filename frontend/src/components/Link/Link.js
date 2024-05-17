@@ -18,7 +18,7 @@ export const Link = ({ children, location, backLink = false, isExternal = false,
       ) : (
         <>
           {backLink ? (
-            <LinkContainer to={location} inline={inline}>
+            <LinkContainer to={location} inline={inline} style={{ marginLeft: '-8px' }}>
               {!inline && <FiChevronLeft style={{ fontSize: '24px' }} />}
               <LinkText>{children}</LinkText>
             </LinkContainer>
