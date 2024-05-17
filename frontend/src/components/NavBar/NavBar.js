@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 
 // STYLES
-import { NavBarBackground, NavContent, NavLinkContainer, NavLink, NavSpacer } from './NavBar.style';
+import { NavBarBackground, NavContent, NavLinkContainer, NavSpacer } from './NavBar.style';
 
 // COMPONENTS
 import { Burger } from './Burger';
 import { Heading } from '../Heading/Heading';
+import { Link } from '../Link/Link';
 
 export const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -31,12 +32,8 @@ export const NavBar = () => {
           <NavSpacer />
           <Heading white>FinWise</Heading>
           <NavLinkContainer open={open}>
-            <NavLink to={'/'} open={open} onClick={() => setOpen(false)}>
-              Link 1
-            </NavLink>
-            <NavLink to={'/'} open={open} onClick={() => setOpen(false)}>
-              Link 2
-            </NavLink>
+            <Link white={true}>Link 1</Link>
+            <Link white>Link 2</Link>
           </NavLinkContainer>
         </NavContent>
       </NavBarBackground>

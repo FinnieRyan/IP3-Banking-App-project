@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { Link } from 'react-router-dom';
-
 const smallNavBreakpoint = '768px';
 
 export const NavBarBackground = styled.nav`
@@ -10,7 +8,9 @@ export const NavBarBackground = styled.nav`
   display: flex;
   justify-content: center;
 
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: rgb(0 48 121 / 80%);
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
 
   height: ${({ open }) => (open ? '100vh' : '60px')};
   width: 100%;
@@ -47,22 +47,8 @@ export const NavLinkContainer = styled.div`
   position: absolute;
   gap: 24px;
   width: 100%;
-  height: 100vh;
+  height: ${({ open }) => (open ? '100vh' : 0)};
   margin-top: 60px;
   opacity: ${({ open }) => (open ? 1 : 0)};
   transition: all 0.3s ease-in-out;
-`;
-
-// this specifically styles a react router link to prevent the page reloading when the link is clicked
-export const NavLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.textWhite};
-  cursor: pointer;
-  /* on mobile disable links when burger menu closed */
-  @media (max-width: ${smallNavBreakpoint}) {
-    pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
-  }
-
-  :hover {
-    color: ${({ theme }) => theme.colors.textWhite};
-  }
 `;
