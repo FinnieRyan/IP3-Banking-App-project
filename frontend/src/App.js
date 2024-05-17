@@ -7,8 +7,10 @@ import { theme } from './styles/Theme';
 
 // COMPONENTS
 import { PageLayout } from './components/PageLayout/PageLayout';
+import { Text } from './components/Text/Text';
+import { Card } from './components/Card/Card';
 import { Heading } from './components/Heading/Heading';
-import { Link } from './components/Link/Link';
+import { Button } from './components/Button/Button';
 
 export const App = () => {
   return (
@@ -16,11 +18,13 @@ export const App = () => {
       <GlobalStyles />
       <Router>
         <PageLayout>
-          <Heading size={1} displayAs={3}>
-            Hello world!
-          </Heading>
-          <p>FinWise App</p>
-          <Link>Test link</Link>
+          <Text>This is the app content</Text>
+          <Card>This is a card</Card>
+          <Card>
+            <Heading size={2}>This is a card</Heading>
+            <Button type="secondary">hello</Button>
+            <Button>hello</Button>
+          </Card>
         </PageLayout>
       </Router>
     </ThemeProvider>
