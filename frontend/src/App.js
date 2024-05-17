@@ -11,12 +11,15 @@ import { Text } from './components/Text/Text';
 import { Card } from './components/Card/Card';
 import { Heading } from './components/Heading/Heading';
 import { Button } from './components/Button/Button';
+import { ButtonPattern } from './components/ButtonPattern/ButtonPattern';
+import { NavBar } from './components/NavBar/NavBar';
 
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
+        <NavBar />
         <PageLayout>
           <Text>This is the app content</Text>
           <Card>This is a card</Card>
@@ -25,6 +28,7 @@ export const App = () => {
             <Button type="secondary">hello</Button>
             <Button>hello</Button>
           </Card>
+          <ButtonPattern />
         </PageLayout>
       </Router>
     </ThemeProvider>

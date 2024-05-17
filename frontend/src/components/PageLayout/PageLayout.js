@@ -1,4 +1,4 @@
-// STYLES
+import PropTypes from 'prop-types';
 import { Heading } from '../Heading/Heading';
 import { Link } from '../Link/Link';
 import { Container } from './PageLayout.style';
@@ -11,4 +11,8 @@ export const PageLayout = ({ children }) => {
       {children}
     </Container>
   );
+};
+
+PageLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };

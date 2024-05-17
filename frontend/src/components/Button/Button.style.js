@@ -4,6 +4,9 @@ import styled from 'styled-components';
 export const StyledButton = styled.button`
   position: relative;
   cursor: pointer;
+  font-size: 24px;
+  font-weight: ${({ theme }) => theme.fonts.weights.medium};
+  width: 100%;
   padding: 10px 20px;
   color: ${({ type }) => (type === 'primary' ? 'white' : 'black')};
   background-color: ${({ theme, type }) => (type === 'primary' ? theme.colors.primary : '#ececec')};
