@@ -35,7 +35,7 @@ if (!user) return res.status(400).json({msg: 'Email not found'});
 const isMatch = await bcrypt.compare(password, userPassword);
 if(!isMatch) return res.status(400).json({msg: 'Password Incorrect'});
 
-//the jwt is the auth code for now... 
+//the jwt is the auth code 
 const authorizationCode = jwt.sign({id: user.id}, 'authorizationcode_secret', {expiresIn: '10m'});
 
 res.json({authorizationCode});
