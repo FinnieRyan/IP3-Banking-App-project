@@ -1,6 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import authRoutes from './routes/auth.js';
 
 const app = express();
 
@@ -13,7 +14,6 @@ mongoose.connect('mongodb+srv://dudge1:ip3bank@bank-app-ip3.yodwqq8.mongodb.net/
   useUnifiedTopology: true,
 });
 
-const authRoutes = require ('./routes/auth');
 app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;

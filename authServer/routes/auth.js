@@ -1,8 +1,9 @@
-const express = require ('express') 
-const bcrypt = require ('bcrypt')
-const jwt = require ('jsonwebtoken')
-const crypto = require('crypto');
-const User = require('../models/user')
+import express from 'express';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+import User from '../../server/models/user.js';
+
 
 //express router instance
 const router = express.Router();
@@ -15,7 +16,7 @@ router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
     //Check if user exisits 
-    const storedUser = await User.findOne({email});
+    const storedUser = await User.findOne({username});
     if (storedUser) return res.status(400).json({msg: 'User already exsists'});
 
     //hash the password
@@ -69,4 +70,4 @@ router.get('/token', async (req, res) => {
 
 });
 
-module.exports = router;
+export default router;

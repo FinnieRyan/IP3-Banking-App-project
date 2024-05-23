@@ -1,12 +1,13 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import seedData from './seedData.js';
 import User from '../../server/models/user.js';
 import Customer from '../../server/models/customer.js';
 import Account from '../../server/models/account.js';
 import Transaction from '../../server/models/transactions.js';
 import UserSession from '../../server/models/userSession.js';
+import seedData from './seedData.js';
 import connectDB from '../config/helpers.js';
+
 
 const { users, customers, accounts, transactions, userSessions } = seedData;
 
