@@ -1,0 +1,31 @@
+{
+  "name": "ip3-banking-app-project",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "prod": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "docker-compose up",
+    "db-reset": "node ./database/seed/clearDatabase.js && node ./database/seed/seedDatabase.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FinnieRyan/IP3-Banking-App-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FinnieRyan/IP3-Banking-App-project/issues"
+  },
+  "homepage": "https://github.com/FinnieRyan/IP3-Banking-App-project#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
