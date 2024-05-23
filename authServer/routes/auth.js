@@ -57,7 +57,7 @@ router.post('/token', async (req, res) => {
         return res.status(400).json({msg: "invaild or expired authorisation code"});
     }
 
-    authCodes.delete(authorisationCode);
+    authCodes.delete(authorizationCode);
 
     //create access token
     const accessToken = jwt.sign({id: authCodeData.userId}, 'access_token_secret', {expiresIn: '10m'});
