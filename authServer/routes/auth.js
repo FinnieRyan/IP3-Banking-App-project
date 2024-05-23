@@ -1,9 +1,14 @@
 const express = require ('express') 
-const bcrypt = require ('bcrypt.js')
+const bcrypt = require ('bcrypt')
 const jwt = require ('jsonwebtoken')
+const crypto = require('crypto');
 const User = require('../models/user')
 
+//express router instance
 const router = express.Router();
+
+//in-memory store for authorisation codes
+const authCodes = new Map();
 
 //registration route 
 router.post('/register', async (req, res) => {
@@ -15,10 +20,10 @@ router.post('/register', async (req, res) => {
 
     //hash the password
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bycrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     //Create the new user
-    const newUser = new User({username, email, password:hashedPassword});
+    const newUser = new User({username, email, passwordHash:hashedPassword});
     await newUser.save();
 
     res.status(201).json({msg: 'User registration successful'});
@@ -29,31 +34,38 @@ router.post('/login', async (req, res) => {
     const {username, password} = req.body;
 
 //Validate user credentials
-const user = User.findOne({email});
-if (!user) return res.status(400).json({msg: 'Email not found'});
+console.log(username);
+const user = await User.findOne({ username });
+if (!user) return res.status(400).json({msg: 'username not found'});
 
-const isMatch = await bcrypt.compare(password, userPassword);
+console.log(password);
+console.log(user.passwordHash);
+const isMatch = await bcrypt.compare(password, user.passwordHash);
 if(!isMatch) return res.status(400).json({msg: 'Password Incorrect'});
 
 //the jwt is the auth code 
-const authorizationCode = jwt.sign({id: user.id}, 'authorizationcode_secret', {expiresIn: '10m'});
+const authorizationCode = crypto.randomBytes(20).toString('hex')
+authCodes.set(authorizationCode, { userId: user._id, expires: Date.now() + 600000 });
 
 res.json({authorizationCode});
 
 });
 
 //exchange the auth for access token 
-router.post('/token', async (req, res) => {
-const {authorizationCode} = req.body
+router.get('/token', async (req, res) => {
+    const {authorizationCode} = req.body
 
-try{
-    const decoded = jwt.verify(authorizationCode, 'authorizationcode_secret');
-    const accessToken = jwt.sign({id: decoded.id}, 'access_token_secret', {expiresIn: '10m'});
+    const authCodeData = authCodes.get(authorizationCode);
+    if(!authCodeData || authCodeData.expires < Date.now()){
+        return res.status(400).json({msg: "invaild or expired authorisation code"});
+    }
+
+    authCodes.delete(authorizationCode);
+
+    //create access token
+    const accessToken = jwt.sign({id: authCodeData.userId}, 'access_token_secret', {expiresIn: '10m'});
 
     res.json({accessToken});
- } catch (err) {
-    res.status(400).json({msg: 'Invalid auth code '})
- }
 
 });
 
