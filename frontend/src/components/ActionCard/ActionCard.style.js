@@ -1,4 +1,3 @@
-import { AiFillPoundCircle } from 'react-icons/ai';
 import { FiChevronRight } from 'react-icons/fi';
 import styled from 'styled-components';
 import { CardContainer } from '../Card/Card.style';
@@ -20,9 +19,8 @@ export const IconTextContainer = styled.div`
   gap: 10px;
 `;
 
-export const StyledIcon = styled(AiFillPoundCircle)`
-  font-size: 38px;
-  color: ${({ theme }) => theme.colors.primary};
+export const IconImg = styled.img`
+  fill: ${({ theme }) => theme.colors.primary};
 `;
 
 export const StyledChevron = styled(FiChevronRight)`
