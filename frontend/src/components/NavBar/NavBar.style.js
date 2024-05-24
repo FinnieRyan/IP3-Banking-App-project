@@ -31,6 +31,7 @@ export const NavContent = styled.div`
   max-width: ${({ theme }) => theme.sizes.tablet};
   align-items: flex-start;
   margin: 0.75rem 0;
+  max-width: 736px;
 `;
 
 export const NavSpacer = styled.div`

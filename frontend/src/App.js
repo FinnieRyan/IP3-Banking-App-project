@@ -21,6 +21,8 @@ export const App = () => {
       <GlobalStyles />
       <Router>
         <NavBar />
+        <Routes></Routes>
+        {/* to be removed */}
         <PageLayout>
           <Text>This is the app content</Text>
           <Card>This is a card</Card>
