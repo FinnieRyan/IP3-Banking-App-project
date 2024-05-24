@@ -5,7 +5,6 @@ import mongoose from 'mongoose'
 import protectedRoutes from './routes/protected.js'
 import connectDB from '../database/config/helpers.js'
 
-// Load environment variables
 dotenv.config()
 
 const app = express()
