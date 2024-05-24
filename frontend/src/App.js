@@ -1,25 +1,40 @@
-import logo from './logo.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
-function App() {
+// STYLES
+import { GlobalStyles } from './styles/GlobalStyles'
+import { theme } from './styles/Theme'
+
+// COMPONENTS
+import { PageLayout } from './components/PageLayout/PageLayout'
+import { Text } from './components/Text/Text'
+import { Card } from './components/Card/Card'
+import { Heading } from './components/Heading/Heading'
+import { Button } from './components/Button/Button'
+import { ButtonPattern } from './components/ButtonPattern/ButtonPattern'
+import { NavBar } from './components/NavBar/NavBar'
+import { HR } from './components/HR/HR'
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Router>
+        <NavBar />
+        <Routes></Routes>
+        {/* to be removed */}
+        <PageLayout>
+          <Text>This is the app content</Text>
+          <Card>This is a card</Card>
+          <Card>
+            <Heading size={2}>This is a card</Heading>
+            <Button type="secondary">hello</Button>
+            <HR />
+            <Button>hello</Button>
+          </Card>
+          <ButtonPattern />
+        </PageLayout>
+      </Router>
+    </ThemeProvider>
   )
 }
-
-export default App
