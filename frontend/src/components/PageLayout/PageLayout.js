@@ -3,11 +3,11 @@ import { Heading } from '../Heading/Heading';
 import { Link } from '../Link/Link';
 import { Container } from './PageLayout.style';
 
-export const PageLayout = ({ children }) => {
+export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
   return (
     <Container>
-      <Link backLink>Back link</Link>
-      <Heading>App heading</Heading>
+      {linkLocation && linkText && <Link backLink>Back link</Link>}
+      {heading && <Heading>App heading</Heading>}
       {children}
     </Container>
   );
@@ -15,4 +15,7 @@ export const PageLayout = ({ children }) => {
 
 PageLayout.propTypes = {
   children: PropTypes.node.isRequired,
+  heading: PropTypes.string,
+  linkText: PropTypes.string,
+  linkLocation: PropTypes.string,
 };
