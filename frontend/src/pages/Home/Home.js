@@ -7,6 +7,7 @@ import { Text } from '../../components/Text/Text';
 import { Link } from '../../components/Link/Link';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
 import { useNavigate } from 'react-router-dom';
+import pound from '../../assets/pound.svg';
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -18,11 +19,13 @@ export const Home = () => {
   return (
     <PageLayout>
       <Card>
-        <Heading>Welcome back, Name</Heading>
+        <Heading>
+          Welcome back, <br /> Name
+        </Heading>
       </Card>
       <GroupContent>
         <Heading size={5}>Quick links</Heading>
-        <ActionCard content="Current Account" subContent="£X" action={actionCardNavigate} />
+        <ActionCard icon={pound} content="Current Account" subContent="£X" action={actionCardNavigate} />
         <Link location="/accounts">View all accounts</Link>
       </GroupContent>
       <GroupContent>

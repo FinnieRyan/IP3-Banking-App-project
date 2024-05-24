@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '../Text/Text';
-import { ActionCardContainer, IconTextContainer, StyledIcon, StyledChevron } from './ActionCard.style';
+import { ActionCardContainer, IconTextContainer, StyledChevron, IconImg } from './ActionCard.style';
 
-export const ActionCard = ({ content, subContent, action }) => {
+export const ActionCard = ({ icon, content, subContent, action }) => {
   return (
     <ActionCardContainer onClick={action}>
       <IconTextContainer>
-        <StyledIcon /> {/* THIS WILL NEED SWAPPED FOR REAL ICONS */}
+        <IconImg src={icon} alt="action card icon" />
         <div>
           <Text weight="medium">{content}</Text>
           {subContent && (
@@ -23,6 +23,7 @@ export const ActionCard = ({ content, subContent, action }) => {
 };
 
 ActionCard.propTypes = {
+  icon: PropTypes.node.isRequired,
   content: PropTypes.string.isRequired,
   subContent: PropTypes.string,
   action: PropTypes.func.isRequired,
