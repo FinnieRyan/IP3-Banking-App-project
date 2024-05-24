@@ -7,9 +7,11 @@ import { NavBarBackground, NavContent, NavLinkContainer, NavSpacer } from './Nav
 import { Burger } from './Burger';
 import { Heading } from '../Heading/Heading';
 import { Link } from '../Link/Link';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   // close the burger menu on resize
   useEffect(() => {
@@ -30,7 +32,9 @@ export const NavBar = () => {
         <NavContent onMouseLeave={() => setOpen(false)}>
           <Burger open={open} setOpen={setOpen} />
           <NavSpacer />
-          <Heading white>FinWise</Heading>
+          <Heading white onClick={() => navigate('/')}>
+            FinWise
+          </Heading>
           <NavLinkContainer open={open}>
             <Link white={true}>Link 1</Link>
             <Link white>Link 2</Link>
