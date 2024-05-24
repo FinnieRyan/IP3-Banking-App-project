@@ -13,6 +13,7 @@ import { Heading } from './components/Heading/Heading';
 import { Button } from './components/Button/Button';
 import { ButtonPattern } from './components/ButtonPattern/ButtonPattern';
 import { NavBar } from './components/NavBar/NavBar';
+import { HR } from './components/HR/HR';
 
 export const App = () => {
   return (
@@ -26,6 +27,7 @@ export const App = () => {
           <Card>
             <Heading size={2}>This is a card</Heading>
             <Button type="secondary">hello</Button>
+            <HR />
             <Button>hello</Button>
           </Card>
           <ButtonPattern />
