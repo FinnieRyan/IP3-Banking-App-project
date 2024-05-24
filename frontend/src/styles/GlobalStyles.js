@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { darken } from 'polished';
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -76,9 +75,6 @@ export const GlobalStyles = createGlobalStyle`
     border-bottom: 1px solid transparent;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    &:hover {
-      border-bottom: 1px solid ${({ theme }) => darken(0.1, theme.colors.link)};
-    }
   }
 
   /* remove default styling from lists */
