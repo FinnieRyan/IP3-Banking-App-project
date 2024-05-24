@@ -1,14 +1,42 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+import dotenv from 'dotenv'
+import express from 'express'
+import bodyParser from 'body-parser'
+import mongoose from 'mongoose'
+import protectedRoutes from './routes/protected.js'
+import connectDB from '../database/config/helpers.js'
 
-const app = express();
+// Load environment variables
+dotenv.config()
 
+const app = express()
+const PORT = process.env.SERVER_PORT || 3500
 
-app.use(bodyParser.json());
+const connectToDBAndStartServer = async () => {
+  try {
+    await connectDB()
+    console.log('Connected to MongoDB')
+    // Start the server after connecting to the database
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error)
+  }
+}
 
+app.use(bodyParser.json())
 
-const protectedRoutes = require('./routes/protected');
-app.use('/api', protectedRoutes);
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error-handling middleware:', err.stack)
+  res.status(500).json({ message: err.message })
+})
 
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.use('/api', protectedRoutes)
+
+connectToDBAndStartServer()
+// MongoDB connection error handler
+mongoose.connection.on('error', (error) => {
+  console.error('MongoDB connection error:', error)
+})
+
+//const PORT = process.env.PORT || 5001;
+//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

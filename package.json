@@ -7,7 +7,10 @@
     "prod": "node index.js",
     "dev": "nodemon index.js",
     "build": "docker-compose up",
-    "db-reset": "node ./database/seed/clearDatabase.js && node ./database/seed/seedDatabase.js"
+    "db-reset": "node ./database/seed/clearDatabase.js && node ./database/seed/seedDatabase.js",
+    "prepare": "husky install",
+    "format": "prettier --write .",
+    "lint": "prettier --check ."
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,12 @@
   },
   "type": "module",
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.4",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,scss,md}": "prettier --write"
   }
 }
