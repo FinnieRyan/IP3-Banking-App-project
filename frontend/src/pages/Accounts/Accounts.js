@@ -12,7 +12,7 @@ export const Accounts = () => {
       <ActionCard icon={SquarePoundSymbol} content="Current Account" subContent="£X" />
       <Spacer />
       <Button>
-        Transactions <FiPlus style={{ fontSize: '32px', marginRight: '-5px' }} />
+        Transactions <FiPlus style={{ fontSize: '32px', marginRight: '-6px' }} />
       </Button>
     </PageLayout>
   );
