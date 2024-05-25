@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const StyledBurger = styled.div`
   z-index: 1001;
 
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
 
   display: flex;
   justify-content: space-around;
@@ -13,7 +13,7 @@ const StyledBurger = styled.div`
 
   /* create shape of burger icon and animate */
   div {
-    width: 2rem;
+    width: 2.25rem;
     height: 3px;
     background: white;
     border-radius: 10px;

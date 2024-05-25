@@ -39,9 +39,10 @@ export const Home = () => {
         <Card>
           <Heading size={2}>X overview</Heading>
           <Text>
-            So far you have spent <strong>£X</strong> this month
+            So far you this month you have spent <br /> <strong>£X</strong>
           </Text>
           <Heading size={3}>Trends in your spending</Heading>
+          <Text>Graph</Text>
         </Card>
       </GroupContent>
     </PageLayout>

@@ -11,7 +11,7 @@ export const ActionCard = ({ icon, content, subContent, action }) => {
         <div>
           <Text weight="medium">{content}</Text>
           {subContent && (
-            <Text size={5} color="Grey">
+            <Text size={5} color="grey">
               {subContent}
             </Text>
           )}
