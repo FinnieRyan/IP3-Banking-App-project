@@ -4,7 +4,7 @@ import { Heading } from '../../components/Heading/Heading';
 
 export const Account = () => {
   return (
-    <PageLayout>
+    <PageLayout linkText="Accounts" linkLocation={'/accounts'}>
       <Heading>Account</Heading>
     </PageLayout>
   );
