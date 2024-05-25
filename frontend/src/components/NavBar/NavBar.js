@@ -37,7 +37,7 @@ export const NavBar = () => {
         <NavContent onMouseLeave={() => setOpen(false)}>
           <Burger open={open} setOpen={setOpen} />
           <NavSpacer />
-          <Heading white onClick={() => navigate('/')}>
+          <Heading color="white" onClick={() => navigate('/')}>
             FinWise
           </Heading>
           <NavLinkContainer open={open}>

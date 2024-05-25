@@ -6,7 +6,11 @@ import { Container } from './PageLayout.style';
 export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
   return (
     <Container>
-      {linkLocation && linkText && <Link backLink>Back link</Link>}
+      {linkLocation && linkText && (
+        <Link backLink location={linkLocation}>
+          {linkText}
+        </Link>
+      )}
       {heading && <Heading>App heading</Heading>}
       {children}
     </Container>
