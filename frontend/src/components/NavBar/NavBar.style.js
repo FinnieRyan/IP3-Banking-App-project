@@ -4,6 +4,7 @@ const smallNavBreakpoint = '768px';
 
 export const NavBarBackground = styled.nav`
   position: fixed;
+  top: 0;
   z-index: 100;
   display: flex;
   justify-content: center;
