@@ -24,7 +24,7 @@ export const IconImg = styled.img`
 `;
 
 export const StyledChevron = styled(FiChevronRight)`
-  font-size: 38px;
-  margin-right: -12px;
+  font-size: 44px;
+  margin-right: -14px;
   color: ${({ theme }) => theme.colors.primary};
 `;
