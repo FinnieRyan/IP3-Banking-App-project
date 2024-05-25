@@ -11,7 +11,7 @@ export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
           {linkText}
         </Link>
       )}
-      {heading && <Heading>App heading</Heading>}
+      {heading && <Heading>{heading}</Heading>}
       {children}
     </Container>
   );

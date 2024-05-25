@@ -40,14 +40,16 @@ export const NavBar = () => {
           <Heading color="white" onClick={() => navigate('/')}>
             FinWise
           </Heading>
-          <NavLinkContainer open={open}>
-            <Link white location="/">
-              Home
-            </Link>
-            <Link white location="/accounts">
-              Accounts
-            </Link>
-          </NavLinkContainer>
+          {open && (
+            <NavLinkContainer open={open}>
+              <Link white location="/">
+                Home
+              </Link>
+              <Link white location="/accounts">
+                Accounts
+              </Link>
+            </NavLinkContainer>
+          )}
         </NavContent>
       </NavBarBackground>
       <div style={{ height: '60px' }} />
