@@ -13,7 +13,7 @@ export const TransferMoney = () => {
     navigate('/transfer-money/money-in');
   };
   const actionCardTransferAccountsNavigate = () => {
-    navigate('/transfer-money/accounts');
+    navigate('/transfer-money/move-money');
   };
   const buttonPaySomeoneNavigate = () => {
     navigate('/transfer-money/pay-someone');

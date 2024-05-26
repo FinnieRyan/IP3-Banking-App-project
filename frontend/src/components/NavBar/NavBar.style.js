@@ -7,7 +7,7 @@ export const NavBarBackground = styled.nav`
   display: flex;
   justify-content: center;
 
-  background-color: rgb(0 48 121 / 80%);
+  background-color: rgb(0 52 125 / 80%);
   backdrop-filter: blur(33px);
   -webkit-backdrop-filter: blur(33px);
 
