@@ -44,7 +44,9 @@ export const NavLinkContainer = styled.div`
   height: ${({ open }) => (open ? '100vh' : 0)};
   margin-top: 60px;
   opacity: ${({ open }) => (open ? 1 : 0)};
-  transition: all 0.3s ease-in-out;
+  transform: ${({ open }) => (open ? 'translateY(0)' : 'translateY(-10px)')};
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 `;
 
 export const NavLinkGroup = styled.div`
