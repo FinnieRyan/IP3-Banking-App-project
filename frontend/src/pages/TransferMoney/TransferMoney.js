@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
 import SquarePoundPersonSymbol from '../../assets/square-pound-person-symbol-x2.svg';
 import SquarePoundAddSymbol from '../../assets/square-pound-add-symbol-x2.svg';
 import SquareArrowsSymbol from '../../assets/square-arrows-symbol-x2.svg';
+import AccountsModal from '../../components/AccountsModal/AccountsModal';
 
 export const TransferMoney = () => {
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
 
   const actionCardMoneyInNavigate = () => {
-    navigate('/transfer-money/money-in');
+    setShowModal(true);
   };
   const actionCardTransferAccountsNavigate = () => {
     navigate('/transfer-money/move-money');
@@ -21,6 +23,13 @@ export const TransferMoney = () => {
 
   return (
     <PageLayout linkText="Accounts" linkLocation={'/accounts'} heading="Transfer Money">
+      {showModal && (
+        <AccountsModal
+          heading="Pay money into?"
+          description="Which account would you like to pay money into?"
+          onClose={() => setShowModal(false)}
+        />
+      )}
       <ActionCard
         icon={SquarePoundAddSymbol}
         content="Pay money in"

@@ -5,7 +5,7 @@ import { FiExternalLink } from 'react-icons/fi';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
 // STYLES
-import { LinkContainer, LinkText } from './Link.style';
+import { LinkContainer } from './Link.style';
 
 export const Link = ({ children, location, backLink = false, isExternal = false, inline = false, white = false }) => {
   return (
@@ -13,18 +13,18 @@ export const Link = ({ children, location, backLink = false, isExternal = false,
       {isExternal ? (
         <LinkContainer to={location} target="_blank" rel="noreferrer" inline={inline} $white={white}>
           <FiExternalLink style={{ fontSize: '18px' }} />
-          <LinkText> {children}</LinkText>
+          {children}
         </LinkContainer>
       ) : (
         <>
           {backLink ? (
             <LinkContainer to={location} inline={inline} style={{ marginLeft: '-8px' }} $white={white}>
               {!inline && <FiChevronLeft style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
-              <LinkText>{children}</LinkText>
+              {children}
             </LinkContainer>
           ) : (
             <LinkContainer to={location} inline={inline} $white={white}>
-              <LinkText>{children}</LinkText>
+              {children}
               {!inline && <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
             </LinkContainer>
           )}

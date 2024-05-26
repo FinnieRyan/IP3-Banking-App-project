@@ -8,9 +8,6 @@ export const LinkContainer = styled(({ inline, ...props }) => <Link {...props} /
   white-space: nowrap;
   width: fit-content;
   color: ${({ theme, $white }) => $white && theme.colors.textWhite};
-`;
-
-export const LinkText = styled.span`
   font-size: 16px;
   font-weight: ${({ theme }) => theme.fonts.weights.bold};
 `;
