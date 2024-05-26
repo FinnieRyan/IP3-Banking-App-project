@@ -22,7 +22,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
-          <Route path="/accounts/current" element={<Account />} />
+          <Route path="/accounts/:accountType" element={<Account />} />
         </Routes>
       </Router>
     </ThemeProvider>

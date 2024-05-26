@@ -19,13 +19,13 @@ export const Link = ({ children, location, backLink = false, isExternal = false,
         <>
           {backLink ? (
             <LinkContainer to={location} inline={inline} style={{ marginLeft: '-8px' }} $white={white}>
-              {!inline && <FiChevronLeft style={{ fontSize: '24px' }} />}
+              {!inline && <FiChevronLeft style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
               <LinkText>{children}</LinkText>
             </LinkContainer>
           ) : (
             <LinkContainer to={location} inline={inline} $white={white}>
               <LinkText>{children}</LinkText>
-              {!inline && <FiChevronRight style={{ fontSize: '24px' }} />}
+              {!inline && <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
             </LinkContainer>
           )}
         </>
