@@ -7,7 +7,7 @@ import { Text } from '../../components/Text/Text';
 import { Link } from '../../components/Link/Link';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
 import { useNavigate } from 'react-router-dom';
-import SquarePoundSymbol from '../../assets/square-pound-symbol.svg';
+import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
 
 export const Home = () => {
   const navigate = useNavigate();
