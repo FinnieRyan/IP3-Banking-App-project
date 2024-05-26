@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // STYLES
-import { NavBarBackground, NavContent, NavLinkContainer, NavSpacer } from './NavBar.style';
+import { NavBarBackground, NavContent, NavLinkContainer, NavLinkGroup, NavSpacer } from './NavBar.style';
 
 // COMPONENTS
 import { Burger } from './Burger';
@@ -48,6 +48,17 @@ export const NavBar = () => {
               <Link white location="/accounts">
                 Accounts
               </Link>
+              <NavLinkGroup>
+                <Link white location="/accounts/current">
+                  Current Account
+                </Link>
+                <Link white location="/accounts/savings">
+                  Savings
+                </Link>
+                <Link white location="/transfer">
+                  Transfer Money
+                </Link>
+              </NavLinkGroup>
             </NavLinkContainer>
           )}
         </NavContent>

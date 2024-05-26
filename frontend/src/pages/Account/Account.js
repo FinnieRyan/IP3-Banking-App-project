@@ -3,6 +3,7 @@ import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { Heading } from '../../components/Heading/Heading';
 import { useParams } from 'react-router-dom';
 import { Card } from '../../components/Card/Card';
+import { toTitleCase } from '../../helpers/toTitleCase';
 
 export const Account = () => {
   const { accountType } = useParams();
@@ -10,7 +11,7 @@ export const Account = () => {
   return (
     <PageLayout linkText="Accounts" linkLocation={'/accounts'}>
       <Card>
-        <Heading>{accountType}</Heading>
+        <Heading>{toTitleCase(accountType)}</Heading>
       </Card>
     </PageLayout>
   );
