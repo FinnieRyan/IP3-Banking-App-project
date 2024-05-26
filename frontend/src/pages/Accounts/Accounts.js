@@ -29,7 +29,7 @@ export const Accounts = () => {
       <ActionCard icon={BankNote} content="Savings" subContent="£X" action={actionCardSavingsNavigate} />
       <Spacer />
       <Button>
-        Transactions <FiPlus style={{ fontSize: '32px', marginRight: '-6px' }} />
+        Transfer Money <FiPlus style={{ fontSize: '32px', marginRight: '-6px' }} />
       </Button>
     </PageLayout>
   );
