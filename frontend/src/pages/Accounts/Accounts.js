@@ -14,6 +14,10 @@ export const Accounts = () => {
   const actionCardCurrentAccountNavigate = () => {
     navigate('/accounts/current');
   };
+  const actionCardSavingsNavigate = () => {
+    navigate('/accounts/savings');
+  };
+
   return (
     <PageLayout linkText="Home" linkLocation={'/'} heading="Accounts">
       <ActionCard
@@ -22,7 +26,7 @@ export const Accounts = () => {
         subContent="£X"
         action={actionCardCurrentAccountNavigate}
       />
-      <ActionCard icon={BankNote} content="Savings" subContent="£X" action={actionCardCurrentAccountNavigate} />
+      <ActionCard icon={BankNote} content="Savings" subContent="£X" action={actionCardSavingsNavigate} />
       <Spacer />
       <Button>
         Transactions <FiPlus style={{ fontSize: '32px', marginRight: '-6px' }} />
