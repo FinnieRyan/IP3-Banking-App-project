@@ -15,7 +15,7 @@ const AccountsModal = ({ heading, description, onClose }) => {
         {description && <Text>{description}</Text>}
         <CloseIcon onClick={onClose} />
         <StyledLink to="/transfer-money/money-in/current">
-          Current Account{' '}
+          Current Account
           <div>
             £X
             <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />
@@ -23,7 +23,7 @@ const AccountsModal = ({ heading, description, onClose }) => {
         </StyledLink>
         <HR />
         <StyledLink to="/transfer-money/money-in/savings">
-          Savings Account{' '}
+          Savings Account
           <div>
             £X
             <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />

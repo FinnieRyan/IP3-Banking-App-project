@@ -6,6 +6,7 @@ import { GlobalStyles } from './styles/GlobalStyles';
 import { theme } from './styles/Theme';
 
 // COMPONENTS
+import { ScrollToTop } from './helpers/ScrollToTop';
 import { NavBar } from './components/NavBar/NavBar';
 
 // PAGES
@@ -23,6 +24,7 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
+        <ScrollToTop />
         <NavBar />
         <Routes>
           <Route path="*" element={<NotFound />} />
