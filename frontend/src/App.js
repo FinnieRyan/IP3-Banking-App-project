@@ -10,7 +10,7 @@ import { ScrollToTop } from './helpers/ScrollToTop';
 import { NavBar } from './components/NavBar/NavBar';
 
 // PAGES
-import NotFound from './pages/NotFound/NotFound';
+import { NotFound } from './pages/NotFound/NotFound';
 import { Home } from './pages/Home/Home';
 import { Accounts } from './pages/Accounts/Accounts';
 import { Account } from './pages/Account/Account';
