@@ -7,11 +7,12 @@ import { theme } from './styles/Theme';
 
 // PAGES
 import { Home } from './pages/Home/Home';
+import { Accounts } from './pages/Accounts/Accounts';
+import { Account } from './pages/Account/Account';
+import { TransferMoney } from './pages/TransferMoney/TransferMoney';
 
 // COMPONENTS
 import { NavBar } from './components/NavBar/NavBar';
-import { Accounts } from './pages/Accounts/Accounts';
-import { Account } from './pages/Account/Account';
 
 export const App = () => {
   return (
@@ -23,6 +24,7 @@ export const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:accountType" element={<Account />} />
+          <Route path="/transfer-money" element={<TransferMoney />} />
         </Routes>
       </Router>
     </ThemeProvider>
