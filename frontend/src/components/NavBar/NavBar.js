@@ -40,27 +40,25 @@ export const NavBar = () => {
           <Heading color="white" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             FinWise
           </Heading>
-          {open && (
-            <NavLinkContainer open={open}>
-              <Link white location="/">
-                Home
+          <NavLinkContainer open={open}>
+            <Link white location="/">
+              Home
+            </Link>
+            <Link white location="/accounts">
+              Accounts
+            </Link>
+            <NavLinkGroup>
+              <Link white location="/accounts/current">
+                Current Account
               </Link>
-              <Link white location="/accounts">
-                Accounts
+              <Link white location="/accounts/savings">
+                Savings
               </Link>
-              <NavLinkGroup>
-                <Link white location="/accounts/current">
-                  Current Account
-                </Link>
-                <Link white location="/accounts/savings">
-                  Savings
-                </Link>
-                <Link white location="/transfer-money">
-                  Transfer Money
-                </Link>
-              </NavLinkGroup>
-            </NavLinkContainer>
-          )}
+              <Link white location="/transfer-money">
+                Transfer Money
+              </Link>
+            </NavLinkGroup>
+          </NavLinkContainer>
         </NavContent>
       </NavBarBackground>
       <div style={{ height: '60px' }} />

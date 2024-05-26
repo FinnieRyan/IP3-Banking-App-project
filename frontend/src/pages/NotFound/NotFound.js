@@ -16,7 +16,7 @@ const NotFound = () => {
   };
   return (
     <PageLayout>
-      <OopsImg style={{ width: '100%' }} />
+      <OopsImg style={{ width: '100%', height: '250px' }} />
       <Heading>Oops, that's not right...</Heading>
       <Text>
         We're sorry, but the page you're looking for doesn't seem to exist. You can use the button below or the menu bar
