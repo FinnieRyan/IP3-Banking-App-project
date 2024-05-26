@@ -54,3 +54,10 @@ export const NavLinkContainer = styled.div`
   opacity: ${({ open }) => (open ? 1 : 0)};
   transition: all 0.3s ease-in-out;
 `;
+
+export const NavLinkGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-left: 1em;
+`;
