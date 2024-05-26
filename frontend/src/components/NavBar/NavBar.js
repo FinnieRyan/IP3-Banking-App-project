@@ -55,7 +55,7 @@ export const NavBar = () => {
                 <Link white location="/accounts/savings">
                   Savings
                 </Link>
-                <Link white location="/transfer">
+                <Link white location="/transfer-money">
                   Transfer Money
                 </Link>
               </NavLinkGroup>
