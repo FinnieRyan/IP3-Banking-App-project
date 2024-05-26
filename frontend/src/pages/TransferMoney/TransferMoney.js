@@ -20,7 +20,7 @@ export const TransferMoney = () => {
   };
 
   return (
-    <PageLayout linkText="Home" linkLocation={'/'} heading="Transfer Money">
+    <PageLayout linkText="Accounts" linkLocation={'/accounts'} heading="Transfer Money">
       <ActionCard
         icon={SquarePoundAddSymbol}
         content="Pay money in"

@@ -9,5 +9,5 @@ export const CardContainer = styled.div`
   justify-content: space-between;
   gap: 20px;
   align-self: stretch;
-  ${({ theme }) => theme.shadows.cardShadow};
+  box-shadow: ${({ theme }) => theme.shadows.cardShadow};
 `;

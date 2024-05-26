@@ -17,6 +17,15 @@ export const theme = {
     warning: '#E51010',
     alert: '#EFBE41',
     success: '#72B73C',
+    category: {
+      groceries: '#789982',
+      eatingOut: '#E5A75D',
+      travel: '#FBA100',
+      entertainment: '#895DE5',
+      utilities: '#4A6D8C',
+      health: '#E57373',
+      shopping: '#B55795',
+    },
   },
   fonts: {
     familySans: 'Open Sans',
@@ -25,17 +34,17 @@ export const theme = {
       normal: '400',
       medium: '500',
       bold: '600',
-      black: '700',
+      extraBold: '700',
     },
   },
   shadows: {
     cardShadow:
-      'box-shadow: 0px 10px 10px 2px rgba(48, 92, 157, 0.05), 0px 2px 5px 0px rgba(48, 92, 157, 0.19), 0px 0px 2px 0px rgba(48, 92, 157, 0.11) inset;',
+      '0px 10px 10px 2px rgba(48, 92, 157, 0.05), 0px 2px 5px 0px rgba(48, 92, 157, 0.19), 0px 0px 2px 0px rgba(48, 92, 157, 0.11) inset;',
   },
   sizes: {
     sm: '320px', // small mobile devices
     md: '375px', // medium mobile devices
     lg: '425px', // large mobile devices
-    tablet: '768px', // tablets
+    tablet: '600px', // tablets
   },
 };
