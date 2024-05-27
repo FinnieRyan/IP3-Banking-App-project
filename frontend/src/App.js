@@ -5,15 +5,13 @@ import { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from './styles/GlobalStyles'
 import { theme } from './styles/Theme'
 
+// PAGES
+import { Home } from './pages/Home/Home';
+
 // COMPONENTS
-import { PageLayout } from './components/PageLayout/PageLayout'
-import { Text } from './components/Text/Text'
-import { Card } from './components/Card/Card'
-import { Heading } from './components/Heading/Heading'
-import { Button } from './components/Button/Button'
-import { ButtonPattern } from './components/ButtonPattern/ButtonPattern'
-import { NavBar } from './components/NavBar/NavBar'
-import { HR } from './components/HR/HR'
+import { NavBar } from './components/NavBar/NavBar';
+import { Accounts } from './pages/Accounts/Accounts';
+import { Account } from './pages/Account/Account';
 
 export const App = () => {
   return (
@@ -21,19 +19,11 @@ export const App = () => {
       <GlobalStyles />
       <Router>
         <NavBar />
-        <Routes></Routes>
-        {/* to be removed */}
-        <PageLayout>
-          <Text>This is the app content</Text>
-          <Card>This is a card</Card>
-          <Card>
-            <Heading size={2}>This is a card</Heading>
-            <Button type="secondary">hello</Button>
-            <HR />
-            <Button>hello</Button>
-          </Card>
-          <ButtonPattern />
-        </PageLayout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/accounts/current" element={<Account />} />
+        </Routes>
       </Router>
     </ThemeProvider>
   )

@@ -10,7 +10,6 @@ const styles = {
 }
 
 export const StyledHeading = styled.h1`
-  font-size: ${(props) => styles[props.displayAs || props.size]};
-  color: ${({ theme, white }) =>
-    white ? theme.colors.textWhite : theme.colors.textBlack};
-`
+  font-size: ${(props) => styles[props.$displayAs || props.size]};
+  color: ${({ theme, $white }) => ($white ? theme.colors.textWhite : theme.colors.textBlack)};
+`;

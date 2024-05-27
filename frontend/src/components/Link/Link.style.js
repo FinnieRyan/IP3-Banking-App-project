@@ -9,8 +9,8 @@ export const LinkContainer = styled(({ inline, ...props }) => (
   gap: 4px;
   white-space: nowrap;
   width: fit-content;
-  color: ${({ theme, white }) => white && theme.colors.textWhite};
-`
+  color: ${({ theme, $white }) => $white && theme.colors.textWhite};
+`;
 
 export const LinkText = styled.span`
   font-size: 16px;

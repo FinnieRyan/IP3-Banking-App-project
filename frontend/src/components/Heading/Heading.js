@@ -11,7 +11,7 @@ export const Heading = ({
   const HeadingComponent = `h${size}`
 
   return (
-    <StyledHeading as={HeadingComponent} displayAs={displayAs} white={white}>
+    <StyledHeading as={HeadingComponent} $displayAs={displayAs} $white={white}>
       {children}
     </StyledHeading>
   )
@@ -20,6 +20,6 @@ export const Heading = ({
 Heading.propTypes = {
   size: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
   displayAs: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
-  white: PropTypes.bool,
+  $white: PropTypes.bool,
   children: PropTypes.node.isRequired,
 }
