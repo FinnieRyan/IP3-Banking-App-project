@@ -1,13 +1,17 @@
 import { darken, lighten } from 'polished';
+import React from 'react';
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: ${({ children }) => (React.Children.count(children) > 1 ? 'space-between' : 'center')};
   cursor: pointer;
   font-size: 24px;
   font-weight: ${({ theme }) => theme.fonts.weights.medium};
   width: 100%;
-  padding: 10px 20px;
+  padding: 15px 20px;
   color: ${({ type }) => (type === 'primary' ? 'white' : 'black')};
   background-color: ${({ theme, type }) => (type === 'primary' ? theme.colors.primary : '#ececec')};
   border: solid 1px ${({ type }) => (type === 'primary' ? '#244981' : '#BDBDBD')};

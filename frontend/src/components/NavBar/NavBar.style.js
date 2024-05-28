@@ -4,6 +4,7 @@ const smallNavBreakpoint = '768px';
 
 export const NavBarBackground = styled.nav`
   position: fixed;
+  top: 0;
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -52,4 +53,11 @@ export const NavLinkContainer = styled.div`
   margin-top: 60px;
   opacity: ${({ open }) => (open ? 1 : 0)};
   transition: all 0.3s ease-in-out;
+`;
+
+export const NavLinkGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-left: 1em;
 `;

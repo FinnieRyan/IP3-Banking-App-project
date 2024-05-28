@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // STYLES
-import { NavBarBackground, NavContent, NavLinkContainer, NavSpacer } from './NavBar.style';
+import { NavBarBackground, NavContent, NavLinkContainer, NavLinkGroup, NavSpacer } from './NavBar.style';
 
 // COMPONENTS
 import { Burger } from './Burger';
@@ -37,17 +37,30 @@ export const NavBar = () => {
         <NavContent onMouseLeave={() => setOpen(false)}>
           <Burger open={open} setOpen={setOpen} />
           <NavSpacer />
-          <Heading white onClick={() => navigate('/')}>
+          <Heading color="white" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             FinWise
           </Heading>
-          <NavLinkContainer open={open}>
-            <Link white location="/">
-              Home
-            </Link>
-            <Link white location="/accounts">
-              Accounts
-            </Link>
-          </NavLinkContainer>
+          {open && (
+            <NavLinkContainer open={open}>
+              <Link white location="/">
+                Home
+              </Link>
+              <Link white location="/accounts">
+                Accounts
+              </Link>
+              <NavLinkGroup>
+                <Link white location="/accounts/current">
+                  Current Account
+                </Link>
+                <Link white location="/accounts/savings">
+                  Savings
+                </Link>
+                <Link white location="/transfer-money">
+                  Transfer Money
+                </Link>
+              </NavLinkGroup>
+            </NavLinkContainer>
+          )}
         </NavContent>
       </NavBarBackground>
       <div style={{ height: '60px' }} />

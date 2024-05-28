@@ -17,14 +17,17 @@ export const IconTextContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10px;
+  align-items: center;
 `;
 
 export const IconImg = styled.img`
   fill: ${({ theme }) => theme.colors.primary};
+  max-height: 45px;
+  object-fit: contain;
 `;
 
 export const StyledChevron = styled(FiChevronRight)`
-  font-size: 38px;
-  margin-right: -12px;
+  font-size: 44px;
+  margin-right: -14px;
   color: ${({ theme }) => theme.colors.primary};
 `;

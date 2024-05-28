@@ -7,7 +7,7 @@ import { Text } from '../../components/Text/Text';
 import { Link } from '../../components/Link/Link';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
 import { useNavigate } from 'react-router-dom';
-import pound from '../../assets/pound.svg';
+import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export const Home = () => {
       </Card>
       <GroupContent>
         <Heading size={5}>Quick links</Heading>
-        <ActionCard icon={pound} content="Current Account" subContent="£X" action={actionCardNavigate} />
+        <ActionCard icon={SquarePoundSymbol} content="Current Account" subContent="£X" onClick={actionCardNavigate} />
         <Link location="/accounts">View all accounts</Link>
       </GroupContent>
       <GroupContent>
@@ -39,9 +39,10 @@ export const Home = () => {
         <Card>
           <Heading size={2}>X overview</Heading>
           <Text>
-            So far you have spent <strong>£X</strong> this month
+            So far you this month you have spent <br /> <strong>£X</strong>
           </Text>
           <Heading size={3}>Trends in your spending</Heading>
+          <Text>Graph</Text>
         </Card>
       </GroupContent>
     </PageLayout>
