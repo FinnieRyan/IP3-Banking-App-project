@@ -24,8 +24,8 @@ const NotFound = () => {
       </Text>
       <GroupContent>
         <Text>Or check out some of our popular pages:</Text>
-        <Link to="/accounts">Accounts</Link>
-        <Link to="/transfer-money">Transfer money</Link>
+        <Link location="/accounts">Accounts</Link>
+        <Link location="/transfer-money">Transfer money</Link>
       </GroupContent>
       <GroupContent>
         <Text>Still can't find what you're looking for?</Text>
