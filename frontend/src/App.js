@@ -5,15 +5,18 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { theme } from './styles/Theme';
 
+// COMPONENTS
+import { NavBar } from './components/NavBar/NavBar';
+
 // PAGES
+import NotFound from './pages/NotFound/NotFound';
 import { Home } from './pages/Home/Home';
 import { Accounts } from './pages/Accounts/Accounts';
 import { Account } from './pages/Account/Account';
 import { TransferMoney } from './pages/TransferMoney/TransferMoney';
-import NotFound from './pages/NotFound/NotFound';
-
-// COMPONENTS
-import { NavBar } from './components/NavBar/NavBar';
+import { MoneyIn } from './pages/MoneyIn/MoneyIn';
+import { MoveMoney } from './pages/MoveMoney/MoveMoney';
+import { PaySomeone } from './pages/PaySomeone/PaySomeone';
 
 export const App = () => {
   return (
@@ -22,11 +25,14 @@ export const App = () => {
       <Router>
         <NavBar />
         <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:accountType" element={<Account />} />
           <Route path="/transfer-money" element={<TransferMoney />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/transfer-money/money-in" element={<MoneyIn />} />
+          <Route path="/transfer-money/move-money" element={<MoveMoney />} />
+          <Route path="/transfer-money/pay-someone" element={<PaySomeone />} />
         </Routes>
       </Router>
     </ThemeProvider>
