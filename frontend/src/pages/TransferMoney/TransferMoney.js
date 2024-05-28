@@ -5,7 +5,7 @@ import { ActionCard } from '../../components/ActionCard/ActionCard';
 import SquarePoundPersonSymbol from '../../assets/square-pound-person-symbol-x2.svg';
 import SquarePoundAddSymbol from '../../assets/square-pound-add-symbol-x2.svg';
 import SquareArrowsSymbol from '../../assets/square-arrows-symbol-x2.svg';
-import AccountsModal from '../../components/AccountsModal/AccountsModal';
+import { AccountsModal } from '../../components/AccountsModal/AccountsModal';
 
 export const TransferMoney = () => {
   const navigate = useNavigate();

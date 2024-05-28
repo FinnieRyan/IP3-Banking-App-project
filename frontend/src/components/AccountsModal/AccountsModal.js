@@ -5,7 +5,7 @@ import { Text } from '../Text/Text';
 import { HR } from '../HR/HR';
 import { CloseIcon, Modal, ModalContainer, StyledLink } from './AccountsModal.style';
 
-const AccountsModal = ({ heading, description, onClose }) => {
+export const AccountsModal = ({ heading, description, onClose }) => {
   return (
     <Modal>
       <ModalContainer>
@@ -33,5 +33,3 @@ const AccountsModal = ({ heading, description, onClose }) => {
     </Modal>
   );
 };
-
-export default AccountsModal;
