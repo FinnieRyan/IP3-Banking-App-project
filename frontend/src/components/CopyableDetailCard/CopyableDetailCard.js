@@ -6,9 +6,13 @@ import {
   CopyConfirmation,
   CopyIcon,
   DetailsContainer,
-} from './AccountDetails.style';
+} from './CopyableDetailCard.style';
 
-export const AccountDetails = ({ label, value, showCopyButton = false }) => {
+export const CopyableDetailCard = ({
+  label,
+  value,
+  showCopyButton = false,
+}) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = useCallback(() => {
@@ -50,7 +54,7 @@ export const AccountDetails = ({ label, value, showCopyButton = false }) => {
   );
 };
 
-AccountDetails.propTypes = {
+CopyableDetailCard.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   showCopyButton: PropTypes.bool,
