@@ -48,7 +48,11 @@ export const CopyableDetailCard = ({
         {showCopyButton && (
           <CopyIcon onClick={copyToClipboard} aria-label="Copy to clipboard" />
         )}
-        {isCopied && <CopyConfirmation>Copied {value}</CopyConfirmation>}
+        {isCopied && (
+          <CopyConfirmation>
+            Copied <strong>{value}</strong>
+          </CopyConfirmation>
+        )}
       </DetailsContainer>
     </Card>
   );

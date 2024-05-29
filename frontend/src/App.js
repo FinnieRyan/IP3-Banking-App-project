@@ -31,7 +31,7 @@ const TransitionRoutes = () => {
 
   return (
     <TransitionGroup>
-      <CSSTransition key={location.key} classNames="fade" timeout={300}>
+      <CSSTransition key={location.key} classNames="fade" timeout={400}>
         <Routes location={location}>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />

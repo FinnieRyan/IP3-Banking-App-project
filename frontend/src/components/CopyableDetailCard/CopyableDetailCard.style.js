@@ -35,7 +35,7 @@ export const CopyConfirmation = styled.div`
   color: ${({ theme }) => theme.colors.textWhite};
   border-radius: 20px;
   font-size: 14px;
-  font-weight: ${({ theme }) => theme.fonts.weights.bold};
+  font-weight: ${({ theme }) => theme.fonts.weights.medium};
   padding: 20px 40px;
   box-shadow: 0px 5px 15px 2px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(16px);
