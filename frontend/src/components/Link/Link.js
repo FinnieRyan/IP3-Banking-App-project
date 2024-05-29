@@ -7,25 +7,51 @@ import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 // STYLES
 import { LinkContainer } from './Link.style';
 
-export const Link = ({ children, location, backLink = false, isExternal = false, inline = false, white = false }) => {
+export const Link = ({
+  children,
+  location,
+  backLink = false,
+  isExternal = false,
+  inline = false,
+  white = false,
+}) => {
   return (
     <>
       {isExternal ? (
-        <LinkContainer to={location} target="_blank" rel="noreferrer" inline={inline} $white={white}>
+        <LinkContainer
+          to={location}
+          target="_blank"
+          rel="noreferrer"
+          inline={inline}
+          $white={white}
+        >
           <FiExternalLink style={{ fontSize: '18px' }} />
           {children}
         </LinkContainer>
       ) : (
         <>
           {backLink ? (
-            <LinkContainer to={location} inline={inline} style={{ marginLeft: '-8px' }} $white={white}>
-              {!inline && <FiChevronLeft style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
+            <LinkContainer
+              to={location}
+              inline={inline}
+              style={{ marginLeft: '-8px' }}
+              $white={white}
+            >
+              {!inline && (
+                <FiChevronLeft
+                  style={{ fontSize: '24px', position: 'relative', top: '1px' }}
+                />
+              )}
               {children}
             </LinkContainer>
           ) : (
             <LinkContainer to={location} inline={inline} $white={white}>
               {children}
-              {!inline && <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
+              {!inline && (
+                <FiChevronRight
+                  style={{ fontSize: '24px', position: 'relative', top: '1px' }}
+                />
+              )}
             </LinkContainer>
           )}
         </>

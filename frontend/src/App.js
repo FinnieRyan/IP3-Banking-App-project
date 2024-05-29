@@ -32,7 +32,10 @@ export const App = () => {
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:accountType" element={<Account />} />
           <Route path="/transfer-money" element={<TransferMoney />} />
-          <Route path="/transfer-money/money-in/:account" element={<MoneyIn />} />
+          <Route
+            path="/transfer-money/money-in/:account"
+            element={<MoneyIn />}
+          />
           <Route path="/transfer-money/move-money" element={<MoveMoney />} />
           <Route path="/transfer-money/pay-someone" element={<PaySomeone />} />
         </Routes>

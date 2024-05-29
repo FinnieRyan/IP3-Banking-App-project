@@ -29,10 +29,16 @@ export const Accounts = () => {
         subContent="£X"
         onClick={actionCardCurrentAccountNavigate}
       />
-      <ActionCard icon={BankNote} content="Savings" subContent="£X" onClick={actionCardSavingsNavigate} />
+      <ActionCard
+        icon={BankNote}
+        content="Savings"
+        subContent="£X"
+        onClick={actionCardSavingsNavigate}
+      />
       <Spacer />
       <Button onClick={buttonTransferMoneyNavigate}>
-        Transfer Money <FiPlus style={{ fontSize: '32px', marginRight: '-6px' }} />
+        Transfer Money{' '}
+        <FiPlus style={{ fontSize: '32px', marginRight: '-6px' }} />
       </Button>
     </PageLayout>
   );
