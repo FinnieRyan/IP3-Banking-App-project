@@ -25,6 +25,7 @@ import { TransferMoney } from './pages/TransferMoney/TransferMoney';
 import { MoneyIn } from './pages/MoneyIn/MoneyIn';
 import { MoveMoney } from './pages/MoveMoney/MoveMoney';
 import { PaySomeone } from './pages/PaySomeone/PaySomeone';
+import { Login } from './pages/Login/Login';
 
 const TransitionRoutes = () => {
   let location = useLocation();
@@ -34,6 +35,7 @@ const TransitionRoutes = () => {
       <CSSTransition key={location.key} classNames="fade" timeout={400}>
         <Routes location={location}>
           <Route path="*" element={<NotFound />} />
+          <Route path='/login' element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:accountType" element={<Account />} />
