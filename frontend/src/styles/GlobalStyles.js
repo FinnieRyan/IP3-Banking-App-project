@@ -26,11 +26,6 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* push main content below fixed nav bar */
-  main {
-    /* padding-top: 60px !important; */
-  }
-
   /* remove default margin and padding from text */
   h1, h2, h3, h4, h5, h6, p, ul, figure, blockquote, dl, dd {
     padding: 0;

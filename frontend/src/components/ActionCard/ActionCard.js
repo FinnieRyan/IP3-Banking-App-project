@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { Text } from '../Text/Text';
 import { ActionCardContainer, IconTextContainer, StyledChevron, IconImg } from './ActionCard.style';
 
-export const ActionCard = ({ icon, content, subContent, action }) => {
+export const ActionCard = ({ icon, content, subContent, onClick }) => {
   return (
-    <ActionCardContainer onClick={action}>
+    <ActionCardContainer onClick={onClick}>
       <IconTextContainer>
         <IconImg src={icon} alt="action card icon" />
         <div>
           <Text weight="medium">{content}</Text>
           {subContent && (
-            <Text size={5} color="Grey">
+            <Text size={5} color="grey">
               {subContent}
             </Text>
           )}
@@ -26,5 +26,5 @@ ActionCard.propTypes = {
   icon: PropTypes.node.isRequired,
   content: PropTypes.string.isRequired,
   subContent: PropTypes.string,
-  action: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };

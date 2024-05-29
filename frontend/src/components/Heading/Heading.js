@@ -1,17 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { StyledHeading } from './Heading.style'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { toTitleCase } from '../../helpers/toTitleCase';
+import { StyledHeading } from './Heading.style';
 
-export const Heading = ({
-  size = 1,
-  displayAs = size,
-  white = false,
-  children,
-}) => {
-  const HeadingComponent = `h${size}`
+export const Heading = ({ size = 1, displayAs = size, color = 'black', children, ...props }) => {
+  const HeadingComponent = `h${size}`;
 
   return (
-    <StyledHeading as={HeadingComponent} $displayAs={displayAs} $white={white}>
+    <StyledHeading as={HeadingComponent} $displayAs={displayAs} $color={toTitleCase(color)} {...props}>
       {children}
     </StyledHeading>
   )
@@ -20,6 +16,6 @@ export const Heading = ({
 Heading.propTypes = {
   size: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
   displayAs: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
-  $white: PropTypes.bool,
+  color: PropTypes.oneOf(['black', 'grey', 'light', 'white']),
   children: PropTypes.node.isRequired,
 }

@@ -1,24 +1,19 @@
 import styled from 'styled-components'
 
-const smallNavBreakpoint = '768px'
-
 export const NavBarBackground = styled.nav`
   position: fixed;
+  top: 0;
   z-index: 100;
   display: flex;
   justify-content: center;
 
-  background-color: rgb(0 48 121 / 80%);
-  backdrop-filter: blur(60px);
-  -webkit-backdrop-filter: blur(60px);
+  background-color: rgb(0 52 125 / 80%);
+  backdrop-filter: blur(33px);
+  -webkit-backdrop-filter: blur(33px);
 
   height: ${({ open }) => (open ? '100vh' : '60px')};
   width: 100%;
-  padding: 0 20px;
   min-width: ${({ theme }) => theme.sizes.ms};
-
-  box-shadow: ${({ open }) =>
-    open ? '0 5px 25px 15px rgba(0, 15, 33, 0.5)' : 'none'};
 
   transition: all 0.5s ease-in-out;
 `
@@ -32,15 +27,13 @@ export const NavContent = styled.div`
   max-width: ${({ theme }) => theme.sizes.tablet};
   align-items: flex-start;
   margin: 0.75rem 0;
-  max-width: 736px;
-`
+
+  padding: 0 20px;
+`;
 
 export const NavSpacer = styled.div`
   flex-grow: 1;
-  @media (max-width: ${smallNavBreakpoint}) {
-    display: none;
-  }
-`
+`;
 
 export const NavLinkContainer = styled.div`
   display: flex;
@@ -52,5 +45,14 @@ export const NavLinkContainer = styled.div`
   height: ${({ open }) => (open ? '100vh' : 0)};
   margin-top: 60px;
   opacity: ${({ open }) => (open ? 1 : 0)};
-  transition: all 0.3s ease-in-out;
-`
+  transform: ${({ open }) => (open ? 'translateY(0)' : 'translateY(-10px)')};
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
+`;
+
+export const NavLinkGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-left: 1em;
+`;

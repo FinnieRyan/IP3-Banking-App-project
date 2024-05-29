@@ -7,8 +7,9 @@ export const Container = styled.div`
   display: flex;
   padding: 0 16px;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
   flex-shrink: 0;
   gap: 20px;
-`
+
+  height: calc(100dvh - 120px); /* Subtract the height of the navbar and the needed margin */
+`;
