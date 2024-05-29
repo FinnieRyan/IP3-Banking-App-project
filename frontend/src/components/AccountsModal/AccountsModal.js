@@ -3,7 +3,12 @@ import { FiChevronRight } from 'react-icons/fi';
 import { Heading } from '../Heading/Heading';
 import { Text } from '../Text/Text';
 import { HR } from '../HR/HR';
-import { CloseIcon, Modal, ModalContainer, StyledLink } from './AccountsModal.style';
+import {
+  CloseIcon,
+  Modal,
+  ModalContainer,
+  StyledLink,
+} from './AccountsModal.style';
 
 export const AccountsModal = ({ heading, description, onClose }) => {
   return (
@@ -18,7 +23,9 @@ export const AccountsModal = ({ heading, description, onClose }) => {
           Current Account
           <div>
             £X
-            <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />
+            <FiChevronRight
+              style={{ fontSize: '24px', position: 'relative', top: '1px' }}
+            />
           </div>
         </StyledLink>
         <HR />
@@ -26,7 +33,9 @@ export const AccountsModal = ({ heading, description, onClose }) => {
           Savings Account
           <div>
             £X
-            <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />
+            <FiChevronRight
+              style={{ fontSize: '24px', position: 'relative', top: '1px' }}
+            />
           </div>
         </StyledLink>
       </ModalContainer>

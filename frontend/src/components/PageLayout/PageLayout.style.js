@@ -10,5 +10,8 @@ export const Container = styled.div`
   align-items: flex-start;
   flex-shrink: 0;
   gap: 20px;
-  height: calc(100dvh - 120px); /* Subtract the height of the navbar and the needed margin */
+
+  height: calc(
+    100dvh - 120px
+  ); /* Subtract the height of the navbar and the needed margin */
 `;

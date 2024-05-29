@@ -19,8 +19,9 @@ export const NotFound = () => {
       <OopsImg style={{ width: '100%', height: '250px' }} />
       <Heading>Oops, this page is all tangled up!</Heading>
       <Text>
-        We're sorry, but the page you're looking for doesn't seem to exist. You can use the button below or the menu bar
-        to navigate back to the homepage.
+        We're sorry, but the page you're looking for doesn't seem to exist. You
+        can use the button below or the menu bar to navigate back to the
+        homepage.
       </Text>
       <GroupContent>
         <Text>Or check out some of our popular pages:</Text>

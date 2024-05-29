@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 import { toTitleCase } from '../../helpers/toTitleCase';
 import { StyledText } from './Text.style';
 
-export const Text = ({ children, size = 4, weight = 'normal', color = 'black' }) => {
+export const Text = ({
+  children,
+  size = 4,
+  weight = 'normal',
+  color = 'black',
+}) => {
   return (
     <StyledText $size={size} $weight={weight} $color={toTitleCase(color)}>
       {children}

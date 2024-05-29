@@ -27,6 +27,7 @@ export const NavContent = styled.div`
   max-width: ${({ theme }) => theme.sizes.tablet};
   align-items: flex-start;
   margin: 0.75rem 0;
+
   padding: 0 20px;
 `;
 
@@ -45,7 +46,9 @@ export const NavLinkContainer = styled.div`
   margin-top: 60px;
   opacity: ${({ open }) => (open ? 1 : 0)};
   transform: ${({ open }) => (open ? 'translateY(0)' : 'translateY(-10px)')};
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 `;
 

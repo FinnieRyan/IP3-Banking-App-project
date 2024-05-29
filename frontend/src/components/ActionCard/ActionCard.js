@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '../Text/Text';
-import { ActionCardContainer, IconTextContainer, StyledChevron, IconImg } from './ActionCard.style';
+import {
+  ActionCardContainer,
+  IconTextContainer,
+  StyledChevron,
+  IconImg,
+} from './ActionCard.style';
 
 export const ActionCard = ({ icon, content, subContent, onClick }) => {
   return (

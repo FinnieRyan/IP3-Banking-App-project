@@ -38,9 +38,12 @@ export const StyledButton = styled.button`
         rgba(255, 255, 255, 0)
       )
       border-box;
-    -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+    -webkit-mask:
+      linear-gradient(#fff 0 0) padding-box,
       linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
   }
