@@ -9,14 +9,14 @@ import connectDB from '../database/config/helpers.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.AUTH_PORT || 3500;
 
 const connectToDBAndStartServer = async () => {
   try {
     await connectDB();
     console.log('Connected to MongoDB');
     // Start the server after connecting to the database
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Auth Server running on port ${PORT}`));
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
   }
