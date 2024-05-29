@@ -1,0 +1,124 @@
+{
+  "info": {
+    "_postman_id": "a7500112-7601-4c06-8e3d-4ac43930c288",
+    "name": "IP3 Project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17383241"
+  },
+  "item": [
+    {
+      "name": "authServer",
+      "item": [
+        {
+          "name": "/login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"newuser\",\r\n  \"password\": \"password\"\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:5000/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"newuser\",\r\n  \"email\": \"newuser@example.com\",\r\n  \"password\": \"password\"\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:5000/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/token",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"authorizationCode\": \"04bafa33d6f56767db0ecdca25b5ad4d9dc349da\"\r\n}\r\n"
+            },
+            "url": {
+              "raw": "http://localhost:5000/auth/token",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["auth", "token"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "applicationServer",
+      "item": [
+        {
+          "name": "/protected",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "x-auth-token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGY0MmI0NjQ2ZmQ3ZWM5M2JlMTkzZSIsImlhdCI6MTcxNjQ3MTgwNSwiZXhwIjoxNzE2NDcyNDA1fQ.ItM2Vfu1byv2UsE9crovHEqFBB6feXLpdkAckVlHp_o",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5001/api/protected",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["api", "protected"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { Button } from '../Button/Button';
 import { ButtonPatternContainer } from './ButtonPatter.style';
 
-export const ButtonPattern = ({ secondaryLabel = 'Secondary Button', primaryLabel = 'Primary Button' }) => {
+export const ButtonPattern = ({
+  secondaryLabel = 'Secondary Button',
+  primaryLabel = 'Primary Button',
+}) => {
   return (
     <ButtonPatternContainer>
       <Button type="secondary">{secondaryLabel}</Button>

@@ -3,11 +3,22 @@ import PropTypes from 'prop-types';
 import { toTitleCase } from '../../helpers/toTitleCase';
 import { StyledHeading } from './Heading.style';
 
-export const Heading = ({ size = 1, displayAs = size, color = 'black', children, ...props }) => {
+export const Heading = ({
+  size = 1,
+  displayAs = size,
+  color = 'black',
+  children,
+  ...props
+}) => {
   const HeadingComponent = `h${size}`;
 
   return (
-    <StyledHeading as={HeadingComponent} $displayAs={displayAs} $color={toTitleCase(color)} {...props}>
+    <StyledHeading
+      as={HeadingComponent}
+      $displayAs={displayAs}
+      $color={toTitleCase(color)}
+      {...props}
+    >
       {children}
     </StyledHeading>
   );
