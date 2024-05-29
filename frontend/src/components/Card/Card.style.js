@@ -6,7 +6,7 @@ export const CardContainer = styled.div`
   padding: 16px 20px;
   height: fit-content;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ $row }) => ($row ? 'row' : 'column')};
   justify-content: space-between;
   gap: 20px;
   align-self: stretch;
