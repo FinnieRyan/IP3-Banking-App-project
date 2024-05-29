@@ -9,8 +9,8 @@
     "build": "docker-compose up",
     "db-reset": "node ./database/seed/clearDatabase.js && node ./database/seed/seedDatabase.js",
     "prepare": "husky install",
-    "format": "prettier --write .",
-    "lint": "prettier --check ."
+    "lint": "prettier --check .",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\""
   },
   "repository": {
     "type": "git",

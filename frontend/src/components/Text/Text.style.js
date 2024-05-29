@@ -11,7 +11,8 @@ const styles = {
 
 export const StyledText = styled.p`
   font-size: ${({ $size }) => styles[$size] || styles[4]};
-  font-weight: ${({ $weight, theme }) => theme.fonts.weights[$weight] || 'normal'};
+  font-weight: ${({ $weight, theme }) =>
+    theme.fonts.weights[$weight] || 'normal'};
   color: ${({ $color, theme }) => theme.colors['text' + $color] || 'black'};
   line-height: 1.5;
 `;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
   margin: 30px auto;
@@ -11,5 +11,7 @@ export const Container = styled.div`
   flex-shrink: 0;
   gap: 20px;
 
-  height: calc(100dvh - 120px); /* Subtract the height of the navbar and the needed margin */
+  height: calc(
+    100dvh - 120px
+  ); /* Subtract the height of the navbar and the needed margin */
 `;

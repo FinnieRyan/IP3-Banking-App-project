@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 // STYLES
-import { NavBarBackground, NavContent, NavLinkContainer, NavLinkGroup, NavSpacer } from './NavBar.style';
+import {
+  NavBarBackground,
+  NavContent,
+  NavLinkContainer,
+  NavLinkGroup,
+  NavSpacer,
+} from './NavBar.style';
 
 // COMPONENTS
 import { Burger } from './Burger';
@@ -18,14 +24,14 @@ export const NavBar = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 626) {
-        setOpen(false)
+        setOpen(false);
       }
-    }
-    handleResize() // call handleResize on mount
-    window.addEventListener('resize', handleResize) // add event listener for resize
+    };
+    handleResize(); // call handleResize on mount
+    window.addEventListener('resize', handleResize); // add event listener for resize
 
-    return () => window.removeEventListener('resize', handleResize) // remove event listener on unmount
-  }, [])
+    return () => window.removeEventListener('resize', handleResize); // remove event listener on unmount
+  }, []);
 
   useEffect(() => {
     setOpen(false); // close the burger menu when the route changes
@@ -37,7 +43,11 @@ export const NavBar = () => {
         <NavContent onMouseLeave={() => setOpen(false)}>
           <Burger open={open} setOpen={setOpen} />
           <NavSpacer />
-          <Heading color="white" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+          <Heading
+            color="white"
+            onClick={() => navigate('/')}
+            style={{ cursor: 'pointer' }}
+          >
             FinWise
           </Heading>
           <NavLinkContainer open={open}>
@@ -63,5 +73,5 @@ export const NavBar = () => {
       </NavBarBackground>
       <div style={{ height: '60px' }} />
     </>
-  )
-}
+  );
+};

@@ -22,7 +22,11 @@ export const TransferMoney = () => {
   };
 
   return (
-    <PageLayout linkText="Accounts" linkLocation={'/accounts'} heading="Transfer Money">
+    <PageLayout
+      linkText="Accounts"
+      linkLocation={'/accounts'}
+      heading="Transfer Money"
+    >
       {showModal && (
         <AccountsModal
           heading="Pay money into?"

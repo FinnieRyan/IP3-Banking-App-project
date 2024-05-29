@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 // ICONS
-import { FiExternalLink } from 'react-icons/fi'
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
+import { FiExternalLink } from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 
 // STYLES
 import { LinkContainer } from './Link.style';
@@ -18,28 +18,47 @@ export const Link = ({
   return (
     <>
       {isExternal ? (
-        <LinkContainer to={location} target="_blank" rel="noreferrer" inline={inline} $white={white}>
+        <LinkContainer
+          to={location}
+          target="_blank"
+          rel="noreferrer"
+          inline={inline}
+          $white={white}
+        >
           <FiExternalLink style={{ fontSize: '18px' }} />
           {children}
         </LinkContainer>
       ) : (
         <>
           {backLink ? (
-            <LinkContainer to={location} inline={inline} style={{ marginLeft: '-8px' }} $white={white}>
-              {!inline && <FiChevronLeft style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
+            <LinkContainer
+              to={location}
+              inline={inline}
+              style={{ marginLeft: '-8px' }}
+              $white={white}
+            >
+              {!inline && (
+                <FiChevronLeft
+                  style={{ fontSize: '24px', position: 'relative', top: '1px' }}
+                />
+              )}
               {children}
             </LinkContainer>
           ) : (
             <LinkContainer to={location} inline={inline} $white={white}>
               {children}
-              {!inline && <FiChevronRight style={{ fontSize: '24px', position: 'relative', top: '1px' }} />}
+              {!inline && (
+                <FiChevronRight
+                  style={{ fontSize: '24px', position: 'relative', top: '1px' }}
+                />
+              )}
             </LinkContainer>
           )}
         </>
       )}
     </>
-  )
-}
+  );
+};
 
 Link.propTypes = {
   children: PropTypes.node.isRequired,
@@ -48,4 +67,4 @@ Link.propTypes = {
   isExternal: PropTypes.bool,
   inline: PropTypes.bool,
   white: PropTypes.bool,
-}
+};

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const LinkContainer = styled(({ inline, ...props }) => (
   <Link {...props} />
@@ -12,4 +12,4 @@ export const LinkContainer = styled(({ inline, ...props }) => (
   color: ${({ theme, $white }) => $white && theme.colors.textWhite};
   font-size: 16px;
   font-weight: ${({ theme }) => theme.fonts.weights.bold};
-`
+`;

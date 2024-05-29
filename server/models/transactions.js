@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const { Schema } = mongoose
+const { Schema } = mongoose;
 
 const transactionSchema = new Schema({
   fromAccountId: {
@@ -24,8 +24,8 @@ const transactionSchema = new Schema({
     enum: ['Food', 'Entertainment', 'Travel'],
     required: true,
   },
-})
+});
 
-const Transaction = mongoose.model('Transaction', transactionSchema)
+const Transaction = mongoose.model('Transaction', transactionSchema);
 
-export default Transaction
+export default Transaction;

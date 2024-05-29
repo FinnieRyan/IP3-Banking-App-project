@@ -6,7 +6,8 @@ export const StyledButton = styled.button`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: ${({ children }) => (React.Children.count(children) > 1 ? 'space-between' : 'center')};
+  justify-content: ${({ children }) =>
+    React.Children.count(children) > 1 ? 'space-between' : 'center'};
   cursor: pointer;
   font-size: 24px;
   font-weight: ${({ theme }) => theme.fonts.weights.medium};
@@ -59,4 +60,4 @@ export const StyledButton = styled.button`
         : darken(0.02, '#ececec')};
     transform: scale(0.98) translateY(2px);
   }
-`
+`;

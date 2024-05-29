@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
-import { Heading } from '../Heading/Heading'
-import { Link } from '../Link/Link'
-import { Container } from './PageLayout.style'
+import PropTypes from 'prop-types';
+import { Heading } from '../Heading/Heading';
+import { Link } from '../Link/Link';
+import { Container } from './PageLayout.style';
 
 export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
   return (
@@ -14,8 +14,8 @@ export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
       {heading && <Heading>{heading}</Heading>}
       {children}
     </Container>
-  )
-}
+  );
+};
 
 PageLayout.propTypes = {
   children: PropTypes.node.isRequired,

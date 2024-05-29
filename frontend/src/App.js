@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 // STYLES
-import { GlobalStyles } from './styles/GlobalStyles'
-import { theme } from './styles/Theme'
+import { GlobalStyles } from './styles/GlobalStyles';
+import { theme } from './styles/Theme';
 
 // COMPONENTS
 import { ScrollToTop } from './helpers/ScrollToTop';
@@ -32,11 +32,14 @@ export const App = () => {
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:accountType" element={<Account />} />
           <Route path="/transfer-money" element={<TransferMoney />} />
-          <Route path="/transfer-money/money-in/:account" element={<MoneyIn />} />
+          <Route
+            path="/transfer-money/money-in/:account"
+            element={<MoneyIn />}
+          />
           <Route path="/transfer-money/move-money" element={<MoveMoney />} />
           <Route path="/transfer-money/pay-someone" element={<PaySomeone />} />
         </Routes>
       </Router>
     </ThemeProvider>
-  )
-}
+  );
+};

@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-const { Schema } = mongoose
+const { Schema } = mongoose;
 
 const customerSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -9,8 +9,8 @@ const customerSchema = new Schema({
   address: { type: String },
   contactNumber: { type: String },
   createdAt: { type: Date, default: Date.now },
-})
+});
 
-const Customer = mongoose.model('Customer', customerSchema)
+const Customer = mongoose.model('Customer', customerSchema);
 
-export default Customer
+export default Customer;

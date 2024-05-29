@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const NavBarBackground = styled.nav`
   position: fixed;
@@ -16,7 +16,7 @@ export const NavBarBackground = styled.nav`
   min-width: ${({ theme }) => theme.sizes.ms};
 
   transition: all 0.5s ease-in-out;
-`
+`;
 
 export const NavContent = styled.div`
   position: relative;
@@ -46,7 +46,9 @@ export const NavLinkContainer = styled.div`
   margin-top: 60px;
   opacity: ${({ open }) => (open ? 1 : 0)};
   transform: ${({ open }) => (open ? 'translateY(0)' : 'translateY(-10px)')};
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 `;
 

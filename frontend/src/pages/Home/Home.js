@@ -25,7 +25,12 @@ export const Home = () => {
       </Card>
       <GroupContent>
         <Heading size={5}>Quick links</Heading>
-        <ActionCard icon={SquarePoundSymbol} content="Current Account" subContent="£X" onClick={actionCardNavigate} />
+        <ActionCard
+          icon={SquarePoundSymbol}
+          content="Current Account"
+          subContent="£X"
+          onClick={actionCardNavigate}
+        />
         <Link location="/accounts">View all accounts</Link>
       </GroupContent>
       <GroupContent>

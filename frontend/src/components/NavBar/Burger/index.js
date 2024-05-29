@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledBurger = styled.div`
   z-index: 1001;
@@ -33,7 +33,7 @@ const StyledBurger = styled.div`
       transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
     }
   }
-`
+`;
 
 export const Burger = ({ open, setOpen }) => {
   return (
@@ -42,5 +42,5 @@ export const Burger = ({ open, setOpen }) => {
       <div />
       <div />
     </StyledBurger>
-  )
-}
+  );
+};

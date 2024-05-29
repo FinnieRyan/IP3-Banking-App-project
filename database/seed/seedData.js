@@ -15,14 +15,14 @@ const users = [
     email: 'user3@example.com',
   },
   // Add more users if needed
-]
+];
 
 const userSessions = [
   { userId: 'user1@example.com', sessionToken: 'sessionToken1' },
   { userId: 'user2@example.com', sessionToken: 'sessionToken2' },
   { userId: 'user3@example.com', sessionToken: 'sessionToken3' },
   // Add more user sessions if needed
-]
+];
 
 const customers = [
   // Reference to user by username
@@ -48,7 +48,7 @@ const customers = [
     contactNumber: '555-123-4567',
   },
   // Add more customers if needed
-]
+];
 
 const accounts = [
   // Reference to customer by userId
@@ -81,7 +81,7 @@ const accounts = [
     sortCode: '12-34-56',
   },
   // Add more accounts if needed
-]
+];
 
 const transactions = [
   {
@@ -185,7 +185,7 @@ const transactions = [
     category: 'Food',
   },
   // Add more transactions if needed
-]
+];
 
 export default {
   users,
@@ -193,4 +193,4 @@ export default {
   customers,
   accounts,
   transactions,
-}
+};
