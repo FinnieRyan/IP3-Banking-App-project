@@ -11,6 +11,7 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ email: '', password: '' });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -22,9 +23,8 @@ export const Login = () => {
     setError((prevError) => ({ ...prevError, password: '' }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Validate the form
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!email) {
       setError((prevError) => ({
         ...prevError,
@@ -39,7 +39,11 @@ export const Login = () => {
       }));
       return;
     }
+
+    setIsLoading(true);
     // Add your login logic here
+    // After login logic, set isLoading back to false
+    setIsLoading(false);
   };
 
   return (
@@ -57,15 +61,16 @@ export const Login = () => {
           onChange={handleEmailChange}
           type="email"
         />
-        {error.password && <span>{error.password}</span>}
+        {error.password && (
+          <span style={{ color: theme.colors.warning }}>{error.password}</span>
+        )}
         <InputField
           label="Password"
           value={password}
           onChange={handlePasswordChange}
           type="password"
         />
-
-        <Button>Log in</Button>
+        <Button>{isLoading ? 'Loading...' : 'Log in'}</Button>
       </Form>
     </PageLayout>
   );

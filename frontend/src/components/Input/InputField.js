@@ -78,8 +78,12 @@ export const InputField = ({
   const handleScroll = (e) => {
     const inputEl = e.target;
     const wrapperEl = inputEl.parentElement;
+    const threshold = 2; // Adjust this value as needed
 
-    if (inputEl.scrollLeft + inputEl.clientWidth >= inputEl.scrollWidth) {
+    if (
+      inputEl.scrollLeft >=
+      inputEl.scrollWidth - inputEl.clientWidth - threshold
+    ) {
       wrapperEl.classList.add('scrolled-right');
     } else {
       wrapperEl.classList.remove('scrolled-right');
