@@ -35,7 +35,7 @@ const TransitionRoutes = () => {
       <CSSTransition key={location.key} classNames="fade" timeout={400}>
         <Routes location={location}>
           <Route path="*" element={<NotFound />} />
-          <Route path='/login' element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/accounts/:accountType" element={<Account />} />
