@@ -17,7 +17,7 @@ export const MoneyIn = () => {
   return (
     <PageLayout heading="Pay money in">
       <Heading size={2} aria-label="Account Type">
-        X Account
+        X Account details
       </Heading>
       <Text>Never share account details with someone you don’t trust.</Text>
       <CopyableDetailCard showCopyButton label="Name" value="Name" />

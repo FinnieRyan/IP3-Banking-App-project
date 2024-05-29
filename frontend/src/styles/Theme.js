@@ -39,8 +39,7 @@ export const theme = {
   },
   shadows: {
     cardShadow:
-      '0px 10px 10px 2px rgba(48, 92, 157, 0.05), 0px 2px 5px 0px rgba(48, 92, 157, 0.19), 0px 0px 2px 0px rgba(48, 92, 157, 0.11) inset;',
-
+      '0px 10px 10px 2px rgba(48, 92, 157, 0.08), 0px 2px 5px 0px rgba(48, 92, 157, 0.2), 0px 0px 2px 0px rgba(48, 92, 157, 0.15) inset;',
   },
   sizes: {
     sm: '320px', // small mobile devices
