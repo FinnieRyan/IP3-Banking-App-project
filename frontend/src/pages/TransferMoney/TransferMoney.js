@@ -17,12 +17,16 @@ export const TransferMoney = () => {
   const actionCardTransferAccountsNavigate = () => {
     navigate('/transfer-money/move-money');
   };
-  const buttonPaySomeoneNavigate = () => {
+  const actionCardPaySomeoneNavigate = () => {
     navigate('/transfer-money/pay-someone');
   };
 
   return (
-    <PageLayout linkText="Accounts" linkLocation={'/accounts'} heading="Transfer Money">
+    <PageLayout
+      linkText="Accounts"
+      linkLocation={'/accounts'}
+      heading="Transfer Money"
+    >
       {showModal && (
         <AccountsModal
           heading="Pay money into?"
@@ -46,7 +50,7 @@ export const TransferMoney = () => {
         icon={SquarePoundPersonSymbol}
         content="Pay someone"
         subContent="By bank transfer"
-        onClick={buttonPaySomeoneNavigate}
+        onClick={actionCardPaySomeoneNavigate}
       />
     </PageLayout>
   );
