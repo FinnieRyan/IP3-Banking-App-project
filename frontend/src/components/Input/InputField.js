@@ -1,8 +1,44 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Card } from '../Card/Card';
 import { Text } from '../Text/Text';
-import styled from 'styled-components';
+
+const InputWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  &.scrollable:not(.scrolled-left)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 100%;
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1)
+    );
+    pointer-events: none;
+  }
+
+  &.scrollable:not(.scrolled-right)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1)
+    );
+    pointer-events: none;
+  }
+`;
 
 const StyledInput = styled.input`
   font-weight: ${({ $weight, theme }) =>
@@ -12,7 +48,7 @@ const StyledInput = styled.input`
   border: none;
   outline: none;
   background: transparent;
-  width: auto;
+  width: 100%;
   min-width: 50px;
   text-align: right;
   cursor: ${({ readOnly }) => (readOnly ? 'default' : 'text')};
@@ -24,12 +60,54 @@ export const InputField = ({
   value,
   onChange = () => {},
   readOnly = false,
-}) => (
-  <Card row>
-    <Text>{label}</Text>
-    <StyledInput value={value} onChange={onChange} readOnly={readOnly} />
-  </Card>
-);
+  ...props
+}) => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    const inputEl = inputRef.current;
+    const wrapperEl = inputEl.parentElement;
+
+    if (inputEl.scrollWidth > inputEl.clientWidth) {
+      wrapperEl.classList.add('scrollable');
+    } else {
+      wrapperEl.classList.remove('scrollable');
+    }
+  }, [value]);
+
+  const handleScroll = (e) => {
+    const inputEl = e.target;
+    const wrapperEl = inputEl.parentElement;
+
+    if (inputEl.scrollLeft + inputEl.clientWidth >= inputEl.scrollWidth) {
+      wrapperEl.classList.add('scrolled-right');
+    } else {
+      wrapperEl.classList.remove('scrolled-right');
+    }
+
+    if (inputEl.scrollLeft === 0) {
+      wrapperEl.classList.add('scrolled-left');
+    } else {
+      wrapperEl.classList.remove('scrolled-left');
+    }
+  };
+
+  return (
+    <Card row>
+      <Text>{label}</Text>
+      <InputWrapper>
+        <StyledInput
+          ref={inputRef}
+          value={value}
+          onChange={onChange}
+          onScroll={handleScroll}
+          readOnly={readOnly}
+          {...props}
+        />
+      </InputWrapper>
+    </Card>
+  );
+};
 
 InputField.propTypes = {
   label: PropTypes.string,
