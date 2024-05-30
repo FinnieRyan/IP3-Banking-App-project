@@ -63,7 +63,7 @@ export const Login = () => {
       <Text>
         Enter you account details below to log into your FinWise account
       </Text>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} id="login-form">
         {errors.api && (
           <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
             {errors.api}
@@ -93,9 +93,11 @@ export const Login = () => {
           onChange={handleChange}
           type="password"
         />
-        <Spacer />
-        <Button>{isLoading ? 'Loading...' : 'Log in'}</Button>
       </Form>
+      <Spacer />
+      <Button disabled={isLoading} form="login-form">
+        {isLoading ? 'Loading...' : 'Log in'}
+      </Button>
     </PageLayout>
   );
 };
