@@ -32,7 +32,7 @@ export const NavContent = styled.div`
 `;
 
 export const NavLogo = styled.img`
-  height: 100%;
+  height: 40px;
   object-fit: contain;
 `;
 
