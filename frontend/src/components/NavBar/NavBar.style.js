@@ -31,6 +31,11 @@ export const NavContent = styled.div`
   padding: 0 20px;
 `;
 
+export const NavLogo = styled.img`
+  height: 100%;
+  object-fit: contain;
+`;
+
 export const NavSpacer = styled.div`
   flex-grow: 1;
 `;

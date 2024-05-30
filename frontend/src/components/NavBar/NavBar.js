@@ -6,8 +6,10 @@ import {
   NavContent,
   NavLinkContainer,
   NavLinkGroup,
+  NavLogo,
   NavSpacer,
 } from './NavBar.style';
+import Logo from '../../assets/Logo.png';
 
 // COMPONENTS
 import { Burger } from './Burger';
@@ -43,13 +45,12 @@ export const NavBar = () => {
         <NavContent onMouseLeave={() => setOpen(false)}>
           <Burger open={open} setOpen={setOpen} />
           <NavSpacer />
-          <Heading
-            color="white"
+          <NavLogo
+            src={Logo}
             onClick={() => navigate('/')}
             style={{ cursor: 'pointer' }}
-          >
-            FinWise
-          </Heading>
+            alt="FinWise Logo"
+          />
           <NavLinkContainer open={open}>
             <Link white location="/">
               Home
