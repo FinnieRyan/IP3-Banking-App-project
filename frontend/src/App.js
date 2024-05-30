@@ -1,9 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { ThemeProvider } from 'styled-components';
 
 // STYLES
 import { GlobalStyles } from './styles/GlobalStyles';
 import { theme } from './styles/Theme';
+import './App.css';
 
 // COMPONENTS
 import { ScrollToTop } from './helpers/ScrollToTop';
@@ -19,14 +26,13 @@ import { MoneyIn } from './pages/MoneyIn/MoneyIn';
 import { MoveMoney } from './pages/MoveMoney/MoveMoney';
 import { PaySomeone } from './pages/PaySomeone/PaySomeone';
 
-export const App = () => {
+const TransitionRoutes = () => {
+  let location = useLocation();
+
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Router>
-        <ScrollToTop />
-        <NavBar />
-        <Routes>
+    <TransitionGroup>
+      <CSSTransition key={location.key} classNames="fade" timeout={400}>
+        <Routes location={location}>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
           <Route path="/accounts" element={<Accounts />} />
@@ -39,6 +45,19 @@ export const App = () => {
           <Route path="/transfer-money/move-money" element={<MoveMoney />} />
           <Route path="/transfer-money/pay-someone" element={<PaySomeone />} />
         </Routes>
+      </CSSTransition>
+    </TransitionGroup>
+  );
+};
+
+export const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Router>
+        <ScrollToTop />
+        <NavBar />
+        <TransitionRoutes />
       </Router>
     </ThemeProvider>
   );

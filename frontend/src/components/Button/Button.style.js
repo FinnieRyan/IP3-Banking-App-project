@@ -20,6 +20,8 @@ export const StyledButton = styled.button`
     ${({ type }) => (type === 'primary' ? '#244981' : '#BDBDBD')};
   border-radius: 20px;
 
+  transition: transform 0.1s ease-in-out;
+
   &:before {
     content: '';
     position: absolute;
