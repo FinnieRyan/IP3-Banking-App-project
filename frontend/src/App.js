@@ -26,6 +26,7 @@ import { MoneyIn } from './pages/MoneyIn/MoneyIn';
 import { MoveMoney } from './pages/MoveMoney/MoveMoney';
 import { PaySomeone } from './pages/PaySomeone/PaySomeone';
 import { Login } from './pages/Login/Login';
+import { ProtectedRoute } from './common/routes/ProtectedRoutes';
 
 const TransitionRoutes = () => {
   let location = useLocation();
@@ -36,16 +37,31 @@ const TransitionRoutes = () => {
         <Routes location={location}>
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/accounts" element={<Accounts />} />
-          <Route path="/accounts/:accountType" element={<Account />} />
-          <Route path="/transfer-money" element={<TransferMoney />} />
+          <Route path="/" element={<ProtectedRoute element={<Home />} />} />
+          <Route
+            path="/accounts"
+            element={<ProtectedRoute element={<Accounts />} />}
+          />
+          <Route
+            path="/accounts/:accountType"
+            element={<ProtectedRoute element={<Account />} />}
+          />
+          <Route
+            path="/transfer-money"
+            element={<ProtectedRoute element={<TransferMoney />} />}
+          />
           <Route
             path="/transfer-money/money-in/:account"
-            element={<MoneyIn />}
+            element={<ProtectedRoute element={<MoneyIn />} />}
           />
-          <Route path="/transfer-money/move-money" element={<MoveMoney />} />
-          <Route path="/transfer-money/pay-someone" element={<PaySomeone />} />
+          <Route
+            path="/transfer-money/move-money"
+            element={<ProtectedRoute element={<MoveMoney />} />}
+          />
+          <Route
+            path="/transfer-money/pay-someone"
+            element={<ProtectedRoute element={<PaySomeone />} />}
+          />
         </Routes>
       </CSSTransition>
     </TransitionGroup>

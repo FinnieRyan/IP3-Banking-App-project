@@ -5,6 +5,9 @@ import { Button } from '../../components/Button/Button';
 import { Form } from '../../components/Input/Form';
 import { Text } from '../../components/Text/Text';
 import { useTheme } from 'styled-components';
+import { Spacer } from '../../components/ContentLayout/Spacer';
+import { setSessionData } from '../../helpers/sessionHandlers';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const theme = useTheme();
@@ -12,6 +15,7 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -41,9 +45,11 @@ export const Login = () => {
     }
 
     setIsLoading(true);
-    // Add your login logic here
-    // After login logic, set isLoading back to false
+    // Add login logic here
+    setSessionData('isLoggedIn', 'true'); // replace this with correct info
+    // need to handle if the details are incorrect to send error back to the UI
     setIsLoading(false);
+    navigate('/');
   };
 
   return (
@@ -70,6 +76,7 @@ export const Login = () => {
           onChange={handlePasswordChange}
           type="password"
         />
+        <Spacer />
         <Button>{isLoading ? 'Loading...' : 'Log in'}</Button>
       </Form>
     </PageLayout>
