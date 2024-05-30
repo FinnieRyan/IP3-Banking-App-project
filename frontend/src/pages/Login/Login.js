@@ -8,6 +8,7 @@ import { useTheme } from 'styled-components';
 import { Spacer } from '../../components/ContentLayout/Spacer';
 import { setSessionData } from '../../helpers/sessionHandlers';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../api/Auth/Auth';
 
 export const Login = () => {
   const theme = useTheme();
@@ -19,12 +20,12 @@ export const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name === 'email') {
       setEmail(value);
     } else if (name === 'password') {
       setPassword(value);
     }
-    setError((prevError) => ({ ...prevError, [name]: '' }));
   };
 
   const handleSubmit = async (event) => {
@@ -41,11 +42,17 @@ export const Login = () => {
     }
 
     setIsLoading(true);
-    // Add login logic here
-    setSessionData('isLoggedIn', 'true'); // replace this with correct info
-    // need to handle if the details are incorrect to send error back to the UI
-    setIsLoading(false);
-    navigate('/');
+    login(email, password)
+      .then((data) => {
+        console.log(data);
+        setSessionData('authorizationCode', data.authorizationCode);
+        setIsLoading(false);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -60,10 +67,11 @@ export const Login = () => {
           </span>
         )}
         <InputField
+          name="email"
           label="Email"
           value={email}
           onChange={handleChange}
-          type="email"
+          // type="email"
         />
         {error.password && (
           <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
@@ -71,6 +79,7 @@ export const Login = () => {
           </span>
         )}
         <InputField
+          name="password"
           label="Password"
           value={password}
           onChange={handleChange}
