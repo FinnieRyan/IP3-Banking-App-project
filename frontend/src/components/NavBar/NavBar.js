@@ -13,7 +13,6 @@ import Logo from '../../assets/Logo.png';
 
 // COMPONENTS
 import { Burger } from './Burger';
-import { Heading } from '../Heading/Heading';
 import { Link } from '../Link/Link';
 import { useLocation, useNavigate } from 'react-router-dom';
 
