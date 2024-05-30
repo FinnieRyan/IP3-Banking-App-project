@@ -17,30 +17,26 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setError((prevError) => ({ ...prevError, email: '' }));
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    setError((prevError) => ({ ...prevError, password: '' }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+    setError((prevError) => ({ ...prevError, [name]: '' }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!email) {
-      setError((prevError) => ({
-        ...prevError,
-        email: 'Please enter your email.',
-      }));
-      return;
-    }
-    if (!password) {
-      setError((prevError) => ({
-        ...prevError,
-        password: 'Please enter your password.',
-      }));
+
+    const errors = {
+      email: !email ? 'Please enter your email.' : '',
+      password: !password ? 'Please enter your password.' : '',
+    };
+
+    if (errors.email || errors.password) {
+      setError(errors);
       return;
     }
 
@@ -59,21 +55,25 @@ export const Login = () => {
       </Text>
       <Form onSubmit={handleSubmit}>
         {error.email && (
-          <span style={{ color: theme.colors.warning }}>{error.email}</span>
+          <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
+            {error.email}
+          </span>
         )}
         <InputField
           label="Email"
           value={email}
-          onChange={handleEmailChange}
+          onChange={handleChange}
           type="email"
         />
         {error.password && (
-          <span style={{ color: theme.colors.warning }}>{error.password}</span>
+          <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
+            {error.password}
+          </span>
         )}
         <InputField
           label="Password"
           value={password}
-          onChange={handlePasswordChange}
+          onChange={handleChange}
           type="password"
         />
         <Spacer />
