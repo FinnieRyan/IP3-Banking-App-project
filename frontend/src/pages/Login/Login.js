@@ -79,7 +79,7 @@ export const Login = () => {
           label="Email"
           value={formFields.email}
           onChange={handleChange}
-          // type="email"
+          type="email"
         />
         {errors.password && (
           <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
