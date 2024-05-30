@@ -12,32 +12,31 @@ import { login } from '../../api/Auth/Auth';
 
 export const Login = () => {
   const theme = useTheme();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState({ email: '', password: '' });
+  const [formFields, setFormFields] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+    api: '',
+  });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
-    }
+  const handleChange = ({ target: { name, value } }) => {
+    setFormFields((prevState) => ({ ...prevState, [name]: value }));
+    setErrors((prevState) => ({ ...prevState, [name]: '', api: '' }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const errors = {
+    const { email, password } = formFields;
+    const newErrors = {
       email: !email ? 'Please enter your email.' : '',
       password: !password ? 'Please enter your password.' : '',
     };
 
-    if (errors.email || errors.password) {
-      setError(errors);
+    if (newErrors.email || newErrors.password) {
+      setErrors((prevState) => ({ ...prevState, ...newErrors }));
       return;
     }
 
@@ -52,6 +51,10 @@ export const Login = () => {
       .catch((error) => {
         console.error(error);
         setIsLoading(false);
+        setErrors((prevState) => ({
+          ...prevState,
+          api: 'Login failed. Please check your email and password.',
+        }));
       });
   };
 
@@ -61,27 +64,32 @@ export const Login = () => {
         Enter you account details below to log into your FinWise account
       </Text>
       <Form onSubmit={handleSubmit}>
-        {error.email && (
+        {errors.api && (
           <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
-            {error.email}
+            {errors.api}
+          </span>
+        )}
+        {errors.email && (
+          <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
+            {errors.email}
           </span>
         )}
         <InputField
           name="email"
           label="Email"
-          value={email}
+          value={formFields.email}
           onChange={handleChange}
           // type="email"
         />
-        {error.password && (
+        {errors.password && (
           <span style={{ color: theme.colors.warning, fontSize: '14px' }}>
-            {error.password}
+            {errors.password}
           </span>
         )}
         <InputField
           name="password"
           label="Password"
-          value={password}
+          value={formFields.password}
           onChange={handleChange}
           type="password"
         />
