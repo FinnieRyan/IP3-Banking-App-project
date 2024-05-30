@@ -4,12 +4,14 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.js';
 import connectDB from '../database/config/helpers.js';
+import cors from 'cors';
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
-const PORT = process.env.AUTH_PORT || 3500;
+const PORT = 3500;
+app.use(cors());
 
 const connectToDBAndStartServer = async () => {
   try {

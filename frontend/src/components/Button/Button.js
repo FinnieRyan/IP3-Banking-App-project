@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledButton } from './Button.style';
 
-export const Button = ({ type = 'primary', children, onClick }) => {
+export const Button = ({ type = 'primary', children, onClick, ...props }) => {
   return (
-    <StyledButton type={type} onClick={onClick}>
+    <StyledButton type={type} onClick={onClick} {...props}>
       {children}
     </StyledButton>
   );

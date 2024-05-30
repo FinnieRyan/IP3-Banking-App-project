@@ -14,9 +14,9 @@ const authCodes = new Map();
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
-  //Check if user exisits
+  //Check if user exists
   const storedUser = await User.findOne({ username });
-  if (storedUser) return res.status(400).json({ msg: 'User already exsists' });
+  if (storedUser) return res.status(400).json({ msg: 'User already exists' });
 
   //hash the password
   const salt = await bcrypt.genSalt(10);
@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
   //Validate user credentials
   console.log(username);
   const user = await User.findOne({ username });
-  if (!user) return res.status(400).json({ msg: 'username not found' });
+  if (!user) return res.status(400).json({ msg: 'Username not found' });
 
   console.log(password);
   console.log(user.passwordHash);
@@ -61,7 +61,7 @@ router.get('/token', async (req, res) => {
   if (!authCodeData || authCodeData.expires < Date.now()) {
     return res
       .status(400)
-      .json({ msg: 'invaild or expired authorisation code' });
+      .json({ msg: 'Invalid or expired authorisation code' });
   }
 
   authCodes.delete(authorizationCode);
