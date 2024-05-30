@@ -8,7 +8,7 @@ import { useTheme } from 'styled-components';
 import { Spacer } from '../../components/ContentLayout/Spacer';
 import { setSessionData } from '../../helpers/sessionHandlers';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../api/Auth/Auth';
+import { login } from '../../api/auth';
 
 export const Login = () => {
   const theme = useTheme();
