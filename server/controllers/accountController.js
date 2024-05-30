@@ -51,7 +51,17 @@ export const getSingleAccount = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const account = await Account.findById(id).populate('customerId');
+    // Find the customer by userId
+    const customer = await Customer.findOne({ userId: id });
+
+    if (!customer) {
+      return res.status(404).json({ message: 'Customer not found' });
+    }
+
+    // Find the account by customerId
+    const account = await Account.findOne({
+      customerId: customer._id,
+    }).populate('customerId');
 
     if (!account) {
       return res.status(404).json({ message: 'Account not found' });
