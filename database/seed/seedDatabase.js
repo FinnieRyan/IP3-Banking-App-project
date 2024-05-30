@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt'; // Import bcrypt
 import User from '../../server/models/user.js';
 import Customer from '../../server/models/customer.js';
 import Account from '../../server/models/account.js';
@@ -31,8 +32,20 @@ async function getCustomerIdByUsername(username) {
 // Function to seed the database
 async function seedDatabase() {
   try {
-    // Insert users
-    const createdUsers = await User.insertMany(users);
+    // Hash the passwords for each user before inserting
+    const usersWithHashedPasswords = await Promise.all(
+      users.map(async (user) => {
+        if (!user.passwordHash) {
+          throw new Error(`User ${user.username} does not have a passwordHash`);
+        }
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(user.passwordHash, salt);
+        return { ...user, passwordHash: hashedPassword };
+      })
+    );
+
+    // Insert users with hashed passwords
+    const createdUsers = await User.insertMany(usersWithHashedPasswords);
     const userMap = {};
     createdUsers.forEach((user) => {
       userMap[user.username] = user._id;
