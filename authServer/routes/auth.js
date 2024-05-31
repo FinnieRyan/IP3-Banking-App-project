@@ -31,46 +31,49 @@ router.post('/register', async (req, res) => {
 
 //Login route
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  //Validate user credentials
-  const user = await User.findOne({ username });
+  // Validate user credentials
+  const user = await User.findOne({ email });
+
   if (!user) return res.status(400).json({ msg: 'Username not found' });
 
   const isMatch = await bcrypt.compare(password, user.passwordHash);
-  if (!isMatch) return res.status(400).json({ msg: 'Password Incorrect' });
+  if (!isMatch) return res.status(400).json({ msg: 'Password incorrect' });
 
-  //the jwt is the auth code
+  // Generate authorization code
   const authorizationCode = crypto.randomBytes(20).toString('hex');
   authCodes.set(authorizationCode, {
     userId: user._id,
-    expires: Date.now() + 600000,
+    expires: Date.now() + 600000, // 10 minutes expiry
   });
 
-  res.json({ authorizationCode });
-});
-
-//exchange the auth for access token
-router.get('/token', async (req, res) => {
-  const { authorizationCode } = req.body;
-
+  // Immediately exchange authorization code for access token
   const authCodeData = authCodes.get(authorizationCode);
   if (!authCodeData || authCodeData.expires < Date.now()) {
     return res
       .status(400)
-      .json({ msg: 'Invalid or expired authorisation code' });
+      .json({ msg: 'Invalid or expired authorization code' });
   }
 
+  // Remove the auth code from the store after it has been used
   authCodes.delete(authorizationCode);
 
-  //create access token
+  // Generate access token
   const accessToken = jwt.sign(
     { id: authCodeData.userId },
     'access_token_secret',
-    { expiresIn: '10m' }
+    { expiresIn: '1h' }
   );
 
-  res.json({ accessToken });
+  res.json({
+    accessToken,
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    },
+  });
 });
 
 export default router;
