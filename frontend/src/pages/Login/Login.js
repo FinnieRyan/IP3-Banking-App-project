@@ -44,7 +44,7 @@ export const Login = () => {
     login(email, password)
       .then((data) => {
         console.log(data);
-        setSessionData('authorizationCode', data.authorizationCode);
+        setSessionData('loginResponse', data);
         setIsLoading(false);
         navigate('/');
       })
