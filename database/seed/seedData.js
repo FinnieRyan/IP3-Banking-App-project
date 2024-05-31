@@ -57,7 +57,9 @@ const generateAccount = (index, customerId) => ({
   customerId,
   accountType: index % 2 === 0 ? 'Savings' : 'Current',
   balance: 1000.0 * index,
-  accountNumber: String((index % 94279689) + 1).padStart(8, '0'),
+  accountNumber: String(
+    (index % 94279689) + (Math.floor(Math.random() * 999999) + 1)
+  ).padStart(8, '0'),
   sortCode: sortCodes[Math.floor(Math.random() * sortCodes.length)],
 });
 
