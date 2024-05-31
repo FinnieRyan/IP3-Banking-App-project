@@ -50,7 +50,10 @@ router.post('/login', async (req, res) => {
     expires: Date.now() + 600000,
   });
 
-  res.json({ authorizationCode });
+  res.json({
+    authorizationCode,
+    userId: user._id,
+  });
 });
 
 //exchange the auth for access token
