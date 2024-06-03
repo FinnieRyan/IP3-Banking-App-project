@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react'; // import useState
 import { AuthUserContext } from '../contexts/contexts';
 import { getSessionData } from '../helpers/sessionHandlers';
 
@@ -12,6 +12,8 @@ export const useAuthUser = () => {
     setUser,
   } = useContext(AuthUserContext);
 
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchSessionData = () => {
       try {
@@ -22,13 +24,15 @@ export const useAuthUser = () => {
         }
       } catch (error) {
         console.error('Failed to fetch session data:', error);
+        setError('Failed to fetch session data');
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchSessionData();
-  }, [setAccessToken, setIsLoading, setUser]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return { isLoading, accessToken, setAccessToken, user, setUser };
+  return { isLoading, accessToken, user, error };
 };
