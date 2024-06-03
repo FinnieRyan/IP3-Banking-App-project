@@ -29,17 +29,15 @@ export const Home = () => {
         {accountsData &&
           accountsData.map((account) => (
             <ActionCard
-              key={account.id}
+              key={account._id}
               icon={
                 account.accountType === 'Current'
                   ? SquarePoundSymbol
                   : BankNoteSymbol
               }
-              content={account.accountType}
+              content={`${account.accountType} Account`}
               subContent={`£${account.balance}`}
-              onClick={() =>
-                navigate(`/accounts/${account.accountType.toLowerCase()}`)
-              }
+              onClick={() => navigate(`/accounts/${account._id}`)}
             />
           ))}
         <Link location="/accounts">View all accounts</Link>

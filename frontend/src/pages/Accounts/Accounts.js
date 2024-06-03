@@ -20,23 +20,21 @@ export const Accounts = () => {
         {accountsData &&
           accountsData.map((account) => (
             <ActionCard
-              key={account.id}
+              key={account._id}
               icon={
                 account.accountType === 'Current'
                   ? SquarePoundSymbol
                   : BankNoteSymbol
               }
-              content={account.accountType}
+              content={`${account.accountType} Account`}
               subContent={`£${account.balance}`}
-              onClick={() =>
-                navigate(`/accounts/${account.accountType.toLowerCase()}`)
-              }
+              onClick={() => navigate(`/accounts/${account._id}`)}
             />
           ))}
       </GroupContent>
       <Spacer />
       <Button onClick={() => navigate('/transfer-money')}>
-        Transfer Money{' '}
+        Transfer Money
         <FiPlus style={{ fontSize: '32px', marginRight: '-6px' }} />
       </Button>
     </PageLayout>

@@ -8,9 +8,6 @@ export const ProtectedRoute = ({ element }) => {
   const { isLoading: isAuthUserLoading, accessToken } = useAuthUser();
   const { isLoading: isCustomerLoading } = useCustomer();
   const { isLoading: isAccountsLoading } = useAccounts();
-  console.log('isAuthUserLoading', isAuthUserLoading);
-  console.log('isCustomerLoading', isCustomerLoading);
-  console.log('isAccountsLoading', isAccountsLoading);
 
   if (isAuthUserLoading || isCustomerLoading || isAccountsLoading) {
     return <Loading />;

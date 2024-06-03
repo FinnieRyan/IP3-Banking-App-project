@@ -46,7 +46,7 @@ const TransitionRoutes = () => {
             element={<ProtectedRoute element={<Accounts />} />}
           />
           <Route
-            path="/accounts/:accountType"
+            path="/accounts/:accountId"
             element={<ProtectedRoute element={<Account />} />}
           />
           <Route
