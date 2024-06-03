@@ -90,7 +90,7 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
     return (index) => {
       const maxDistance = 3; // distance from the active index where the opacity will start to fade
       const distance = Math.abs(activeIndex - index);
-      return distance >= maxDistance ? 0.2 : 1 - (distance / maxDistance) * 0.8;
+      return distance >= maxDistance ? 0 : 1 - (distance / maxDistance) * 1;
     };
   }, [activeIndex]);
 

@@ -55,10 +55,7 @@ export const Account = () => {
         )}
         <Heading size={2}>£{account.balance}</Heading>
       </Card>
-      <MonthPicker
-        startDate={account.createdAt}
-        onMonthChange={setSelectedMonth}
-      />
+      <MonthPicker startDate="02/03/2011" onMonthChange={setSelectedMonth} />
       <Card>
         <Heading size={2}>{selectedMonth.name} overview</Heading>
       </Card>
