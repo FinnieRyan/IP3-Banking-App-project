@@ -24,7 +24,7 @@ import { useAccounts } from '../../hooks/useAccounts';
 export const NavBar = () => {
   const { clearAuthUser } = useAuthUser();
   const { clearCustomer } = useCustomer();
-  const { clearAccounts } = useAccounts();
+  const { clearAccounts, accountsData, isLoading } = useAccounts();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -74,17 +74,23 @@ export const NavBar = () => {
             <Link white location="/accounts">
               Accounts
             </Link>
-            <NavLinkGroup>
-              <Link white location="/accounts/current">
-                Current Account
-              </Link>
-              <Link white location="/accounts/savings">
-                Savings
-              </Link>
-              <Link white location="/transfer-money">
-                Transfer Money
-              </Link>
-            </NavLinkGroup>
+            {location.pathname !== '/login' && (
+              <NavLinkGroup>
+                {!isLoading &&
+                  accountsData.map((account) => (
+                    <Link
+                      key={account.id}
+                      white
+                      location={`/accounts/${account.accountType.toLowerCase()}`}
+                    >
+                      {account.accountType} Account
+                    </Link>
+                  ))}
+                <Link white location="/transfer-money">
+                  Transfer Money
+                </Link>
+              </NavLinkGroup>
+            )}
             <Link white location="/login" onClick={logout}>
               Logout
             </Link>
