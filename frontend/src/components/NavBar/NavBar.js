@@ -77,7 +77,7 @@ export const NavBar = () => {
             {location.pathname !== '/login' && (
               <NavLinkGroup>
                 {!isLoading &&
-                  accountsData.map((account) => (
+                  accountsData?.map((account) => (
                     <Link
                       key={account.id}
                       white

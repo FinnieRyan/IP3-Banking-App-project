@@ -12,14 +12,13 @@ import { useAuthUser } from '../../hooks/useAuthUser';
 
 export const Login = () => {
   const theme = useTheme();
-  const { setAccessToken, setUser } = useAuthUser();
+  const { setAccessToken, setUser, isLoading, setIsLoading } = useAuthUser();
   const [formFields, setFormFields] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({
     email: '',
     password: '',
     api: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {

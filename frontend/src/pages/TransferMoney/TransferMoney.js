@@ -7,10 +7,9 @@ import SquarePoundAddSymbol from '../../assets/square-pound-add-symbol-x2.svg';
 import SquareArrowsSymbol from '../../assets/square-arrows-symbol-x2.svg';
 import { AccountsModal } from '../../components/AccountsModal/AccountsModal';
 import { useAccounts } from '../../hooks/useAccounts';
-import { Loading } from '../../components/Loading/Loading';
 
 export const TransferMoney = () => {
-  const { accountsData, isLoading } = useAccounts();
+  const { accountsData } = useAccounts();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
@@ -23,10 +22,6 @@ export const TransferMoney = () => {
   const actionCardPaySomeoneNavigate = () => {
     navigate('/transfer-money/pay-someone');
   };
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <PageLayout

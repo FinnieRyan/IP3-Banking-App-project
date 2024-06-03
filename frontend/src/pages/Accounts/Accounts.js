@@ -9,15 +9,10 @@ import BankNoteSymbol from '../../assets/bank-note-symbol-x2.svg';
 import { useNavigate } from 'react-router-dom';
 import { GroupContent } from '../../components/ContentLayout/GroupContent';
 import { useAccounts } from '../../hooks/useAccounts';
-import { Loading } from '../../components/Loading/Loading';
 
 export const Accounts = () => {
-  const { accountsData, isLoading } = useAccounts();
+  const { accountsData } = useAccounts();
   const navigate = useNavigate();
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <PageLayout linkText="Home" linkLocation={'/'} heading="Accounts">

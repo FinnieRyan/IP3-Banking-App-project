@@ -12,13 +12,9 @@ import { Loading } from '../../components/Loading/Loading';
 
 export const MoneyIn = () => {
   const { accountId } = useParams();
-  const { getAccountById, isLoading: isAccountsLoading } = useAccounts();
-  const { customerData, isLoading: isCustomerLoading } = useCustomer();
+  const { getAccountById } = useAccounts();
+  const { customerData } = useCustomer();
   const navigate = useNavigate();
-
-  if (isAccountsLoading || isCustomerLoading) {
-    return <Loading />;
-  }
 
   const account = getAccountById(accountId);
 

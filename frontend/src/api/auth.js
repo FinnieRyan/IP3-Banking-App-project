@@ -7,10 +7,9 @@ export const login = async (email, password) => {
       email,
       password,
     });
-    const data = response.data;
-    console.log('login', data);
-    setSessionData('loginResponse', data);
-    return data;
+    console.log('login', response.data);
+    setSessionData('loginResponse', response.data);
+    return response.data;
   } catch (error) {
     console.error('Login failed:', error);
     throw new Error('Login failed!');

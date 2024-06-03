@@ -7,7 +7,7 @@ import { GroupContent } from '../ContentLayout/GroupContent';
 export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
   return (
     <Container>
-      {heading && linkLocation && linkText && (
+      {heading && linkLocation && linkText ? (
         <GroupContent>
           {linkLocation && linkText && (
             <Link backLink location={linkLocation}>
@@ -16,6 +16,12 @@ export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
           )}
           {heading && <Heading>{heading}</Heading>}
         </GroupContent>
+      ) : linkLocation && linkText ? (
+        <Link backLink location={linkLocation}>
+          {linkText}
+        </Link>
+      ) : (
+        heading && <Heading>{heading}</Heading>
       )}
       {children}
     </Container>
