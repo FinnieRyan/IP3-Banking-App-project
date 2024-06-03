@@ -34,5 +34,19 @@ export const useAuthUser = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { isLoading, accessToken, user, error };
+  const clearAuthUser = () => {
+    setAccessToken(null);
+    setUser(null);
+    setIsLoading(true);
+  };
+
+  return {
+    isLoading,
+    accessToken,
+    setAccessToken,
+    user,
+    setUser,
+    error,
+    clearAuthUser,
+  };
 };

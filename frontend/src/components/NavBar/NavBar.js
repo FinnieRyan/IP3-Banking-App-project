@@ -15,8 +15,16 @@ import Logo from '../../assets/Logo.png';
 import { Burger } from './Burger';
 import { Link } from '../Link/Link';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { removeSessionData } from '../../helpers/sessionHandlers';
+
+import { useAuthUser } from '../../hooks/useAuthUser';
+import { useCustomer } from '../../hooks/useCustomer';
+import { useAccounts } from '../../hooks/useAccounts';
 
 export const NavBar = () => {
+  const { clearAuthUser } = useAuthUser();
+  const { clearCustomer } = useCustomer();
+  const { clearAccounts } = useAccounts();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,11 +46,20 @@ export const NavBar = () => {
     setOpen(false); // close the burger menu when the route changes
   }, [location]);
 
+  const logout = () => {
+    removeSessionData('loginResponse');
+    clearAuthUser();
+    clearCustomer();
+    clearAccounts();
+  };
+
   return (
     <>
       <NavBarBackground open={open}>
         <NavContent onMouseLeave={() => setOpen(false)}>
-          <Burger open={open} setOpen={setOpen} />
+          {location.pathname !== '/login' && (
+            <Burger open={open} setOpen={setOpen} />
+          )}
           <NavSpacer />
           <NavLogo
             src={Logo}
@@ -68,6 +85,9 @@ export const NavBar = () => {
                 Transfer Money
               </Link>
             </NavLinkGroup>
+            <Link white location="/login" onClick={logout}>
+              Logout
+            </Link>
           </NavLinkContainer>
         </NavContent>
       </NavBarBackground>

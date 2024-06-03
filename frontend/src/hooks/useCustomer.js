@@ -37,5 +37,10 @@ export const useCustomer = () => {
     }
   }, [user, isAuthUserLoading]);
 
-  return { customerData, isLoading, error };
+  const clearCustomer = () => {
+    setCustomerData(null);
+    setIsLoading(true);
+  };
+
+  return { customerData, isLoading, error, clearCustomer };
 };

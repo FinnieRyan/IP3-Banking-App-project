@@ -10,7 +10,7 @@ import {
   StyledLink,
 } from './AccountsModal.style';
 
-export const AccountsModal = ({ heading, description, onClose }) => {
+export const AccountsModal = ({ heading, description, onClose, accounts }) => {
   return (
     <Modal>
       <ModalContainer>
@@ -19,25 +19,20 @@ export const AccountsModal = ({ heading, description, onClose }) => {
         </Heading>
         {description && <Text>{description}</Text>}
         <CloseIcon onClick={onClose} />
-        <StyledLink to="/transfer-money/money-in/current">
-          Current Account
-          <div>
-            £X
-            <FiChevronRight
-              style={{ fontSize: '24px', position: 'relative', top: '1px' }}
-            />
-          </div>
-        </StyledLink>
-        <HR />
-        <StyledLink to="/transfer-money/money-in/savings">
-          Savings Account
-          <div>
-            £X
-            <FiChevronRight
-              style={{ fontSize: '24px', position: 'relative', top: '1px' }}
-            />
-          </div>
-        </StyledLink>
+        {accounts.map((account, index) => (
+          <>
+            <StyledLink to={`/transfer-money/money-in/${account._id}`}>
+              {account.accountType}
+              <div>
+                £{account.balance}
+                <FiChevronRight
+                  style={{ fontSize: '24px', position: 'relative', top: '1px' }}
+                />
+              </div>
+            </StyledLink>
+            {index < accounts.length - 1 && <HR />}
+          </>
+        ))}
       </ModalContainer>
     </Modal>
   );

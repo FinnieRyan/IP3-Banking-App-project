@@ -37,5 +37,16 @@ export const useAccounts = () => {
     }
   }, [user, isAuthUserLoading]);
 
-  return { accountsData, isLoading, error };
+  const getAccountById = (id) => {
+    console.log('id', id);
+    const account = accountsData?.find((account) => account._id === id);
+    return account;
+  };
+
+  const clearAccounts = () => {
+    setAccountsData(null);
+    setIsLoading(true);
+  };
+
+  return { accountsData, isLoading, error, getAccountById, clearAccounts };
 };
