@@ -48,7 +48,8 @@ export const Account = () => {
         )}
         <Heading size={2}>£{account.balance}</Heading>
       </Card>
-      <MonthCarousel startDate={'01/01/2022'} />
+      <MonthCarousel startDate={account.createdAt} />
+      <MonthCarousel startDate="10/10/2022" />
     </PageLayout>
   );
 };

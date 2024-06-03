@@ -38,6 +38,8 @@ export const MonthCarousel = ({ startDate }) => {
   const currentMonth = today.getMonth();
   const currentYear = today.getFullYear();
   const monthsRef = useRef(null);
+  const startYear = new Date(startDate).getFullYear();
+  const startMonth = new Date(startDate).getMonth();
 
   const months = [
     'Jan',
@@ -53,9 +55,6 @@ export const MonthCarousel = ({ startDate }) => {
     'Nov',
     'Dec',
   ];
-
-  const startYear = new Date(startDate).getFullYear();
-  const startMonth = new Date(startDate).getMonth();
 
   const generateMonthList = () => {
     const monthList = [];
@@ -108,17 +107,22 @@ export const MonthCarousel = ({ startDate }) => {
     <Container>
       <MonthsContainer ref={monthsRef} role="list">
         <Spacer />
-        {monthList.map((month, index) => (
-          <Month
-            key={`${month.name}-${month.year}`}
-            active={index === activeIndex}
-            opacity={calculateOpacity(index)}
-            onClick={() => setActiveIndex(index)}
-            role="listitem"
-          >
-            {month.name}
-          </Month>
-        ))}
+        {monthList.map((month, index) => {
+          const showYear =
+            (index === 0 && monthList.length > 1) ||
+            (index > 0 && month.year !== monthList[index - 1].year);
+          return (
+            <Month
+              key={`${month.name}-${month.year}`}
+              active={index === activeIndex}
+              opacity={calculateOpacity(index)}
+              onClick={() => setActiveIndex(index)}
+              role="listitem"
+            >
+              {month.name} {showYear && month.year}
+            </Month>
+          );
+        })}
         <Spacer />
       </MonthsContainer>
     </Container>
