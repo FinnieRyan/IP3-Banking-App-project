@@ -9,14 +9,18 @@ import { ActionCard } from '../../components/ActionCard/ActionCard';
 import { useNavigate } from 'react-router-dom';
 import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
 import { useCustomer } from '../../hooks/useCustomer';
+import { useAccounts } from '../../hooks/useAccounts';
 
 export const Home = () => {
   const navigate = useNavigate();
   const { customerData } = useCustomer();
+  const { accountsData } = useAccounts();
 
   const actionCardNavigate = () => {
     navigate('/accounts/current');
   };
+
+  console.log('accountsData', accountsData);
 
   return (
     <PageLayout>
@@ -27,12 +31,22 @@ export const Home = () => {
       </Card>
       <GroupContent>
         <Heading size={5}>Quick links</Heading>
-        <ActionCard
+        {accountsData &&
+          accountsData.map((account) => (
+            <ActionCard
+              key={account.id}
+              icon={SquarePoundSymbol}
+              content={account.accountType}
+              subContent={`£${account.balance}`}
+              onClick={() => navigate(`/accounts/${account.accountType}`)}
+            />
+          ))}
+        {/* <ActionCard
           icon={SquarePoundSymbol}
           content="Current Account"
           subContent="£X"
           onClick={actionCardNavigate}
-        />
+        /> */}
         <Link location="/accounts">View all accounts</Link>
       </GroupContent>
       <GroupContent>

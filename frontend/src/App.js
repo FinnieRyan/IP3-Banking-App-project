@@ -29,6 +29,7 @@ import { Login } from './pages/Login/Login';
 import { ProtectedRoute } from './common/routes/ProtectedRoutes';
 import { AuthUserProvider } from './providers/AuthUserProvider';
 import { CustomerProvider } from './providers/CustomerProvider';
+import { AccountsProvider } from './providers/AccountsProvider';
 
 const TransitionRoutes = () => {
   let location = useLocation();
@@ -75,12 +76,14 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <AuthUserProvider>
         <CustomerProvider>
-          <GlobalStyles />
-          <Router>
-            <ScrollToTop />
-            <NavBar />
-            <TransitionRoutes />
-          </Router>
+          <AccountsProvider>
+            <GlobalStyles />
+            <Router>
+              <ScrollToTop />
+              <NavBar />
+              <TransitionRoutes />
+            </Router>
+          </AccountsProvider>
         </CustomerProvider>
       </AuthUserProvider>
     </ThemeProvider>
