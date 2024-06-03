@@ -1,12 +1,17 @@
 import { Navigate } from 'react-router-dom';
 import { useAuthUser } from '../../hooks/useAuthUser';
+import { Loading } from '../../components/Loading/Loading';
 
 export const ProtectedRoute = ({ element }) => {
   const { isLoading, accessToken } = useAuthUser();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
-  return accessToken ? element : <Navigate to="/login" replace />;
+  if (!accessToken) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return element;
 };

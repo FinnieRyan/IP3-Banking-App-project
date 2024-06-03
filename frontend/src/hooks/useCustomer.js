@@ -12,30 +12,29 @@ export const useCustomer = () => {
   } = useContext(AuthUserContext);
   const [error, setError] = useState(null);
 
-  const fetchCustomerData = async () => {
-    setIsLoading(true);
-    setError(null);
-    if (!accessToken) {
-      setError('No access token');
-      setIsLoading(false);
-      return;
-    }
-    try {
-      const data = await getCustomer(user?.username, accessToken);
-      setCustomerData(data);
-    } catch (error) {
-      console.error('Error fetching customer data:', error);
-      setError(error.message); // set error state
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (user?.username && !isAuthUserLoading) {
+    const fetchCustomerData = async () => {
+      setIsLoading(true);
+      setError(null);
+      if (!accessToken) {
+        setError('No access token');
+        setIsLoading(false);
+        return;
+      }
+      try {
+        const data = await getCustomer(user?.username, accessToken);
+        setCustomerData(data);
+      } catch (error) {
+        console.error('Error fetching customer data:', error);
+        setError(error.message); // set error state
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    if (!isAuthUserLoading) {
       fetchCustomerData();
     }
-  }, [user, isAuthUserLoading]);
+  }, [accessToken, user]);
 
   const clearCustomer = () => {
     setCustomerData(null);

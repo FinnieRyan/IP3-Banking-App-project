@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CopyableDetailCard } from '../../components/CopyableDetailCard/CopyableDetailCard';
 import { useAccounts } from '../../hooks/useAccounts';
 import { useCustomer } from '../../hooks/useCustomer';
-import { Spinner } from '../../components/Spinner/Spinner';
+import { Loading } from '../../components/Loading/Loading';
 
 export const MoneyIn = () => {
   const { accountId } = useParams();
@@ -17,11 +17,7 @@ export const MoneyIn = () => {
   const navigate = useNavigate();
 
   if (isAccountsLoading || isCustomerLoading) {
-    return (
-      <PageLayout>
-        <Spinner />
-      </PageLayout>
-    );
+    return <Loading />;
   }
 
   const account = getAccountById(accountId);
@@ -31,11 +27,7 @@ export const MoneyIn = () => {
   };
 
   if (!account) {
-    return (
-      <PageLayout>
-        <Spinner />
-      </PageLayout>
-    );
+    return <Loading />;
   }
 
   return (

@@ -11,11 +11,16 @@ import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
 import BankNoteSymbol from '../../assets/bank-note-symbol-x2.svg';
 import { useCustomer } from '../../hooks/useCustomer';
 import { useAccounts } from '../../hooks/useAccounts';
+import { Loading } from '../../components/Loading/Loading';
 
 export const Home = () => {
   const navigate = useNavigate();
-  const { customerData } = useCustomer();
-  const { accountsData } = useAccounts();
+  const { customerData, isLoading: isCustomerLoading } = useCustomer();
+  const { accountsData, isLoading: isAccountsLoading } = useAccounts();
+
+  if (isAccountsLoading || isCustomerLoading) {
+    return <Loading />;
+  }
 
   return (
     <PageLayout>
