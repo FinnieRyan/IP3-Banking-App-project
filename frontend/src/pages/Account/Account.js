@@ -25,8 +25,6 @@ export const Account = () => {
   const [showAccountDetails, setShowAccountDetails] = useState(false);
   const account = getAccountById(accountId);
 
-  console.log('selectedMonth', selectedMonth);
-
   return (
     <PageLayout linkText="Accounts" linkLocation={'/accounts'}>
       <Card style={{ position: 'relative' }}>
@@ -57,11 +55,10 @@ export const Account = () => {
         )}
         <Heading size={2}>£{account.balance}</Heading>
       </Card>
-      {/* <MonthCarousel
+      <MonthPicker
         startDate={account.createdAt}
         onMonthChange={setSelectedMonth}
-      /> */}
-      <MonthPicker startDate="10/10/2022" onMonthChange={setSelectedMonth} />
+      />
       <Card>
         <Heading size={2}>{selectedMonth.name} overview</Heading>
       </Card>
