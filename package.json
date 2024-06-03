@@ -4,6 +4,7 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
+    "preinstall": "node install-all.js",
     "frontend": "npm start --prefix ./frontend",
     "auth-server": "nodemon ./authserver/server.js",
     "express-server": "nodemon ./server/server.js",
