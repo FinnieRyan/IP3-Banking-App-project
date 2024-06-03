@@ -6,8 +6,10 @@ import SquarePoundPersonSymbol from '../../assets/square-pound-person-symbol-x2.
 import SquarePoundAddSymbol from '../../assets/square-pound-add-symbol-x2.svg';
 import SquareArrowsSymbol from '../../assets/square-arrows-symbol-x2.svg';
 import { AccountsModal } from '../../components/AccountsModal/AccountsModal';
+import { useAccounts } from '../../hooks/useAccounts';
 
 export const TransferMoney = () => {
+  const { accountsData } = useAccounts();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
@@ -32,6 +34,7 @@ export const TransferMoney = () => {
           heading="Pay money into?"
           description="Which account would you like to pay money into?"
           onClose={() => setShowModal(false)}
+          accounts={accountsData}
         />
       )}
       <ActionCard

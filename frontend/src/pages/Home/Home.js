@@ -8,29 +8,38 @@ import { Link } from '../../components/Link/Link';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
 import { useNavigate } from 'react-router-dom';
 import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
+import BankNoteSymbol from '../../assets/bank-note-symbol-x2.svg';
+import { useCustomer } from '../../hooks/useCustomer';
+import { useAccounts } from '../../hooks/useAccounts';
 
 export const Home = () => {
   const navigate = useNavigate();
-
-  const actionCardNavigate = () => {
-    navigate('/accounts/current');
-  };
+  const { customerData } = useCustomer();
+  const { accountsData } = useAccounts();
 
   return (
     <PageLayout>
       <Card>
         <Heading>
-          Welcome back, <br /> Name
+          Welcome back, <br /> {customerData?.forename}
         </Heading>
       </Card>
       <GroupContent>
         <Heading size={5}>Quick links</Heading>
-        <ActionCard
-          icon={SquarePoundSymbol}
-          content="Current Account"
-          subContent="£X"
-          onClick={actionCardNavigate}
-        />
+        {accountsData &&
+          accountsData.map((account) => (
+            <ActionCard
+              key={account._id}
+              icon={
+                account.accountType === 'Current'
+                  ? SquarePoundSymbol
+                  : BankNoteSymbol
+              }
+              content={`${account.accountType} Account`}
+              subContent={`£${account.balance}`}
+              onClick={() => navigate(`/accounts/${account._id}`)}
+            />
+          ))}
         <Link location="/accounts">View all accounts</Link>
       </GroupContent>
       <GroupContent>

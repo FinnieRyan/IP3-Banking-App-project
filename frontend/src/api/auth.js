@@ -1,16 +1,17 @@
-export const login = async (email, password) => {
-  const response = await fetch('http://localhost:3500/auth/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
+import axios from 'axios';
+import { setSessionData } from '../helpers/sessionHandlers';
 
-  if (!response.ok) {
+export const login = async (email, password) => {
+  try {
+    const response = await axios.post('http://localhost:3500/auth/login', {
+      email,
+      password,
+    });
+    console.log('login', response.data);
+    setSessionData('loginResponse', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Login failed:', error);
     throw new Error('Login failed!');
   }
-
-  const data = await response.json();
-  return data;
 };

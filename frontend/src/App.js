@@ -27,6 +27,9 @@ import { MoveMoney } from './pages/MoveMoney/MoveMoney';
 import { PaySomeone } from './pages/PaySomeone/PaySomeone';
 import { Login } from './pages/Login/Login';
 import { ProtectedRoute } from './common/routes/ProtectedRoutes';
+import { AuthUserProvider } from './providers/AuthUserProvider';
+import { CustomerProvider } from './providers/CustomerProvider';
+import { AccountsProvider } from './providers/AccountsProvider';
 
 const TransitionRoutes = () => {
   let location = useLocation();
@@ -43,7 +46,7 @@ const TransitionRoutes = () => {
             element={<ProtectedRoute element={<Accounts />} />}
           />
           <Route
-            path="/accounts/:accountType"
+            path="/accounts/:accountId"
             element={<ProtectedRoute element={<Account />} />}
           />
           <Route
@@ -51,7 +54,7 @@ const TransitionRoutes = () => {
             element={<ProtectedRoute element={<TransferMoney />} />}
           />
           <Route
-            path="/transfer-money/money-in/:account"
+            path="/transfer-money/money-in/:accountId"
             element={<ProtectedRoute element={<MoneyIn />} />}
           />
           <Route
@@ -71,12 +74,18 @@ const TransitionRoutes = () => {
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Router>
-        <ScrollToTop />
-        <NavBar />
-        <TransitionRoutes />
-      </Router>
+      <AuthUserProvider>
+        <CustomerProvider>
+          <AccountsProvider>
+            <GlobalStyles />
+            <Router>
+              <ScrollToTop />
+              <NavBar />
+              <TransitionRoutes />
+            </Router>
+          </AccountsProvider>
+        </CustomerProvider>
+      </AuthUserProvider>
     </ThemeProvider>
   );
 };

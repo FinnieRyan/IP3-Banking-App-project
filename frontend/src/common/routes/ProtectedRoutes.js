@@ -1,9 +1,21 @@
 import { Navigate } from 'react-router-dom';
-import { getSessionData } from '../../helpers/sessionHandlers';
+import { useAuthUser } from '../../hooks/useAuthUser';
+import { Loading } from '../../components/Loading/Loading';
+import { useCustomer } from '../../hooks/useCustomer';
+import { useAccounts } from '../../hooks/useAccounts';
 
 export const ProtectedRoute = ({ element }) => {
-  const loginResponse = getSessionData('loginResponse');
-  const isLoggedIn = loginResponse && loginResponse.accessToken;
-  console.log('retrieved access token:', isLoggedIn);
-  return isLoggedIn ? element : <Navigate to="/login" replace />;
+  const { isLoading: isAuthUserLoading, accessToken } = useAuthUser();
+  const { isLoading: isCustomerLoading } = useCustomer();
+  const { isLoading: isAccountsLoading } = useAccounts();
+
+  if (isAuthUserLoading || isCustomerLoading || isAccountsLoading) {
+    return <Loading />;
+  }
+
+  if (!accessToken) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return element;
 };

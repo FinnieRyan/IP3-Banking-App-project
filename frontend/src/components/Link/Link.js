@@ -14,6 +14,7 @@ export const Link = ({
   isExternal = false,
   inline = false,
   white = false,
+  ...props
 }) => {
   return (
     <>
@@ -24,6 +25,7 @@ export const Link = ({
           rel="noreferrer"
           inline={inline}
           $white={white}
+          {...props}
         >
           <FiExternalLink style={{ fontSize: '18px' }} />
           {children}
@@ -36,6 +38,7 @@ export const Link = ({
               inline={inline}
               style={{ marginLeft: '-8px' }}
               $white={white}
+              {...props}
             >
               {!inline && (
                 <FiChevronLeft
@@ -45,7 +48,12 @@ export const Link = ({
               {children}
             </LinkContainer>
           ) : (
-            <LinkContainer to={location} inline={inline} $white={white}>
+            <LinkContainer
+              to={location}
+              inline={inline}
+              $white={white}
+              {...props}
+            >
               {children}
               {!inline && (
                 <FiChevronRight

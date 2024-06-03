@@ -47,7 +47,7 @@ export const createAccount = async (req, res) => {
 };
 
 // Get a single account
-export const getSingleAccount = async (req, res) => {
+export const getAllCustomerAccounts = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -59,7 +59,7 @@ export const getSingleAccount = async (req, res) => {
     }
 
     // Find the account by customerId
-    const account = await Account.findOne({
+    const account = await Account.find({
       customerId: customer._id,
     }).populate('customerId');
 
@@ -121,7 +121,7 @@ export const deleteAccount = async (req, res) => {
 export default {
   getAllAccounts,
   createAccount,
-  getSingleAccount,
+  getAllCustomerAccounts,
   updateAccount,
   deleteAccount,
 };

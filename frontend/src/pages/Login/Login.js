@@ -6,19 +6,19 @@ import { Form } from '../../components/Input/Form';
 import { Text } from '../../components/Text/Text';
 import { useTheme } from 'styled-components';
 import { Spacer } from '../../components/ContentLayout/Spacer';
-import { setSessionData } from '../../helpers/sessionHandlers';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/auth';
+import { useAuthUser } from '../../hooks/useAuthUser';
 
 export const Login = () => {
   const theme = useTheme();
+  const { setAccessToken, setUser, isLoading, setIsLoading } = useAuthUser();
   const [formFields, setFormFields] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({
     email: '',
     password: '',
     api: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -43,8 +43,8 @@ export const Login = () => {
     setIsLoading(true);
     login(email, password)
       .then((data) => {
-        console.log(data);
-        setSessionData('loginResponse', data);
+        setAccessToken(data.accessToken);
+        setUser(data.user);
         setIsLoading(false);
         navigate('/');
       })
