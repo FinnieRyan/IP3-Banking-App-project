@@ -9,7 +9,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex-shrink: 0;
-  gap: 20px;
+  gap: 32px;
 
   height: calc(
     100dvh - 120px

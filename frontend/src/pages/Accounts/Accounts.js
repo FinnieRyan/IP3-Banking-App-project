@@ -7,6 +7,7 @@ import { Spacer } from '../../components/ContentLayout/Spacer';
 import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
 import BankNote from '../../assets/bank-note-symbol-x2.svg';
 import { useNavigate } from 'react-router-dom';
+import { GroupContent } from '../../components/ContentLayout/GroupContent';
 
 export const Accounts = () => {
   const navigate = useNavigate();
@@ -23,18 +24,20 @@ export const Accounts = () => {
 
   return (
     <PageLayout linkText="Home" linkLocation={'/'} heading="Accounts">
-      <ActionCard
-        icon={SquarePoundSymbol}
-        content="Current Account"
-        subContent="£X"
-        onClick={actionCardCurrentAccountNavigate}
-      />
-      <ActionCard
-        icon={BankNote}
-        content="Savings"
-        subContent="£X"
-        onClick={actionCardSavingsNavigate}
-      />
+      <GroupContent>
+        <ActionCard
+          icon={SquarePoundSymbol}
+          content="Current Account"
+          subContent="£X"
+          onClick={actionCardCurrentAccountNavigate}
+        />
+        <ActionCard
+          icon={BankNote}
+          content="Savings"
+          subContent="£X"
+          onClick={actionCardSavingsNavigate}
+        />
+      </GroupContent>
       <Spacer />
       <Button onClick={buttonTransferMoneyNavigate}>
         Transfer Money{' '}

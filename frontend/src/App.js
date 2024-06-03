@@ -27,6 +27,7 @@ import { MoveMoney } from './pages/MoveMoney/MoveMoney';
 import { PaySomeone } from './pages/PaySomeone/PaySomeone';
 import { Login } from './pages/Login/Login';
 import { ProtectedRoute } from './common/routes/ProtectedRoutes';
+import { AuthProvider } from './providers/AuthProvider';
 
 const TransitionRoutes = () => {
   let location = useLocation();
@@ -71,12 +72,14 @@ const TransitionRoutes = () => {
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Router>
-        <ScrollToTop />
-        <NavBar />
-        <TransitionRoutes />
-      </Router>
+      <AuthProvider>
+        <GlobalStyles />
+        <Router>
+          <ScrollToTop />
+          <NavBar />
+          <TransitionRoutes />
+        </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 };

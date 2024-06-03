@@ -1,3 +1,5 @@
+import { setSessionData } from '../helpers/sessionHandlers';
+
 export const login = async (email, password) => {
   const response = await fetch('http://localhost:3500/auth/login', {
     method: 'POST',
@@ -12,5 +14,6 @@ export const login = async (email, password) => {
   }
 
   const data = await response.json();
+  setSessionData('loginResponse', data);
   return data;
 };
