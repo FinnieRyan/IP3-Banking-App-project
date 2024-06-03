@@ -8,7 +8,7 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const MonthsContainer = styled.div`
+const MonthsContainer = styled.ul`
   display: flex;
   overflow-x: hidden;
   width: 100%;
@@ -17,7 +17,7 @@ const MonthsContainer = styled.div`
   position: relative;
 `;
 
-const Month = styled.div`
+const Month = styled.li`
   flex: 0 0 auto;
   padding: 0 16px;
   cursor: pointer;
@@ -90,7 +90,7 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
     return (index) => {
       const maxDistance = 3; // distance from the active index where the opacity will start to fade
       const distance = Math.abs(activeIndex - index);
-      return distance >= maxDistance ? 0 : 1 - (distance / maxDistance) * 1;
+      return distance >= maxDistance ? 0.1 : 1 - (distance / maxDistance) * 0.9;
     };
   }, [activeIndex]);
 
