@@ -29,13 +29,13 @@ export const MoneyIn = () => {
   return (
     <PageLayout heading="Pay money in">
       <Heading size={2} aria-label="Account Type">
-        {account?.accountType} Account details
+        {account.accountType} Account details
       </Heading>
       <Text>Never share account details with someone you don’t trust.</Text>
       <CopyableDetailCard
         showCopyButton
         label="Name"
-        value={`${customerData?.forename} ${customerData?.surname}`}
+        value={`${customerData.forename} ${customerData.surname}`}
       />
       <CopyableDetailCard
         showCopyButton

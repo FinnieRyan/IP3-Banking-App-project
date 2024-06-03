@@ -21,7 +21,7 @@ export const Home = () => {
     <PageLayout>
       <Card>
         <Heading>
-          Welcome back, <br /> {customerData?.forename}
+          Welcome back, <br /> {customerData.forename}
         </Heading>
       </Card>
       <GroupContent>
