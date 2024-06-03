@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { AuthContext } from '../contexts/contexts';
+import { AuthUserContext } from '../contexts/contexts';
 
-export const AuthProvider = ({ children }) => {
+export const AuthUserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
 
   return (
-    <AuthContext.Provider
+    <AuthUserContext.Provider
       value={{
         isLoading,
         setIsLoading,
@@ -18,6 +18,6 @@ export const AuthProvider = ({ children }) => {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AuthUserContext.Provider>
   );
 };

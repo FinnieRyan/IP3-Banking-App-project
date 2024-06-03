@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import protectedRoutes from './routes/protected.js';
 import connectDB from '../database/config/helpers.js';
 
@@ -9,6 +10,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 3500;
+app.use(cors());
 
 const connectToDBAndStartServer = async () => {
   try {

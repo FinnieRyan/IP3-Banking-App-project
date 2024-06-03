@@ -8,11 +8,11 @@ import { useTheme } from 'styled-components';
 import { Spacer } from '../../components/ContentLayout/Spacer';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../api/auth';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthUser } from '../../hooks/useAuthUser';
 
 export const Login = () => {
   const theme = useTheme();
-  const { setAccessToken, setUser } = useAuth();
+  const { setAccessToken, setUser } = useAuthUser();
   const [formFields, setFormFields] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({
     email: '',

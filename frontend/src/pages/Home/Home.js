@@ -8,9 +8,11 @@ import { Link } from '../../components/Link/Link';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
 import { useNavigate } from 'react-router-dom';
 import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
+import { useCustomer } from '../../hooks/useCustomer';
 
 export const Home = () => {
   const navigate = useNavigate();
+  const { customerData } = useCustomer();
 
   const actionCardNavigate = () => {
     navigate('/accounts/current');
@@ -20,7 +22,7 @@ export const Home = () => {
     <PageLayout>
       <Card>
         <Heading>
-          Welcome back, <br /> Name
+          Welcome back, <br /> {customerData?.forename}
         </Heading>
       </Card>
       <GroupContent>

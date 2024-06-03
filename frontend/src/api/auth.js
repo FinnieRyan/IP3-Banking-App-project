@@ -1,19 +1,18 @@
+import axios from 'axios';
 import { setSessionData } from '../helpers/sessionHandlers';
 
 export const login = async (email, password) => {
-  const response = await fetch('http://localhost:3500/auth/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
-
-  if (!response.ok) {
+  try {
+    const response = await axios.post('http://localhost:3500/auth/login', {
+      email,
+      password,
+    });
+    const data = response.data;
+    console.log('login', data);
+    setSessionData('loginResponse', data);
+    return data;
+  } catch (error) {
+    console.error('Login failed:', error);
     throw new Error('Login failed!');
   }
-
-  const data = await response.json();
-  setSessionData('loginResponse', data);
-  return data;
 };

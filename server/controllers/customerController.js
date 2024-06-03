@@ -49,6 +49,8 @@ export const createCustomer = async (req, res) => {
 export const getSingleCustomer = async (req, res) => {
   const { id } = req.params;
 
+  console.log('id', id);
+
   try {
     // Find the user by username
     const user = await User.findOne({ username: id });

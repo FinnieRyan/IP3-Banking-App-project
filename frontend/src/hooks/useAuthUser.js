@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
-import { AuthContext } from '../contexts/contexts';
+import { AuthUserContext } from '../contexts/contexts';
 import { getSessionData } from '../helpers/sessionHandlers';
 
-export const useAuth = () => {
+export const useAuthUser = () => {
   const {
     isLoading,
     setIsLoading,
@@ -10,7 +10,7 @@ export const useAuth = () => {
     setAccessToken,
     user,
     setUser,
-  } = useContext(AuthContext);
+  } = useContext(AuthUserContext);
 
   useEffect(() => {
     const fetchSessionData = () => {
