@@ -9,14 +9,23 @@ import { useTheme } from 'styled-components';
 import { HR } from '../../components/HR/HR';
 import { Text } from '../../components/Text/Text';
 import { AccountDetailsContainer } from './Account.style';
-import { MonthCarousel } from '../../components/MonthPicker/MonthPicker';
+import { MonthPicker } from '../../components/MonthPicker/MonthPicker';
 
 export const Account = () => {
   const theme = useTheme();
   const { accountId } = useParams();
   const { getAccountById } = useAccounts();
+  const [selectedMonth, setSelectedMonth] = useState(() => {
+    const date = new Date();
+    return {
+      name: date.toLocaleString('default', { month: 'long' }),
+      year: date.getFullYear(),
+    };
+  });
   const [showAccountDetails, setShowAccountDetails] = useState(false);
   const account = getAccountById(accountId);
+
+  console.log('selectedMonth', selectedMonth);
 
   return (
     <PageLayout linkText="Accounts" linkLocation={'/accounts'}>
@@ -48,8 +57,14 @@ export const Account = () => {
         )}
         <Heading size={2}>£{account.balance}</Heading>
       </Card>
-      <MonthCarousel startDate={account.createdAt} />
-      <MonthCarousel startDate="10/10/2022" />
+      {/* <MonthCarousel
+        startDate={account.createdAt}
+        onMonthChange={setSelectedMonth}
+      /> */}
+      <MonthPicker startDate="10/10/2022" onMonthChange={setSelectedMonth} />
+      <Card>
+        <Heading size={2}>{selectedMonth.name} overview</Heading>
+      </Card>
     </PageLayout>
   );
 };

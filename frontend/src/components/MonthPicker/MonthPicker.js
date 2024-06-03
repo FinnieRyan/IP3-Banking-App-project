@@ -33,42 +33,33 @@ const Spacer = styled.div`
   width: 50%;
 `;
 
-export const MonthCarousel = ({ startDate }) => {
+export const MonthPicker = ({ startDate, onMonthChange }) => {
   const today = new Date();
   const currentMonth = today.getMonth();
   const currentYear = today.getFullYear();
   const monthsRef = useRef(null);
-  const startYear = new Date(startDate).getFullYear();
-  const startMonth = new Date(startDate).getMonth();
 
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
+  const start = new Date(startDate);
+  const startYear = start.getFullYear();
+  const startMonth = start.getMonth();
 
-  const generateMonthList = () => {
-    const monthList = [];
-    for (let year = startYear; year <= currentYear; year++) {
-      const startMonthIndex = year === startYear ? startMonth : 0;
-      const endMonthIndex = year === currentYear ? currentMonth : 11;
-      for (let month = startMonthIndex; month <= endMonthIndex; month++) {
-        monthList.push({ name: months[month], year });
+  const months = Array.from({ length: 12 }, (_, i) =>
+    new Date(0, i).toLocaleString('default', { month: 'long' })
+  );
+  const monthList = Array.from(
+    { length: (currentYear - startYear + 1) * 12 },
+    (_, i) => {
+      const year = Math.floor(i / 12) + startYear;
+      const month = i % 12;
+      if (
+        (year === startYear && month < startMonth) ||
+        (year === currentYear && month > currentMonth)
+      ) {
+        return null;
       }
+      return { name: months[month], year };
     }
-    return monthList;
-  };
-
-  const monthList = generateMonthList();
+  ).filter(Boolean);
 
   const [activeIndex, setActiveIndex] = useState(monthList.length - 1);
 
@@ -116,7 +107,10 @@ export const MonthCarousel = ({ startDate }) => {
               key={`${month.name}-${month.year}`}
               active={index === activeIndex}
               opacity={calculateOpacity(index)}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => {
+                setActiveIndex(index);
+                onMonthChange(month);
+              }}
               role="listitem"
             >
               {month.name} {showYear && month.year}
