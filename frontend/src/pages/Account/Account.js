@@ -9,6 +9,7 @@ import { useTheme } from 'styled-components';
 import { HR } from '../../components/HR/HR';
 import { Text } from '../../components/Text/Text';
 import { AccountDetailsContainer } from './Account.style';
+import { MonthCarousel } from '../../components/MonthPicker/MonthPicker';
 
 export const Account = () => {
   const theme = useTheme();
@@ -47,6 +48,7 @@ export const Account = () => {
         )}
         <Heading size={2}>£{account.balance}</Heading>
       </Card>
+      <MonthCarousel startDate={'01/01/2022'} />
     </PageLayout>
   );
 };
