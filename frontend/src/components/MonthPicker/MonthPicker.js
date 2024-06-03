@@ -23,6 +23,8 @@ const Month = styled.li`
   cursor: pointer;
   font-weight: ${(props) => (props.active ? 'bold' : '400')};
   font-size: ${(props) => (props.active ? '20px' : '16px')};
+  color: ${({ theme, active }) =>
+    active ? theme.colors.primary : theme.colors.textBlack};
   opacity: ${(props) => props.opacity};
   transition: opacity 0.3s;
   scroll-snap-align: start;
@@ -99,9 +101,9 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
       <MonthsContainer ref={monthsRef} role="list">
         <Spacer />
         {monthList.map((month, index) => {
-          const showYear =
-            (index === 0 && monthList.length > 1) ||
-            (index > 0 && month.year !== monthList[index - 1].year);
+          const showYear = (year, index) => {
+            return activeIndex === index ? ` ${year}` : '';
+          };
           return (
             <Month
               key={`${month.name}-${month.year}`}
@@ -113,7 +115,8 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
               }}
               role="listitem"
             >
-              {month.name} {showYear && month.year}
+              {month.name}
+              {showYear(month.year, index)}
             </Month>
           );
         })}
