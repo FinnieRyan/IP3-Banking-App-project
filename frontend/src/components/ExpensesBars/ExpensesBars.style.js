@@ -3,20 +3,16 @@ import styled from 'styled-components';
 export const ExpensesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 8px;
 `;
 
 export const BarLabel = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
 `;
 
 export const BarAmount = styled.div`
   width: 100%;
-  height: 10px;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,7 +20,7 @@ export const BarAmount = styled.div`
 `;
 
 export const Bar = styled.div`
-  height: 100%;
+  height: 10px;
   background-color: ${({ $color }) => $color};
   width: ${({ $percentage }) => $percentage}%;
   border-radius: 5px;
