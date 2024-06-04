@@ -62,8 +62,24 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
     centerActiveMonth(activeIndex);
   }, [activeIndex]);
 
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
   useEffect(() => {
-    onMonthChange(monthList[activeIndex]);
+    const { name, year } = monthList[activeIndex];
+    const month = months.indexOf(name);
+    onMonthChange({ name, month, year });
   }, [activeIndex, monthList, onMonthChange]);
 
   return (
