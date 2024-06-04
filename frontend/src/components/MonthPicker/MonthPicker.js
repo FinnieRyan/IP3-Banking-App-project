@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
+import { debounce } from 'lodash';
 
-const Container = styled.div`
+const Months = styled.ul`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-`;
-
-const MonthsContainer = styled.ul`
-  display: flex;
-  overflow-x: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   width: 100%;
   justify-content: flex-start;
   align-items: center;
   position: relative;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;
 
 const Month = styled.li`
@@ -27,7 +31,7 @@ const Month = styled.li`
     active ? theme.colors.primary : theme.colors.textBlack};
   opacity: ${(props) => props.opacity};
   transition: opacity 0.3s;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
 `;
 
 const Spacer = styled.div`
@@ -80,48 +84,41 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
     });
   };
 
-  useEffect(() => {
-    centerActiveMonth(activeIndex);
-  }, [activeIndex]);
+  const debouncedOnScroll = useMemo(
+    () =>
+      debounce(() => {
+        const monthsContainer = monthsRef.current;
+        const center =
+          monthsContainer.scrollLeft + monthsContainer.offsetWidth / 2;
+        const index = monthList.findIndex((month, i) => {
+          const monthElement = monthsContainer.children[i + 1];
+          const left = monthElement.offsetLeft;
+          const right = left + monthElement.offsetWidth;
+          return left <= center && center <= right;
+        });
+        setActiveIndex(index);
+      }, 20),
+    []
+  );
 
   useEffect(() => {
     centerActiveMonth(activeIndex);
-  }, []);
-
-  const calculateOpacity = useMemo(() => {
-    return (index) => {
-      const maxDistance = 3; // distance from the active index where the opacity will start to fade
-      const distance = Math.abs(activeIndex - index);
-      return distance >= maxDistance ? 0.1 : 1 - (distance / maxDistance) * 0.9;
-    };
+    onMonthChange(monthList[activeIndex]);
   }, [activeIndex]);
 
   return (
-    <Container>
-      <MonthsContainer ref={monthsRef} role="list">
-        <Spacer />
-        {monthList.map((month, index) => {
-          const showYear = (year, index) => {
-            return activeIndex === index ? ` ${year}` : '';
-          };
-          return (
-            <Month
-              key={`${month.name}-${month.year}`}
-              active={index === activeIndex}
-              opacity={calculateOpacity(index)}
-              onClick={() => {
-                setActiveIndex(index);
-                onMonthChange(month);
-              }}
-              role="listitem"
-            >
-              {month.name}
-              {showYear(month.year, index)}
-            </Month>
-          );
-        })}
-        <Spacer />
-      </MonthsContainer>
-    </Container>
+    <Months ref={monthsRef} onScroll={debouncedOnScroll}>
+      <Spacer />
+      {monthList.map((month, index) => (
+        <Month
+          key={`${month.name}-${month.year}`}
+          active={index === activeIndex}
+          onClick={() => setActiveIndex(index)}
+        >
+          {month.name}
+        </Month>
+      ))}
+      <Spacer />
+    </Months>
   );
 };
