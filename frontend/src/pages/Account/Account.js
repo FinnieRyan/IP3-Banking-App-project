@@ -9,11 +9,19 @@ import { useTheme } from 'styled-components';
 import { HR } from '../../components/HR/HR';
 import { Text } from '../../components/Text/Text';
 import { AccountDetailsContainer } from './Account.style';
+import { MonthPicker } from '../../components/MonthPicker/MonthPicker';
 
 export const Account = () => {
   const theme = useTheme();
   const { accountId } = useParams();
   const { getAccountById } = useAccounts();
+  const [selectedMonth, setSelectedMonth] = useState(() => {
+    const date = new Date();
+    return {
+      name: date.toLocaleString('default', { month: 'long' }),
+      year: date.getFullYear(),
+    };
+  });
   const [showAccountDetails, setShowAccountDetails] = useState(false);
   const account = getAccountById(accountId);
 
@@ -46,6 +54,13 @@ export const Account = () => {
           </>
         )}
         <Heading size={2}>£{account.balance}</Heading>
+      </Card>
+      <MonthPicker
+        startDate={account.createdAt}
+        onMonthChange={setSelectedMonth}
+      />
+      <Card>
+        <Heading size={2}>{selectedMonth.name} overview</Heading>
       </Card>
     </PageLayout>
   );

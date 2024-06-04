@@ -81,7 +81,7 @@ export const NavBar = () => {
                     <Link
                       key={account.id}
                       white
-                      location={`/accounts/${account.accountType.toLowerCase()}`}
+                      location={`/accounts/${account._id}`}
                     >
                       {account.accountType} Account
                     </Link>
