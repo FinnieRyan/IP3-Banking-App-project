@@ -18,7 +18,7 @@ export const ExpensesBars = ({ expenses }) => {
           <BarLabel key={label}>
             <Text>{label}</Text>
             <BarAmount>
-              <Bar $color={color} percentage={percentage} />
+              <Bar $color={color} $percentage={percentage} />
               <Text size={2} weight="medium">
                 £{value}
               </Text>

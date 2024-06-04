@@ -26,7 +26,7 @@ export const BarAmount = styled.div`
 export const Bar = styled.div`
   height: 100%;
   background-color: ${({ $color }) => $color};
-  width: ${({ percentage }) => percentage}%;
+  width: ${({ $percentage }) => $percentage}%;
   border-radius: 5px;
   min-width: 10px;
 `;
