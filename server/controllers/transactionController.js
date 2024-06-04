@@ -24,6 +24,35 @@ export const getAllTransactions = async (req, res) => {
   }
 };
 
+// Get all transactions for a specific account
+export const getTransactionsByAccountId = async (req, res) => {
+  const { accountId } = req.params;
+
+  try {
+    const transactions = await Transaction.find({
+      $or: [{ fromAccountId: accountId }, { toAccountId: accountId }],
+    });
+
+    const populatedTransactions = await Promise.all(
+      transactions.map(async (transaction) => {
+        const fromAccount = await Account.findById(transaction.fromAccountId);
+        const toAccount = await Account.findById(transaction.toAccountId);
+        return {
+          ...transaction.toObject(),
+          fromAccount: fromAccount ? fromAccount.accountNumber : null,
+          toAccount: toAccount ? toAccount.accountNumber : null,
+        };
+      })
+    );
+
+    res.status(200).json(populatedTransactions);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Error fetching transactions', error: error.message });
+  }
+};
+
 // Create a new transaction
 export const createTransaction = async (req, res) => {
   try {
@@ -129,6 +158,7 @@ export const deleteTransaction = async (req, res) => {
 
 export default {
   getAllTransactions,
+  getTransactionsByAccountId,
   createTransaction,
   getSingleTransaction,
   updateTransaction,
