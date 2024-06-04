@@ -10,7 +10,7 @@ import { HR } from '../../components/HR/HR';
 import { Text } from '../../components/Text/Text';
 import { AccountDetailsContainer } from './Account.style';
 import { MonthPicker } from '../../components/MonthPicker/MonthPicker';
-import { IncomeSpent } from '../../components/IncomeSpent/IncomeSpent';
+import { ExpensesBars } from '../../components/ExpensesBars/ExpensesBars';
 
 export const Account = () => {
   const theme = useTheme();
@@ -62,9 +62,19 @@ export const Account = () => {
       />
       <Card>
         <Heading size={2}>{selectedMonth.name} overview</Heading>
-        <IncomeSpent
-          income={Math.floor(Math.random() * 10001)}
-          spent={Math.floor(Math.random() * 10001)}
+        <ExpensesBars
+          expenses={[
+            {
+              label: 'Income',
+              value: Math.floor(Math.random() * 10001),
+              color: theme.colors.success,
+            },
+            {
+              label: 'Spent',
+              value: Math.floor(Math.random() * 10001),
+              color: theme.colors.warning,
+            },
+          ]}
         />
       </Card>
     </PageLayout>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const IncomeSpentContainer = styled.div`
+export const ExpensesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -25,9 +25,8 @@ export const BarAmount = styled.div`
 
 export const Bar = styled.div`
   height: 100%;
-  background-color: ${({ $type, theme }) =>
-    $type === 'income' ? theme.colors.success : theme.colors.warning};
-  width: ${(props) => props.percentage}%;
+  background-color: ${({ $color }) => $color};
+  width: ${({ percentage }) => percentage}%;
   border-radius: 5px;
   min-width: 10px;
 `;

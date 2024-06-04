@@ -11,8 +11,11 @@ import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
 import BankNoteSymbol from '../../assets/bank-note-symbol-x2.svg';
 import { useCustomer } from '../../hooks/useCustomer';
 import { useAccounts } from '../../hooks/useAccounts';
+import { ExpensesBars } from '../../components/ExpensesBars/ExpensesBars';
+import { useTheme } from 'styled-components';
 
 export const Home = () => {
+  const theme = useTheme();
   const navigate = useNavigate();
   const { customerData } = useCustomer();
   const { accountsData } = useAccounts();
@@ -56,7 +59,35 @@ export const Home = () => {
             So far you this month you have spent <br /> <strong>£X</strong>
           </Text>
           <Heading size={3}>Trends in your spending</Heading>
-          <Text>Graph</Text>
+          <ExpensesBars
+            expenses={[
+              {
+                label: 'Shopping',
+                value: Math.floor(Math.random() * 10001),
+                color: theme.colors.category.shopping,
+              },
+              {
+                label: 'Entertainment',
+                value: Math.floor(Math.random() * 10001),
+                color: theme.colors.category.entertainment,
+              },
+              {
+                label: 'Eating out',
+                value: Math.floor(Math.random() * 10001),
+                color: theme.colors.category.eatingOut,
+              },
+              {
+                label: 'Groceries',
+                value: Math.floor(Math.random() * 10001),
+                color: theme.colors.category.groceries,
+              },
+              {
+                label: 'Bills',
+                value: Math.floor(Math.random() * 10001),
+                color: theme.colors.category.bills,
+              },
+            ]}
+          />
         </Card>
       </GroupContent>
     </PageLayout>
