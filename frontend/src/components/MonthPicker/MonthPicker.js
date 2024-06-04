@@ -54,7 +54,7 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
           return left <= center && center <= right;
         });
         setActiveIndex(index);
-      }, 100),
+      }, 200),
     [monthList]
   );
 
