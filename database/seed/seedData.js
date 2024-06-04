@@ -53,6 +53,15 @@ const generateCustomer = (index, userId) => ({
 
 const sortCodes = ['12-34-56', '22-44-66', '33-66-99', '45-67-89', '55-77-00'];
 
+const getRandomDateWithinLastTwoYears = () => {
+  const now = new Date();
+  const twoYearsAgo = new Date(now.setFullYear(now.getFullYear() - 2));
+  const randomTime =
+    twoYearsAgo.getTime() +
+    Math.random() * (Date.now() - twoYearsAgo.getTime());
+  return new Date(randomTime);
+};
+
 const generateAccount = (index, customerId) => ({
   customerId,
   accountType: index % 2 === 0 ? 'Savings' : 'Current',
@@ -61,6 +70,7 @@ const generateAccount = (index, customerId) => ({
     (index % 94279689) + (Math.floor(Math.random() * 999999) + 1)
   ).padStart(8, '0'),
   sortCode: sortCodes[Math.floor(Math.random() * sortCodes.length)],
+  createdAt: getRandomDateWithinLastTwoYears(),
 });
 
 const vendorsByCategory = {
