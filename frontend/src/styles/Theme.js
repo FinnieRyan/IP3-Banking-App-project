@@ -22,9 +22,9 @@ export const theme = {
       eatingOut: '#E5A75D',
       travel: '#FBA100',
       entertainment: '#895DE5',
-      utilities: '#4A6D8C',
       health: '#E57373',
       shopping: '#B55795',
+      bills: '#4A6D8C',
     },
   },
   fonts: {
