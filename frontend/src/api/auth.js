@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setSessionData } from '../helpers/sessionHandlers';
+import { setSessionData } from '../common/helpers/sessionHandlers';
 
 export const login = async (email, password) => {
   try {

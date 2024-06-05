@@ -1,18 +1,23 @@
+// React and Router
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+// Hooks and helper functions
+import { useAccounts } from '../../hooks/useAccounts';
+import { useTheme } from 'styled-components';
+import { getDatesForMonth } from '../../common/helpers/getDatesForMonth';
+
+// Components and styles
 import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { Heading } from '../../components/Heading/Heading';
 import { Card } from '../../components/Card/Card';
-import { useAccounts } from '../../hooks/useAccounts';
-import { useParams } from 'react-router-dom';
 import { HR } from '../../components/HR/HR';
 import { Text } from '../../components/Text/Text';
-import { AccountDetailsContainer, InfoIcon } from './Account.style';
 import { MonthPicker } from '../../components/MonthPicker/MonthPicker';
 import { ExpensesBars } from '../../components/ExpensesBars/ExpensesBars';
 import { DaySeparator } from '../../components/DaySeparator/DaySeparator';
-import { useTheme } from 'styled-components';
-import { getDatesForMonth } from '../../helpers/getDatesForMonth';
 import { GroupContent } from '../../components/ContentLayout/GroupContent';
+import { AccountDetailsContainer, InfoIcon } from './Account.style';
 
 export const Account = () => {
   const theme = useTheme();

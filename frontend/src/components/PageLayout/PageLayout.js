@@ -1,8 +1,13 @@
+// PropTypes
 import PropTypes from 'prop-types';
+
+// Components
 import { Heading } from '../Heading/Heading';
 import { Link } from '../Link/Link';
-import { Container } from './PageLayout.style';
 import { GroupContent } from '../ContentLayout/GroupContent';
+
+// Styles
+import { Container } from './PageLayout.style';
 
 export const PageLayout = ({ children, heading, linkText, linkLocation }) => {
   return (

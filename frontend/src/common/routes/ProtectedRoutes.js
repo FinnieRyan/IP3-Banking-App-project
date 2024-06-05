@@ -1,8 +1,13 @@
+// React Router
 import { Navigate } from 'react-router-dom';
+
+// Hooks
 import { useAuthUser } from '../../hooks/useAuthUser';
-import { Loading } from '../../components/Loading/Loading';
 import { useCustomer } from '../../hooks/useCustomer';
 import { useAccounts } from '../../hooks/useAccounts';
+
+// Components
+import { Loading } from '../../components/Loading/Loading';
 
 export const ProtectedRoute = ({ element }) => {
   const { isLoading: isAuthUserLoading, accessToken } = useAuthUser();

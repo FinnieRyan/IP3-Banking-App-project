@@ -1,5 +1,8 @@
+// React and PropTypes
 import PropTypes from 'prop-types';
-import { toTitleCase } from '../../helpers/toTitleCase';
+
+// Helpers and Styles
+import { toTitleCase } from '../../common/helpers/toTitleCase';
 import { StyledText } from './Text.style';
 
 export const Text = ({

@@ -1,5 +1,11 @@
+// React and PropTypes
 import React from 'react';
+import PropTypes from 'prop-types';
+
+// Icons
 import { FiChevronRight } from 'react-icons/fi';
+
+// Components and Styles
 import { Heading } from '../Heading/Heading';
 import { Text } from '../Text/Text';
 import { HR } from '../HR/HR';
@@ -36,4 +42,17 @@ export const AccountsModal = ({ heading, description, onClose, accounts }) => {
       </ModalContainer>
     </Modal>
   );
+};
+
+AccountsModal.propTypes = {
+  heading: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
+  accounts: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      accountType: PropTypes.string.isRequired,
+      balance: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };

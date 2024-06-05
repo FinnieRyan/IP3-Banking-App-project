@@ -1,5 +1,8 @@
-import { darken, lighten } from 'polished';
+// Polished and React
 import React from 'react';
+import { darken, lighten } from 'polished';
+
+// Styled Components
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`

@@ -1,14 +1,21 @@
+// React
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// Components
 import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { InputField } from '../../components/Input/InputField';
 import { Button } from '../../components/Button/Button';
 import { Form } from '../../components/Input/Form';
 import { Text } from '../../components/Text/Text';
-import { useTheme } from 'styled-components';
 import { Spacer } from '../../components/ContentLayout/Spacer';
-import { useNavigate } from 'react-router-dom';
-import { login } from '../../api/auth';
+
+// Hooks
+import { useTheme } from 'styled-components';
 import { useAuthUser } from '../../hooks/useAuthUser';
+
+// API
+import { login } from '../../api/auth';
 
 export const Login = () => {
   const theme = useTheme();
@@ -30,16 +37,19 @@ export const Login = () => {
     event.preventDefault();
 
     const { email, password } = formFields;
+    // Validate form fields
     const newErrors = {
       email: !email ? 'Please enter your email.' : '',
       password: !password ? 'Please enter your password.' : '',
     };
 
+    // If there are errors, set them and return
     if (newErrors.email || newErrors.password) {
       setErrors((prevState) => ({ ...prevState, ...newErrors }));
       return;
     }
 
+    // If no errors, attempt to log in
     setIsLoading(true);
     login(email, password)
       .then((data) => {

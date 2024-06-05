@@ -1,7 +1,12 @@
+// React and PropTypes
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+
+// Components
 import { Card } from '../Card/Card';
 import { Text } from '../Text/Text';
+
+// Styles
 import {
   CopyConfirmation,
   CopyIcon,
@@ -15,6 +20,7 @@ export const CopyableDetailCard = ({
 }) => {
   const [isCopied, setIsCopied] = useState(false);
 
+  // Copy to clipboard function
   const copyToClipboard = useCallback(() => {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(value);
@@ -31,12 +37,12 @@ export const CopyableDetailCard = ({
     setIsCopied(true);
   }, [value]);
 
+  // Clear the copied message after 2 seconds
   useEffect(() => {
     let timeout;
     if (isCopied) {
       timeout = setTimeout(() => setIsCopied(false), 2000);
     }
-
     return () => clearTimeout(timeout);
   }, [isCopied]);
 

@@ -1,6 +1,5 @@
-// Loading.js
-import { PuffLoader } from 'react-spinners';
 import styled, { useTheme } from 'styled-components';
+import { PuffLoader } from 'react-spinners';
 
 const Container = styled.div`
   display: flex;

@@ -1,5 +1,5 @@
-import { FaCircleInfo } from 'react-icons/fa6';
 import styled from 'styled-components';
+import { FaCircleInfo } from 'react-icons/fa6';
 
 export const AccountDetailsContainer = styled.div`
   display: flex;

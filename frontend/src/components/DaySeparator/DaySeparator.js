@@ -1,5 +1,11 @@
+// React and PropTypes
 import React from 'react';
+import PropTypes from 'prop-types';
+
+// Styled Components
 import styled from 'styled-components';
+
+// Components
 import { Text } from '../Text/Text';
 
 const DaySeparatorContainer = styled.div`
@@ -24,4 +30,9 @@ export const DaySeparator = ({ date, total }) => {
       </Text>
     </DaySeparatorContainer>
   );
+};
+
+DaySeparator.propTypes = {
+  date: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
 };

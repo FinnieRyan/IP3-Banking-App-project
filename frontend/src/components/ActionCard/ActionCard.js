@@ -1,6 +1,11 @@
+// React and PropTypes
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Components
 import { Text } from '../Text/Text';
+
+// Styles
 import {
   ActionCardContainer,
   IconTextContainer,

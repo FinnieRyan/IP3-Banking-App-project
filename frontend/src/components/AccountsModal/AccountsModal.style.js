@@ -1,6 +1,11 @@
+// Styled Components and Animations
 import styled, { keyframes } from 'styled-components';
-import { CardContainer } from '../Card/Card.style';
+
+// Icons
 import { IoClose } from 'react-icons/io5';
+
+// Styled Components from other files
+import { CardContainer } from '../Card/Card.style';
 import { LinkContainer } from '../Link/Link.style';
 
 const fadeInAndBlur = keyframes`
