@@ -1,6 +1,9 @@
+// React and PropTypes
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toTitleCase } from '../../helpers/toTitleCase';
+
+// Helpers and Styles
+import { toTitleCase } from '../../common/helpers/toTitleCase';
 import { StyledHeading } from './Heading.style';
 
 export const Heading = ({

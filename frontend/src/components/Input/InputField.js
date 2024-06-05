@@ -1,6 +1,11 @@
+// React and PropTypes
 import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+// Styled Components
+import styled from 'styled-components';
+
+// Components
 import { Card } from '../Card/Card';
 import { Text } from '../Text/Text';
 

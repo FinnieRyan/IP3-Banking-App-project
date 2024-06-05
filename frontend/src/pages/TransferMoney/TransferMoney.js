@@ -1,11 +1,18 @@
+// React
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// Components
 import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
-import SquarePoundPersonSymbol from '../../assets/square-pound-person-symbol-x2.svg';
-import SquarePoundAddSymbol from '../../assets/square-pound-add-symbol-x2.svg';
-import SquareArrowsSymbol from '../../assets/square-arrows-symbol-x2.svg';
 import { AccountsModal } from '../../components/AccountsModal/AccountsModal';
+
+// Assets
+import SquarePoundPersonSymbol from '../../common/assets/square-pound-person-symbol-x2.svg';
+import SquarePoundAddSymbol from '../../common/assets/square-pound-add-symbol-x2.svg';
+import SquareArrowsSymbol from '../../common/assets/square-arrows-symbol-x2.svg';
+
+// Hooks
 import { useAccounts } from '../../hooks/useAccounts';
 
 export const TransferMoney = () => {

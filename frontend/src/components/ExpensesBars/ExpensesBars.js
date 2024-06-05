@@ -1,5 +1,11 @@
+// React and PropTypes
 import React from 'react';
+import PropTypes from 'prop-types';
+
+// Components
 import { Text } from '../Text/Text';
+
+// Styles
 import {
   Bar,
   BarAmount,
@@ -28,4 +34,14 @@ export const ExpensesBars = ({ expenses }) => {
       })}
     </ExpensesContainer>
   );
+};
+
+ExpensesBars.propTypes = {
+  expenses: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      color: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };

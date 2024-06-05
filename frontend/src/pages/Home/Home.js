@@ -1,4 +1,8 @@
+// React and React Router
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// Components
 import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { GroupContent } from '../../components/ContentLayout/GroupContent';
 import { Card } from '../../components/Card/Card';
@@ -6,13 +10,18 @@ import { Heading } from '../../components/Heading/Heading';
 import { Text } from '../../components/Text/Text';
 import { Link } from '../../components/Link/Link';
 import { ActionCard } from '../../components/ActionCard/ActionCard';
-import { useNavigate } from 'react-router-dom';
-import SquarePoundSymbol from '../../assets/square-pound-symbol-x2.svg';
-import BankNoteSymbol from '../../assets/bank-note-symbol-x2.svg';
+import { ExpensesBars } from '../../components/ExpensesBars/ExpensesBars';
+
+// Hooks
 import { useCustomer } from '../../hooks/useCustomer';
 import { useAccounts } from '../../hooks/useAccounts';
-import { ExpensesBars } from '../../components/ExpensesBars/ExpensesBars';
+
+// Styled Components
 import { useTheme } from 'styled-components';
+
+// Assets
+import SquarePoundSymbol from '../../common/assets/square-pound-symbol-x2.svg';
+import BankNoteSymbol from '../../common/assets/bank-note-symbol-x2.svg';
 
 export const Home = () => {
   const theme = useTheme();

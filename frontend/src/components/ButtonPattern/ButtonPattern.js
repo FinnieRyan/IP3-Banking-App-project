@@ -1,7 +1,10 @@
+// React and PropTypes
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Components and Styles
 import { Button } from '../Button/Button';
-import { ButtonPatternContainer } from './ButtonPatter.style';
+import { ButtonPatternContainer } from './ButtonPattern.style';
 
 export const ButtonPattern = ({
   secondaryLabel = 'Secondary Button',

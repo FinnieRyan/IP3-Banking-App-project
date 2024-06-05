@@ -1,13 +1,18 @@
+// React and React Router
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+// Components
 import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { Button } from '../../components/Button/Button';
-import { useNavigate } from 'react-router-dom';
 import { Text } from '../../components/Text/Text';
 import { Heading } from '../../components/Heading/Heading';
-import { ReactComponent as OopsImg } from '../../assets/oops.svg';
-import { Spacer } from '../../components/ContentLayout/Spacer';
 import { Link } from '../../components/Link/Link';
+import { Spacer } from '../../components/ContentLayout/Spacer';
 import { GroupContent } from '../../components/ContentLayout/GroupContent';
+
+// Assets
+import { ReactComponent as OopsImg } from '../../common/assets/oops.svg';
 
 export const NotFound = () => {
   const navigate = useNavigate();

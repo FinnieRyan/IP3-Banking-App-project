@@ -1,14 +1,19 @@
+// React and React Router
 import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+// Components
 import { PageLayout } from '../../components/PageLayout/PageLayout';
 import { Heading } from '../../components/Heading/Heading';
 import { Text } from '../../components/Text/Text';
 import { Button } from '../../components/Button/Button';
 import { Spacer } from '../../components/ContentLayout/Spacer';
-import { useNavigate, useParams } from 'react-router-dom';
 import { CopyableDetailCard } from '../../components/CopyableDetailCard/CopyableDetailCard';
+import { Loading } from '../../components/Loading/Loading';
+
+// Hooks
 import { useAccounts } from '../../hooks/useAccounts';
 import { useCustomer } from '../../hooks/useCustomer';
-import { Loading } from '../../components/Loading/Loading';
 
 export const MoneyIn = () => {
   const { accountId } = useParams();

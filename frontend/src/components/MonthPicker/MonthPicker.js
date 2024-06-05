@@ -1,6 +1,12 @@
+// React and Lodash
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
+
+// Helper Functions
 import { generateMonthList } from './generateMonthList';
+
+// Styles
 import {
   Fader,
   Month,
@@ -18,6 +24,7 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
   const startYear = start.getFullYear();
   const startMonth = start.getMonth();
 
+  // Generate a list of months between the start date and the current date
   const monthList = useMemo(
     () => generateMonthList(startYear, startMonth, currentYear, currentMonth),
     [startYear, startMonth, currentYear, currentMonth]
@@ -41,6 +48,7 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
     });
   };
 
+  // Debounce the scroll event to prevent the active month from changing too frequently
   const debouncedOnScroll = useMemo(
     () =>
       debounce(() => {
@@ -58,25 +66,27 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
     [monthList]
   );
 
+  // Center the active month when the activeIndex changes
   useEffect(() => {
     centerActiveMonth(activeIndex);
   }, [activeIndex]);
 
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  // Call onMonthChange when the activeIndex changes
   useEffect(() => {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
     const { name, year } = monthList[activeIndex];
     const month = months.indexOf(name);
     onMonthChange({ name, month, year });
@@ -102,4 +112,9 @@ export const MonthPicker = ({ startDate, onMonthChange }) => {
       <Fader />
     </MonthPickerContainer>
   );
+};
+
+MonthPicker.propTypes = {
+  startDate: PropTypes.instanceOf(Date).isRequired,
+  onMonthChange: PropTypes.func.isRequired,
 };

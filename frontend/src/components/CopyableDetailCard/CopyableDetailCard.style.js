@@ -1,5 +1,10 @@
+// Styled Components
 import styled from 'styled-components';
+
+// Icons
 import { FaRegCopy } from 'react-icons/fa6';
+
+// Polished
 import { darken, lighten } from 'polished';
 
 export const CopyIcon = styled(FaRegCopy)`

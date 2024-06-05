@@ -11,6 +11,7 @@ export const CustomerProvider = ({ children }) => {
     isLoading: isAuthUserLoading,
   } = useContext(AuthUserContext);
 
+  // Fetch customer data when the user is loaded
   useEffect(() => {
     const fetchCustomerData = async () => {
       setIsLoading(true);

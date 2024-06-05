@@ -1,6 +1,15 @@
+// React
 import { useState, useEffect } from 'react';
 
-// STYLES
+// Router and Hooks
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthUser } from '../../hooks/useAuthUser';
+import { useCustomer } from '../../hooks/useCustomer';
+import { useAccounts } from '../../hooks/useAccounts';
+
+// Components and Styles
+import { Burger } from './Burger';
+import { Link } from '../Link/Link';
 import {
   NavBarBackground,
   NavContent,
@@ -9,17 +18,10 @@ import {
   NavLogo,
   NavSpacer,
 } from './NavBar.style';
-import Logo from '../../assets/Logo.png';
 
-// COMPONENTS
-import { Burger } from './Burger';
-import { Link } from '../Link/Link';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { removeSessionData } from '../../helpers/sessionHandlers';
-
-import { useAuthUser } from '../../hooks/useAuthUser';
-import { useCustomer } from '../../hooks/useCustomer';
-import { useAccounts } from '../../hooks/useAccounts';
+// Assets and Helpers
+import Logo from '../../common/assets/Logo.png';
+import { removeSessionData } from '../../common/helpers/sessionHandlers';
 
 export const NavBar = () => {
   const { clearAuthUser } = useAuthUser();

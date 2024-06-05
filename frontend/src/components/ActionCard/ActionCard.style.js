@@ -1,5 +1,10 @@
-import { FiChevronRight } from 'react-icons/fi';
+// Styled Components
 import styled from 'styled-components';
+
+// Icons
+import { FiChevronRight } from 'react-icons/fi';
+
+// Styled Components from other files
 import { CardContainer } from '../Card/Card.style';
 
 export const ActionCardContainer = styled(CardContainer)`
