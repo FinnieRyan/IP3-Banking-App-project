@@ -1,3 +1,6 @@
+import https from 'https';
+import fs from 'fs';
+import path from 'path';
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -10,6 +13,14 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 3500;
+
+//add certificate 
+const _ssl = path.resolve();
+const privateKey = fs.readFileSync(path.join(_ssl, 'ssl', 'server.key'), 'utf8');
+const certificate = fs.readFileSync(path.join(_ssl, 'ssl', 'server.cert'), 'utf8');
+
+const credentials = { key: privateKey, cert: certificate };
+
 app.use(cors());
 
 const connectToDBAndStartServer = async () => {
@@ -17,7 +28,7 @@ const connectToDBAndStartServer = async () => {
     await connectDB();
     console.log('Connected to MongoDB');
     // Start the server after connecting to the database
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    https.createServer(credentials,app).listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
   }
