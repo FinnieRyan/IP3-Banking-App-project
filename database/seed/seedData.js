@@ -1,7 +1,13 @@
+const getExactDateTwoYearsAgo = () => {
+  const now = new Date();
+  return new Date(now.setFullYear(now.getFullYear() - 2));
+};
+
 const generateUser = (index) => ({
   username: `user${index}@example.com`,
   passwordHash: `hashedPassword${index}`,
   email: `user${index}@example.com`,
+  createdAt: getExactDateTwoYearsAgo(),
 });
 
 const forenames = [
@@ -49,6 +55,7 @@ const generateCustomer = (index, userId) => ({
   contactNumber: `07${Math.floor(Math.random() * 1000000000)
     .toString()
     .padStart(9, '0')}`,
+  createdAt: getExactDateTwoYearsAgo(),
 });
 
 const sortCodes = ['12-34-56', '22-44-66', '33-66-99', '45-67-89', '55-77-00'];
@@ -70,22 +77,13 @@ const generateAccount = (index, customerId) => ({
     (index % 94279689) + (Math.floor(Math.random() * 999999) + 1)
   ).padStart(8, '0'),
   sortCode: sortCodes[Math.floor(Math.random() * sortCodes.length)],
-  createdAt: getRandomDateWithinLastTwoYears(),
+  createdAt: getExactDateTwoYearsAgo(),
 });
 
 const vendorsByCategory = {
   Food: ['Tesco', "Sainsbury's", 'Asda', 'Morrisons', 'Waitrose'],
   Entertainment: ['Netflix', 'Disney', 'Warner Bros', 'Universal Studios'],
   Travel: ['Uber', 'EasyJet'],
-};
-
-const getRandomDateWithinLastTwoMonths = () => {
-  const now = new Date();
-  const twoMonthsAgo = new Date(now.setMonth(now.getMonth() - 2));
-  const randomTime =
-    twoMonthsAgo.getTime() +
-    Math.random() * (Date.now() - twoMonthsAgo.getTime());
-  return new Date(randomTime);
 };
 
 const generateTransaction = (index, fromAccount, toAccount) => {
@@ -97,7 +95,7 @@ const generateTransaction = (index, fromAccount, toAccount) => {
     toAccountNumber: toAccount.accountNumber,
     amount: Math.floor(Math.random() * 1000) + 1,
     transactionType: isTransfer ? 'Transfer' : 'Payment',
-    createdAt: getRandomDateWithinLastTwoMonths(),
+    createdAt: getRandomDateWithinLastTwoYears(),
     paymentMethod: isTransfer
       ? 'Online Banking'
       : Math.random() < 0.5
@@ -145,19 +143,27 @@ for (let i = 1; i <= 20; i++) {
 
 // Generate transactions
 let transactionIndex = 1;
-for (let i = 0; i < accounts.length; i++) {
-  for (let j = 0; j < accounts.length; j += 2) {
-    // Increment by 2 to skip every 3rd account
-    if (i !== j) {
-      // Skip if the same account is selected for both from and to
-      const fromAccount = accounts[i];
-      const toAccount = accounts[j];
-      const transaction = generateTransaction(
-        transactionIndex++,
-        fromAccount,
-        toAccount
-      );
-      transactions.push(transaction);
+while (transactions.length < 1000) {
+  for (let i = 0; i < accounts.length; i++) {
+    for (let j = 0; j < accounts.length; j += 2) {
+      // Increment by 2 to skip every 3rd account
+      if (i !== j) {
+        // Skip if the same account is selected for both from and to
+        const fromAccount = accounts[i];
+        const toAccount = accounts[j];
+        const transaction = generateTransaction(
+          transactionIndex++,
+          fromAccount,
+          toAccount
+        );
+        transactions.push(transaction);
+        if (transactions.length >= 1000) {
+          break;
+        }
+      }
+    }
+    if (transactions.length >= 1000) {
+      break;
     }
   }
 }
