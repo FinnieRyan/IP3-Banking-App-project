@@ -27,23 +27,28 @@ export const getAllTransactions = async (req, res) => {
 // Get all transactions for a specific account
 export const getTransactionsByAccountId = async (req, res) => {
   const { accountId } = req.params;
+  const { month, year } = req.query;
 
   try {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 1);
+
     const transactions = await Transaction.find({
       $or: [{ fromAccountId: accountId }, { toAccountId: accountId }],
-    });
+      createdAt: { $gte: startDate, $lt: endDate },
+    })
+      .populate('fromAccountId', 'accountNumber')
+      .populate('toAccountId', 'accountNumber');
 
-    const populatedTransactions = await Promise.all(
-      transactions.map(async (transaction) => {
-        const fromAccount = await Account.findById(transaction.fromAccountId);
-        const toAccount = await Account.findById(transaction.toAccountId);
-        return {
-          ...transaction.toObject(),
-          fromAccount: fromAccount ? fromAccount.accountNumber : null,
-          toAccount: toAccount ? toAccount.accountNumber : null,
-        };
-      })
-    );
+    const populatedTransactions = transactions.map((transaction) => ({
+      ...transaction.toObject(),
+      fromAccount: transaction.fromAccountId
+        ? transaction.fromAccountId.accountNumber
+        : null,
+      toAccount: transaction.toAccountId
+        ? transaction.toAccountId.accountNumber
+        : null,
+    }));
 
     res.status(200).json(populatedTransactions);
   } catch (error) {

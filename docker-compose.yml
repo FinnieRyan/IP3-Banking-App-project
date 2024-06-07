@@ -13,6 +13,19 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV}
       AUTH_PORT: ${AUTH_PORT}
+      DB_URI: ${DB_URI}
+    depends_on:
+      - mongo
+
+  server:
+    container_name: bank_app_server
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      NODE_ENV: ${NODE_ENV}
       SERVER_PORT: ${SERVER_PORT}
       DB_URI: ${DB_URI}
     depends_on:
