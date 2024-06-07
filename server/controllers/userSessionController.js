@@ -1,5 +1,5 @@
-import UserSession from '../models/userSession.js';
-import User from '../models/user.js';
+import UserSession from '../../database/models/userSession.js';
+import User from '../../database/models/user.js';
 
 // Get all user sessions
 export const getAllUserSessions = async (req, res) => {

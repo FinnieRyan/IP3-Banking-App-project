@@ -10,7 +10,7 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const PORT = 3500;
+const PORT = process.env.AUTH_PORT || 3500;
 app.use(cors());
 
 const connectToDBAndStartServer = async () => {

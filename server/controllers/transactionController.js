@@ -1,5 +1,5 @@
-import Transaction from '../models/transactions.js';
-import Account from '../models/account.js';
+import Transaction from '../../database/models/transactions.js';
+import Account from '../../database/models/account.js';
 
 // Get all transactions
 export const getAllTransactions = async (req, res) => {
