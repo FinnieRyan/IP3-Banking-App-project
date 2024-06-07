@@ -2,9 +2,8 @@
   "name": "ip3-banking-app-project",
   "version": "1.0.0",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
   "scripts": {
-    "auth-server": "nodemon ./authserver/server.js",
+    "auth-server": "nodemon ./authServer/server.js",
     "express-server": "nodemon ./server/server.js",
     "build-backend": "concurrently \"npm run auth-server\" \"npm run express-server\"",
     "db-reset": "node ./database/seed/clearDatabase.js && node ./database/seed/seedDatabase.js",
