@@ -21,6 +21,7 @@ RUN if [ "$NODE_ENV" = "dev" ]; then \
 
 # Copy the rest of the application code to the container
 COPY server/ ./
+COPY ./ssl ./ssl
 
 # Expose port 3000 (or the port your application is listening on)
 EXPOSE $PORT
