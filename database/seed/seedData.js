@@ -72,7 +72,7 @@ const getRandomDateWithinLastTwoYears = () => {
 const generateAccount = (index, customerId) => ({
   customerId,
   accountType: index % 2 === 0 ? 'Savings' : 'Current',
-  balance: 1000.0 * index,
+  balance: parseFloat((Math.random() * (5000 - 1000) + 1000).toFixed(2)),
   accountNumber: String(
     (index % 94279689) + (Math.floor(Math.random() * 999999) + 1)
   ).padStart(8, '0'),
@@ -93,7 +93,7 @@ const generateTransaction = (index, fromAccount, toAccount) => {
   return {
     fromAccountNumber: fromAccount.accountNumber,
     toAccountNumber: toAccount.accountNumber,
-    amount: -(Math.floor(Math.random() * 50) + 1),
+    amount: -(Math.floor(Math.random() * 150) + 1),
     transactionType: isTransfer ? 'Transfer' : 'Payment',
     createdAt: getRandomDateWithinLastTwoYears(),
     paymentMethod: isTransfer
@@ -125,19 +125,68 @@ const getFirstOfEachMonthForLastTwoYears = () => {
   return dates.reverse();
 };
 
-const generateMonthlyIncomeTransactions = (account) => {
+const getTenthOfEachMonthForLastTwoYears = () => {
+  const dates = [];
+  const now = new Date();
+  now.setDate(10);
+
+  for (let i = 0; i < 24; i++) {
+    const date = new Date(now);
+    dates.push(date);
+    now.setMonth(now.getMonth() - 1);
+  }
+
+  return dates.reverse();
+};
+
+const generateMonthlyIncomeTransactions = (account, previousAccountNumber) => {
+  const transactions = [];
+
   const dates = getFirstOfEachMonthForLastTwoYears();
-  return dates.map((date) => ({
-    fromAccountNumber: '00000000',
-    toAccountNumber: account.accountNumber,
-    amount: 2500,
-    transactionType: 'Payment',
-    createdAt: date,
-    paymentMethod: 'Bank Transfer',
-    pending: false,
-    vendor: 'Salary',
-    category: 'Personal',
-  }));
+  const tenthOfEachMonth = getTenthOfEachMonthForLastTwoYears();
+  if (account.accountType === 'Current') {
+    const currentTransactions = dates.map((date) => ({
+      fromAccountNumber: '00000000',
+      toAccountNumber: account.accountNumber,
+      amount: 2500,
+      transactionType: 'Payment',
+      createdAt: date,
+      paymentMethod: 'Bank Transfer',
+      pending: false,
+      vendor: 'Salary',
+      category: 'Income',
+    }));
+    transactions.push(...currentTransactions);
+  }
+  if (account.accountType === 'Savings') {
+    const savingsTransactions = dates.map((date) => ({
+      fromAccountNumber: previousAccountNumber,
+      toAccountNumber: account.accountNumber,
+      amount: 500,
+      transactionType: 'Transfer',
+      createdAt: date,
+      paymentMethod: 'Bank Transfer',
+      pending: false,
+      vendor: 'Standing Order',
+      category: 'Internal Payment',
+    }));
+    transactions.push(...savingsTransactions);
+
+    const interestTransactions = tenthOfEachMonth.map((date) => ({
+      fromAccountNumber: '00000000',
+      toAccountNumber: account.accountNumber,
+      amount: parseFloat((Math.random() * (12 - 8) + 8).toFixed(2)),
+      transactionType: 'Interest',
+      createdAt: date,
+      paymentMethod: 'Bank Transfer',
+      pending: false,
+      vendor: 'Interest Payment',
+      category: 'Internal Payment',
+    }));
+    transactions.push(...interestTransactions);
+  }
+
+  return transactions;
 };
 
 const users = [];
@@ -183,32 +232,44 @@ accounts.push(externalAccount);
 
 // Generate transactions
 let transactionIndex = 1;
-while (transactions.length < 1000) {
+while (transactions.length < 5000) {
   for (let i = 0; i < accounts.length; i++) {
     for (let j = 0; j < accounts.length; j += 2) {
       if (i !== j) {
         const fromAccount = accounts[i];
         const toAccount = accounts[j];
+        if (fromAccount.accountType !== 'Current') {
+          continue;
+        }
         const transaction = generateTransaction(
           transactionIndex++,
           fromAccount,
           toAccount
         );
         transactions.push(transaction);
-        if (transactions.length >= 1000) {
+        if (transactions.length >= 5000) {
           break;
         }
       }
     }
-    if (transactions.length >= 1000) {
+    if (transactions.length >= 5000) {
       break;
     }
   }
 }
 
+let previousAccountNumber = '00000000';
+
 accounts.forEach((account) => {
-  const monthlyIncomeTransactions = generateMonthlyIncomeTransactions(account);
-  transactions.push(...monthlyIncomeTransactions);
+  if (previousAccountNumber !== account.accountNumber) {
+    const monthlyIncomeTransactions = generateMonthlyIncomeTransactions(
+      account,
+      previousAccountNumber
+    );
+    transactions.push(...monthlyIncomeTransactions);
+  }
+
+  previousAccountNumber = account.accountNumber;
 });
 
 export default {

@@ -21,7 +21,7 @@ const transactionSchema = new Schema({
   vendor: { type: String, required: true },
   category: {
     type: String,
-    enum: ['Food', 'Entertainment', 'Travel', 'Internal Payment', 'Personal'],
+    enum: ['Food', 'Entertainment', 'Travel', 'Internal Payment', 'Income'],
     required: true,
   },
 });

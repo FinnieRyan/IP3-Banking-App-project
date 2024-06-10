@@ -41,6 +41,14 @@ export const getTransactionsByAccountId = async (req, res) => {
       .populate('toAccountId', 'accountNumber');
 
     const populatedTransactions = transactions.map((transaction) => {
+      let amount = transaction.amount;
+      if (
+        transaction.fromAccountId._id.toString() === accountId &&
+        transaction.vendor === 'Standing Order'
+      ) {
+        amount = -amount;
+      }
+
       return {
         ...transaction.toObject(),
         fromAccount: transaction.fromAccountId
@@ -49,6 +57,7 @@ export const getTransactionsByAccountId = async (req, res) => {
         toAccount: transaction.toAccountId
           ? transaction.toAccountId.accountNumber
           : null,
+        amount,
       };
     });
 
