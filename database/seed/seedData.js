@@ -93,7 +93,7 @@ const generateTransaction = (index, fromAccount, toAccount) => {
   return {
     fromAccountNumber: fromAccount.accountNumber,
     toAccountNumber: toAccount.accountNumber,
-    amount: Math.floor(Math.random() * 1000) + 1,
+    amount: -(Math.floor(Math.random() * 50) + 1),
     transactionType: isTransfer ? 'Transfer' : 'Payment',
     createdAt: getRandomDateWithinLastTwoYears(),
     paymentMethod: isTransfer
@@ -111,6 +111,35 @@ const generateTransaction = (index, fromAccount, toAccount) => {
   };
 };
 
+const getFirstOfEachMonthForLastTwoYears = () => {
+  const dates = [];
+  const now = new Date();
+  now.setDate(1);
+
+  for (let i = 0; i < 24; i++) {
+    const date = new Date(now);
+    dates.push(date);
+    now.setMonth(now.getMonth() - 1);
+  }
+
+  return dates.reverse();
+};
+
+const generateMonthlyIncomeTransactions = (account) => {
+  const dates = getFirstOfEachMonthForLastTwoYears();
+  return dates.map((date) => ({
+    fromAccountNumber: '00000000',
+    toAccountNumber: account.accountNumber,
+    amount: 2500,
+    transactionType: 'Payment',
+    createdAt: date,
+    paymentMethod: 'Bank Transfer',
+    pending: false,
+    vendor: 'Salary',
+    category: 'Personal',
+  }));
+};
+
 const users = [];
 const userSessions = [];
 const customers = [];
@@ -118,7 +147,7 @@ const accounts = [];
 const transactions = [];
 
 // Generate 20 users, user sessions, and customers
-for (let i = 1; i <= 20; i++) {
+for (let i = 1; i <= 21; i++) {
   const user = generateUser(i);
   users.push(user);
 
@@ -141,14 +170,23 @@ for (let i = 1; i <= 20; i++) {
   }
 }
 
+// Placeholder external account
+const externalAccount = {
+  customerId: 'user21@example.com',
+  accountNumber: '00000000',
+  sortCode: '00-00-00',
+  balance: 0,
+  accountType: 'External',
+  createdAt: getExactDateTwoYearsAgo(),
+};
+accounts.push(externalAccount);
+
 // Generate transactions
 let transactionIndex = 1;
 while (transactions.length < 1000) {
   for (let i = 0; i < accounts.length; i++) {
     for (let j = 0; j < accounts.length; j += 2) {
-      // Increment by 2 to skip every 3rd account
       if (i !== j) {
-        // Skip if the same account is selected for both from and to
         const fromAccount = accounts[i];
         const toAccount = accounts[j];
         const transaction = generateTransaction(
@@ -167,6 +205,11 @@ while (transactions.length < 1000) {
     }
   }
 }
+
+accounts.forEach((account) => {
+  const monthlyIncomeTransactions = generateMonthlyIncomeTransactions(account);
+  transactions.push(...monthlyIncomeTransactions);
+});
 
 export default {
   users,

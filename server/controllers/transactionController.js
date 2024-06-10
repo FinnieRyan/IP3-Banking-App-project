@@ -41,11 +41,6 @@ export const getTransactionsByAccountId = async (req, res) => {
       .populate('toAccountId', 'accountNumber');
 
     const populatedTransactions = transactions.map((transaction) => {
-      let amount = transaction.amount;
-      if (transaction.fromAccountId._id.toString() === accountId) {
-        amount = -amount; // Convert balance to negative if transaction is from the specified account
-      }
-
       return {
         ...transaction.toObject(),
         fromAccount: transaction.fromAccountId
@@ -54,7 +49,6 @@ export const getTransactionsByAccountId = async (req, res) => {
         toAccount: transaction.toAccountId
           ? transaction.toAccountId.accountNumber
           : null,
-        amount: amount,
       };
     });
 
