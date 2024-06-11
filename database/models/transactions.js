@@ -14,14 +14,14 @@ const transactionSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   paymentMethod: {
     type: String,
-    enum: ['Card', 'Contactless', 'Online Banking'],
+    enum: ['Card', 'Contactless', 'Online Banking', 'Bank Transfer'],
     required: true,
   },
   pending: { type: Boolean, default: true },
   vendor: { type: String, required: true },
   category: {
     type: String,
-    enum: ['Food', 'Entertainment', 'Travel', 'Internal Payment'],
+    enum: ['Food', 'Entertainment', 'Travel', 'Internal Payment', 'Income'],
     required: true,
   },
 });
