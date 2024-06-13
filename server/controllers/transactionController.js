@@ -114,7 +114,7 @@ export const createTransaction = async (req, res) => {
 // Get a single transaction
 export const getSingleTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findById(req.params.id);
+    const transaction = await Transaction.findById(req.params.transactionId);
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
     }
