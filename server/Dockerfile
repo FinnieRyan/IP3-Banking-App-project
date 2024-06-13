@@ -7,9 +7,6 @@ RUN apk add --no-cache bash
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy .env file
-COPY .env .env
-
 # Copy package.json and package-lock.json to the container
 COPY ./package*.json ./
 
