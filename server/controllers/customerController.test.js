@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import dotenv from 'dotenv';
 import customerController from './customerController.js';
 import Customer from '../../database/models/customer.js';
@@ -9,31 +10,40 @@ import User from '../../database/models/user.js';
 
 dotenv.config();
 
-const app = express();
-app.use(bodyParser.json());
+let app;
+let mongoServer;
 
-app.get('/api/customers', customerController.getAllCustomers);
-app.post('/api/customers', customerController.createCustomer);
-app.get('/api/customers/:id', customerController.getSingleCustomer);
-app.put('/api/customers/:id', customerController.updateCustomer);
-app.delete('/api/customers/:id', customerController.deleteCustomer);
+beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
 
-jest.setTimeout(30000);
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  app = express();
+  app.use(bodyParser.json());
+
+  // Register routes
+  app.get('/api/customers', customerController.getAllCustomers);
+  app.post('/api/customers', customerController.createCustomer);
+  app.get('/api/customers/:id', customerController.getSingleCustomer);
+  app.put('/api/customers/:id', customerController.updateCustomer);
+  app.delete('/api/customers/:id', customerController.deleteCustomer);
+});
+
+afterAll(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+});
+
+afterEach(async () => {
+  await Customer.deleteMany({});
+  await User.deleteMany({});
+});
 
 describe('Customer Controller', () => {
-  beforeAll(async () => {
-    await mongoose.connect(process.env.DB_URI);
-  });
-
-  afterAll(async () => {
-    await mongoose.connection.close();
-  });
-
-  afterEach(async () => {
-    await Customer.deleteMany({});
-    await User.deleteMany({});
-  });
-
   test('POST /api/customers should create a new customer', async () => {
     const newUser = new User({
       username: 'testuser',

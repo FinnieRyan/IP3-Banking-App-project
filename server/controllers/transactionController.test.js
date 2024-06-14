@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import dotenv from 'dotenv';
 import transactionController from './transactionController.js';
 import Transaction from '../../database/models/transactions.js';
@@ -9,42 +10,44 @@ import Account from '../../database/models/account.js';
 
 dotenv.config();
 
-const app = express();
-app.use(bodyParser.json());
+let app;
+let mongoServer;
 
-// Define routes
-app.get('/api/transactions', transactionController.getAllTransactions);
-app.get(
-  '/api/transactions/:accountId',
-  transactionController.getTransactionsByAccountId
-);
-app.post('/api/transactions', transactionController.createTransaction);
-app.get('/api/transactions/:id', transactionController.getSingleTransaction);
-app.put('/api/transactions/:id', transactionController.updateTransaction);
-app.delete('/api/transactions/:id', transactionController.deleteTransaction);
+beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
 
-jest.setTimeout(30000); // Increase Jest timeout to 30 seconds
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
-// Test Suite for Transaction Controller
+  app = express();
+  app.use(bodyParser.json());
+
+  // Register routes
+  app.get('/api/transactions', transactionController.getAllTransactions);
+  app.get(
+    '/api/transactions/:accountId',
+    transactionController.getTransactionsByAccountId
+  );
+  app.post('/api/transactions', transactionController.createTransaction);
+  app.get('/api/transactions/:id', transactionController.getSingleTransaction);
+  app.put('/api/transactions/:id', transactionController.updateTransaction);
+  app.delete('/api/transactions/:id', transactionController.deleteTransaction);
+});
+
+afterAll(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+});
+
+afterEach(async () => {
+  await Transaction.deleteMany({});
+  await Account.deleteMany({});
+});
+
 describe('Transaction Controller', () => {
-  beforeAll(async () => {
-    try {
-      await mongoose.connect(process.env.DB_URI);
-    } catch (err) {
-      console.error('Failed to connect to MongoDB:', err);
-      throw err;
-    }
-  });
-
-  afterAll(async () => {
-    await mongoose.connection.close();
-  });
-
-  afterEach(async () => {
-    await Transaction.deleteMany({});
-    await Account.deleteMany({});
-  });
-
   test('GET /api/transactions should return a list of transactions', async () => {
     // Create sample accounts
     const account1 = new Account({
@@ -95,8 +98,7 @@ describe('Transaction Controller', () => {
     // Perform GET request
     const response = await request(app).get('/api/transactions');
 
-    // Assertions
     expect(response.status).toBe(200);
-    expect(response.body.length).toBe(2); // Assuming two transactions were created
+    expect(response.body.length).toBe(2);
   });
 });

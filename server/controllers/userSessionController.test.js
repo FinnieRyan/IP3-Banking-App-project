@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import dotenv from 'dotenv';
 import userSessionController from './userSessionController.js';
 import UserSession from '../../database/models/userSession.js';
@@ -9,33 +10,41 @@ import User from '../../database/models/user.js';
 
 dotenv.config();
 
-const app = express();
-app.use(bodyParser.json());
+let app;
+let mongoServer;
 
-// Define routes
-app.get('/api/user-sessions', userSessionController.getAllUserSessions);
-app.post('/api/user-sessions', userSessionController.createUserSession);
-app.get('/api/user-sessions/:id', userSessionController.getSingleUserSession);
-app.put('/api/user-sessions/:id', userSessionController.updateUserSession);
-app.delete('/api/user-sessions/:id', userSessionController.deleteUserSession);
+beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
 
-jest.setTimeout(30000); // Increase Jest timeout to 30 seconds
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  app = express();
+  app.use(bodyParser.json());
+
+  // Register routes
+  app.get('/api/user-sessions', userSessionController.getAllUserSessions);
+  app.post('/api/user-sessions', userSessionController.createUserSession);
+  app.get('/api/user-sessions/:id', userSessionController.getSingleUserSession);
+  app.put('/api/user-sessions/:id', userSessionController.updateUserSession);
+  app.delete('/api/user-sessions/:id', userSessionController.deleteUserSession);
+});
+
+afterAll(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+});
+
+afterEach(async () => {
+  await UserSession.deleteMany({});
+  await User.deleteMany({});
+});
 
 // Test Suite for User Session Controller
 describe('User Session Controller', () => {
-  beforeAll(async () => {
-    await mongoose.connect(process.env.DB_URI);
-  });
-
-  afterAll(async () => {
-    await mongoose.connection.close();
-  });
-
-  afterEach(async () => {
-    await UserSession.deleteMany({});
-    await User.deleteMany({});
-  });
-
   test('POST /api/user-sessions should create a new user session', async () => {
     // Create a new user for testing
     const newUser = new User({

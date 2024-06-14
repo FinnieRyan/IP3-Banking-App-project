@@ -2,36 +2,46 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import express from 'express';
 import bodyParser from 'body-parser';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import dotenv from 'dotenv';
 import usersController from './usersController.js';
 import User from '../../database/models/user.js';
 
 dotenv.config();
 
-const app = express();
-app.use(bodyParser.json());
+let app;
+let mongoServer;
 
-app.get('/api/users', usersController.getAllUsers);
-app.post('/api/users', usersController.createUser);
-app.get('/api/users/:id', usersController.getSingleUser);
-app.put('/api/users/:id', usersController.updateUser);
-app.delete('/api/users/:id', usersController.deleteUser);
+beforeAll(async () => {
+  mongoServer = await MongoMemoryServer.create();
+  const mongoUri = mongoServer.getUri();
 
-jest.setTimeout(30000); // Increase Jest timeout to 30 seconds
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  app = express();
+  app.use(bodyParser.json());
+
+  // Register routes
+  app.get('/api/users', usersController.getAllUsers);
+  app.post('/api/users', usersController.createUser);
+  app.get('/api/users/:id', usersController.getSingleUser);
+  app.put('/api/users/:id', usersController.updateUser);
+  app.delete('/api/users/:id', usersController.deleteUser);
+});
+
+afterAll(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+});
+
+afterEach(async () => {
+  await User.deleteMany({});
+});
 
 describe('Users Controller', () => {
-  beforeAll(async () => {
-    await mongoose.connect(process.env.DB_URI);
-  });
-
-  afterAll(async () => {
-    await mongoose.connection.close();
-  });
-
-  afterEach(async () => {
-    await User.deleteMany({});
-  });
-
   test('GET /api/users should return a list of users', async () => {
     const testUser1 = new User({
       username: 'user1',
