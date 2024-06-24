@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
 import connectDB from './helpers';
+import dotenv from 'dotenv'; // Import dotenv
+
+// Call dotenv.config() to load environment variables
+dotenv.config();
 
 // Mock mongoose.connect
 jest.mock('mongoose', () => ({
