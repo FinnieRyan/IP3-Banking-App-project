@@ -1,18 +1,17 @@
 import Account from '../../database/models/account.js';
 import Transaction from '../../database/models/transactions.js';
 
+let defaultTransaction = {
+  transactionType: 'Online Payment',
+  paymentMethod: 'Online Banking',
+  pending: false,
+  vendor: 'Internal Payment',
+  category: 'Internal Payment',
+};
+
 export const createPayment = async (req, res) => {
   try {
-    let {
-      fromAccountId,
-      toAccountId,
-      amount,
-      transactionType,
-      paymentMethod,
-      pending,
-      vendor,
-      category,
-    } = req.body;
+    let { fromAccountId, toAccountId, amount } = req.body;
 
     // Retrieve the fromAccount and check if it exists
     const fromAccount = await Account.findById(fromAccountId);
@@ -58,14 +57,10 @@ export const createPayment = async (req, res) => {
 
       // Create the transaction
       const newTransaction = new Transaction({
+        ...defaultTransaction,
         fromAccountId,
         toAccountId,
         amount,
-        transactionType,
-        paymentMethod,
-        pending,
-        vendor,
-        category,
       });
 
       const savedTransaction = await newTransaction.save({ session });
@@ -90,5 +85,4 @@ export const createPayment = async (req, res) => {
 
 export default {
   createPayment,
-  createTransfer,
 };
