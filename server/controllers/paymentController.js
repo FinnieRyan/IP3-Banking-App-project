@@ -21,10 +21,8 @@ export const createPayment = async (req, res) => {
 
     // Retrieve the toAccount and check if it exists
     let toAccount;
-
     if (!toAccountId) {
       const { accountNumber } = req.params;
-
       toAccount = await Account.findOne({ accountNumber });
       toAccountId = toAccount._id;
     } else {
@@ -60,7 +58,8 @@ export const createPayment = async (req, res) => {
         ...defaultTransaction,
         fromAccountId,
         toAccountId,
-        amount,
+        amount: -amount,
+        toAmount: amount,
       });
 
       const savedTransaction = await newTransaction.save({ session });
