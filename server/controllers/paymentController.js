@@ -21,8 +21,10 @@ const createPayment = async (req, res) => {
 
     // Retrieve the toAccount and check if it exists
     let toAccount;
+
     if (!toAccountId) {
       const { accountNumber } = req.params;
+
       toAccount = await Account.findOne({ accountNumber });
       if (toAccount) {
         toAccountId = toAccount._id;
@@ -48,8 +50,8 @@ const createPayment = async (req, res) => {
 
     try {
       // Update balances
-      fromAccount.balance -= amount; // Debiting the fromAccount
-      toAccount.balance += amount; // Crediting the toAccount
+      fromAccount.balance -= amount;
+      toAccount.balance += amount;
 
       // Save the updated accounts
       await fromAccount.save({ session });
