@@ -9,7 +9,7 @@ let defaultTransaction = {
   category: 'Internal Payment',
 };
 
-export const createPayment = async (req, res) => {
+const createPayment = async (req, res) => {
   try {
     let { fromAccountId, toAccountId, amount } = req.body;
 
@@ -26,7 +26,9 @@ export const createPayment = async (req, res) => {
       const { accountNumber } = req.params;
 
       toAccount = await Account.findOne({ accountNumber });
-      toAccountId = toAccount._id;
+      if (toAccount) {
+        toAccountId = toAccount._id;
+      }
     } else {
       toAccount = await Account.findById(toAccountId);
     }

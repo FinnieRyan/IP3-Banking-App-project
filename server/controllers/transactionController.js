@@ -36,28 +36,18 @@ export const getTransactionsByAccountId = async (req, res) => {
     const transactions = await Transaction.find({
       $or: [{ fromAccountId: accountId }, { toAccountId: accountId }],
       createdAt: { $gte: startDate, $lt: endDate },
-    })
-      .populate('fromAccountId', 'accountNumber')
-      .populate('toAccountId', 'accountNumber');
+    }).populate('fromAccountId toAccountId', 'accountNumber');
 
     const populatedTransactions = transactions.map((transaction) => {
-      let amount = transaction.amount;
-      if (
-        transaction.fromAccountId._id.toString() === accountId &&
-        transaction.vendor === 'Standing Order'
-      ) {
-        amount = -amount;
-      }
-
+      const isDebit = transaction.fromAccountId._id.toString() === accountId;
       return {
         ...transaction.toObject(),
-        fromAccount: transaction.fromAccountId
-          ? transaction.fromAccountId.accountNumber
-          : null,
-        toAccount: transaction.toAccountId
-          ? transaction.toAccountId.accountNumber
-          : null,
-        amount,
+        isDebit,
+        amount: isDebit
+          ? -Math.abs(transaction.amount)
+          : Math.abs(transaction.amount),
+        fromAccount: transaction.fromAccountId.accountNumber,
+        toAccount: transaction.toAccountId.accountNumber,
       };
     });
 
@@ -114,18 +104,30 @@ export const createTransaction = async (req, res) => {
 // Get a single transaction
 export const getSingleTransaction = async (req, res) => {
   try {
-    const transaction = await Transaction.findById(req.params.transactionId);
+    const { transactionId, accountId } = req.params;
+
+    const transaction = await Transaction.findById(transactionId).populate(
+      'fromAccountId toAccountId'
+    );
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
     }
 
-    const fromAccount = await Account.findById(transaction.fromAccountId);
-    const toAccount = await Account.findById(transaction.toAccountId);
+    // Ensure the comparison is done between strings
+    const fromAccountIdStr = transaction.fromAccountId._id.toString();
+    const accountIdStr = accountId.toString();
+
+    const isDebit = fromAccountIdStr === accountIdStr;
+
+    const correctedAmount = isDebit
+      ? -Math.abs(transaction.amount)
+      : Math.abs(transaction.amount);
 
     const populatedTransaction = {
       ...transaction.toObject(),
-      fromAccount: fromAccount ? fromAccount.accountNumber : null,
-      toAccount: toAccount ? toAccount.accountNumber : null,
+      amount: correctedAmount, // Apply corrected amount sign
+      fromAccount: transaction.fromAccountId.accountNumber,
+      toAccount: transaction.toAccountId.accountNumber,
     };
 
     res.status(200).json(populatedTransaction);

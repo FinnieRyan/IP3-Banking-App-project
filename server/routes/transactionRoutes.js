@@ -7,7 +7,7 @@ Router.route('/').get(transactionController.getAllTransactions);
 Router.route('/:accountId').get(
   transactionController.getTransactionsByAccountId
 );
-Router.route('/id/:transactionId').get(
+Router.route('/id/:transactionId/account/:accountId').get(
   transactionController.getSingleTransaction
 );
 
